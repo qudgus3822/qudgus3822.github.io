@@ -11,7 +11,7 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Learn to <a href="https://nextjs.org">Next.js Deploy!</a>
+          Learn to <a href="https://nextjs.org">Next.js Deploy !</a>
         </h1>
 
         <p className="description">
