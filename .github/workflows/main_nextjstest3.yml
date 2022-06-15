@@ -55,6 +55,6 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3AE9674EDB394E818711954B6B5F57BC }}
           package: .
 
-      - name : 'npm run start'
-        run : |
-          npm run start
+      # - name : 'npm run start'
+      #   run : |
+      #     npm run start
