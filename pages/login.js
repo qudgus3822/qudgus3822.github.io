@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [user, { mutate }] = useCurrentUser();
   useEffect(() => {
     // redirect to home if user is authenticated
-    if (user) router.push("/");
+    if (user) router.push("/posts/first-post");
   }, [user]);
 
   async function onSubmit(e) {
@@ -70,7 +70,7 @@ const LoginPage = () => {
           <button
             type="button"
             className="w-100 btn btn-lg btn-secondary px-4 gap-3"
-            onClick={() => Router.replace("/")}
+            onClick={() => router.replace("/")}
           >
             홈으로
           </button>
