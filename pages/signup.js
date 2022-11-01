@@ -10,11 +10,10 @@ const SignupPage = () => {
   const [errorMsg, setErrorMsg] = useState("");
   useEffect(() => {
     // redirect to home if user is authenticated
-    if (user) Router.replace("/");
+    if (user) Router.replace("/posts/first-post");
   }, [user]);
 
   const handleSubmit = async (e) => {
-    console.log("test");
     e.preventDefault();
     const body = {
       email: e.currentTarget.email.value,

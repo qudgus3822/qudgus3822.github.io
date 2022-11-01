@@ -52,9 +52,9 @@ export default function BlogBox(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="align-self-center">
+                            {/* <div className="align-self-center">
                                 <a href="#" className="text-dark">Read more <i className="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 

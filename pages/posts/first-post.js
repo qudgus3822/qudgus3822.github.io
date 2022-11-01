@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 import BlogBox from "../../components/posts/blogBox";
+import { getBlogs } from "../../db/blog";
+import { useBlog } from "../../hooks/blog";
+import Router from "next/router";
 export default function Blogs() {
   const [loading, setLoading] = useState(true);
 
@@ -72,32 +76,36 @@ export default function Blogs() {
   obj.blogImage = 6;
   obj.key = 6;
   test.push(obj);
+  const test222 = test22();
+  const [blog] = useBlog();
+  let t;
+  if (blog && blog.length > 0) {
+    const test2 = [...blog];
+    t = test2.reduce((acc, cur) => {
+      const arr = acc[acc.length - 1];
 
-  const test2 = [...test];
-  const t = test2.reduce((acc, cur) => {
-    const arr = acc[acc.length - 1];
+      arr.push(cur);
+      if (arr.length == 3) {
+        acc.push([]);
+      }
+      return acc;
+    }, [[]])
+  }
 
-    arr.push(cur);
-    if (arr.length == 3) {
-      acc.push([]);
+
+
+  async function test22() {
+    const res = await fetch("/api/getBlogs", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (res.status === 200) {
+      const userObj = await res.json();
+      console.log(userObj);
+    } else {
+      setErrorMsg("Incorrect username or password. Try again!");
     }
-    return acc;
-  }, [[]])
-
-  // test2.reduce((acc, cur) => {
-  //   const arr = acc[acc.length - 1];
-  //   arr.push(cur);
-  //   if (arr.length % 3 == 0) {
-  //     acc.push([]);
-  //     return acc;
-  //   }
-  // }, [[]]).filter((chunc) => chunc.length).map((c, i) => {
-  //   <div className="col-lg-4">
-  //     {c.map((cc, ii) => {
-  //       <BlogBox {...cc}></BlogBox>
-  //     })}
-  //   </div>
-  // })
+  }
 
 
   return (
@@ -108,6 +116,7 @@ export default function Blogs() {
             <div className="row">
               <div className="col-sm-12">
                 <div className="page-title-box">
+
                   <div className="float-end">
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item"><a href="#">Pages</a></li>
@@ -118,17 +127,15 @@ export default function Blogs() {
                 </div>
               </div>
             </div>
+            <button className="btn btn-de-primary float-end" onClick={()=>{Router.replace("write-blog")}}>글쓰기</button>
             <div className="row">
-
               {
-
-                t.map((data, i) => {
+                t && t.map((data, i) => {
                   return (<div key={i} className="row">
                     {data.map((c, i) => {
-                      return (<BlogBox key={c.key.toString()} {...c}></BlogBox>)
+                      return (<BlogBox key={c._id.toString()} {...c}></BlogBox>)
                     })}
                   </div>)
-
                 })}
             </div>
 
