@@ -8,7 +8,9 @@ const nextConfig = {
         path: '/',
     },
     basePath: '/nextjs-blog',
+    aeestPrefix: './',
     reactStrictMode: true,
+    staticDirs: ['/public/static'],
 }
 
 module.exports = nextConfig
