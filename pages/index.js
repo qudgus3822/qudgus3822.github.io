@@ -69,10 +69,10 @@ export default function IndexPage() {
                         <div className="col-lg-6 align-self-center mb-3 mb-lg-0">
                           <div className="met-profile-main">
                             <div className="met-profile-main-pic">
-                              <img src="/nextjs-blog/assets/images/users/user-4.jpg" alt="" height="110" className="rounded-circle"></img>
-                              <span className="met-profile_main-pic-change">
+                              <img src="/nextjs-blog/images/profile.png" alt="" height="110" className="rounded-circle"></img>
+                              {/* <span className="met-profile_main-pic-change">
                                 <i className="fas fa-camera"></i>
-                              </span>
+                              </span> */}
                             </div>
                             <div className="met-profile_user-detail">
                               <h5 className="met-user-name">김 병 현</h5>
@@ -94,36 +94,73 @@ export default function IndexPage() {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
 
-            {/* 해본 것들 시작*/}
-            <div className="row">
-              <div className="col-12">
-                <div className="card">
-                  <div className="card-header">
-                    <h4 className="card-title">내가 해 본 것들</h4>
-                  </div>
-                  <div className="card-body">
-                    <div className="accordion" id="accordionExample">
-                      <div className="accordion-item">
-                        <h5 className="accordion-header m-0" id="headingProjectOne">
-                          <button className="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProjectOne" aria-expanded="false" aria-controls="collapseProjectOne">
-                            전자책 뷰어
-                          </button>
-                        </h5>
-                        <div id="collapseProjectOne" className="accordion-collapse collapse" aria-labelledby="headingProjectOne" data-bs-parent="#accordionExample">
-                          <div className="accordion-body">
-                            {/* .epub :  <a href="/nextjs-blog/EbookViewer/epub/web/epub-viewer.html">클릭해서 이동</a> */}
-                            .epub :  <a href={hosturl + "/nextjs-blog/EbookViewer/epub/web/epub-viewer.html"}>클릭해서 이동</a>
-                            <br></br>
-                            <br></br>
-                            .PDF :  <a href={hosturl + "/nextjs-blog/EbookViewer/pdf/web/pdf-viewer.html"}>클릭해서 이동</a>
+
+                  <div className="card-body p-0">
+                    <ul className="nav nav-tabs" role="tablist">
+                      <li className="nav-item" >
+                        <a class="nav-link active" data-bs-toggle="tab" href="#intro" role="tab" aria-selected="false">소개</a>
+                      </li>
+                      <li className="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#info" role="tab" aria-selected="false">정보</a>
+                      </li>
+
+                    </ul>
+                    <div className="tab-content">
+                      <div className="tab-pane p-3 active" id="intro" role="tabpanel">
+                        <div class="row">
+                          <div className="col-12">
+                            <div className="card">
+                              <div className="card-header">
+                                <h5 class="font-20 fw-bold d-block mt-3 mb-4">자기소개</h5>
+                              </div>
+                              <div className="card-body">
+                                <p class="font-15 mt-4">저는 김병현입니다.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="card">
+                              <div className="card-header">
+                                <h5 class="font-20 fw-bold d-block mt-3 mb-4">좋아하는 것</h5>
+                              </div>
+                              <div className="card-body">
+                                <p class="font-15 mt-4">김양홍
+                                </p>
+                              </div>
+                            </div>
+
+
                           </div>
                         </div>
                       </div>
-                      {/* <div className="accordion-item">
+                      <div className="tab-pane p-3" id="info" role="tabpanel">
+                        {/* 해본 것들 시작*/}
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="card">
+                              <div className="card-header">
+                                <h4 className="card-title">내가 해 본 것들</h4>
+                              </div>
+                              <div className="card-body">
+                                <div className="accordion" id="accordionExample">
+                                  <div className="accordion-item">
+                                    <h5 className="accordion-header m-0" id="headingProjectOne">
+                                      <button className="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProjectOne" aria-expanded="false" aria-controls="collapseProjectOne">
+                                        전자책 뷰어
+                                      </button>
+                                    </h5>
+                                    <div id="collapseProjectOne" className="accordion-collapse collapse" aria-labelledby="headingProjectOne" data-bs-parent="#accordionExample">
+                                      <div className="accordion-body">
+                                        {/* .epub :  <a href="/nextjs-blog/EbookViewer/epub/web/epub-viewer.html">클릭해서 이동</a> */}
+                                        .epub :  <a href={hosturl + "/nextjs-blog/EbookViewer/epub/web/epub-viewer.html"}>클릭해서 이동</a>
+                                        <br></br>
+                                        <br></br>
+                                        .PDF :  <a href={hosturl + "/nextjs-blog/EbookViewer/pdf/web/pdf-viewer.html"}>클릭해서 이동</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  {/* <div className="accordion-item">
                         <h5 className="accordion-header m-0" id="headingProjectTwo">
                           <button className="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProjectTwo" aria-expanded="false" aria-controls="collapseProjectTwo">
                           </button>
@@ -135,77 +172,77 @@ export default function IndexPage() {
                         </div>
                       </div> */}
 
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* 해본것들 끝  */}
-
-            {/* 내가 다닌 학교 시작*/}
-            <div className="row">
-              <div className="col-12">
-                <div className="card">
-                  <div className="card-header">
-                    <h4 className="card-title">내가 다닌 학교</h4>
-                    <p className="text-muted mb-0"></p>
-                  </div>
-                  <div className="card-body">
-                    <div className="accordion" id="accordionExample">
-                      <div className="accordion-item">
-                        <h5 className="accordion-header m-0" id="headingSchoolOne">
-                          <button className="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSchoolOne" aria-expanded="false" aria-controls="collapseSchoolOne">
-                            서령 고등학교
-                          </button>
-                        </h5>
-                        <div id="collapseSchoolOne" className="accordion-collapse collapse" aria-labelledby="headingSchoolOne" data-bs-parent="#accordionExample">
-                          <div className="accordion-body">
-                            위치 : <br></br>
-                            <div id="mapHighSchool" className="gmaps" style={{ position: "relative", overflow: "hidden", width: "30vw" }}></div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="accordion-item">
-                        <h5 className="accordion-header m-0" id="headingSchoolTwo">
-                          <button className="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSchoolTwo" aria-expanded="false" aria-controls="collapseSchoolTwo">
-                            단국대학교(천안)
-                          </button>
-                        </h5>
-                        <div id="collapseSchoolTwo" className="accordion-collapse collapse" aria-labelledby="headingSchoolTwo" data-bs-parent="#accordionExample" >
-                          <div className="accordion-body">
-                            위치 : <br></br><div id="mapUniversity" className="gmaps" style={{ position: "relative", overflow: "hidden", width: "30vw" }}></div>
+                        {/* 해본것들 끝  */}
+
+                        {/* 내가 다닌 학교 시작*/}
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="card">
+                              <div className="card-header">
+                                <h4 className="card-title">내가 다닌 학교</h4>
+                                <p className="text-muted mb-0"></p>
+                              </div>
+                              <div className="card-body">
+                                <div className="accordion" id="accordionExample">
+                                  <div className="accordion-item">
+                                    <h5 className="accordion-header m-0" id="headingSchoolOne">
+                                      <button className="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSchoolOne" aria-expanded="false" aria-controls="collapseSchoolOne">
+                                        서령 고등학교
+                                      </button>
+                                    </h5>
+                                    <div id="collapseSchoolOne" className="accordion-collapse collapse" aria-labelledby="headingSchoolOne" data-bs-parent="#accordionExample">
+                                      <div className="accordion-body">
+                                        위치 : <br></br>
+                                        <div id="mapHighSchool" className="gmaps" style={{ position: "relative", overflow: "hidden", width: "30vw" }}></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="accordion-item">
+                                    <h5 className="accordion-header m-0" id="headingSchoolTwo">
+                                      <button className="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSchoolTwo" aria-expanded="false" aria-controls="collapseSchoolTwo">
+                                        단국대학교(천안)
+                                      </button>
+                                    </h5>
+                                    <div id="collapseSchoolTwo" className="accordion-collapse collapse" aria-labelledby="headingSchoolTwo" data-bs-parent="#accordionExample" >
+                                      <div className="accordion-body">
+                                        위치 : <br></br><div id="mapUniversity" className="gmaps" style={{ position: "relative", overflow: "hidden", width: "30vw" }}></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* 내가 다닌 학교 끝*/}
+                        {/* 내가 다닌 학교 끝*/}
 
-            {/* 내가 딴 자격증! 시작*/}
-            <div className="row">
-              <div className="col-12">
-                <div className="card">
-                  <div className="card-header">
-                    <h4 className="card-title">내가 딴 자격증</h4>
-                  </div>
-                  <div className="card-body">
-                    <div className="accordion" id="accordionExample">
-                      <div className="accordion-item">
-                        <h5 className="accordion-header m-0" id="headingOne">
-                          <button className="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            정보처리기사
-                          </button>
-                        </h5>
-                        <div id="collapseOne" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                          <div className="accordion-body">
+                        {/* 내가 딴 자격증! 시작*/}
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="card">
+                              <div className="card-header">
+                                <h4 className="card-title">내가 딴 자격증</h4>
+                              </div>
+                              <div className="card-body">
+                                <div className="accordion" id="accordionExample">
+                                  <div className="accordion-item">
+                                    <h5 className="accordion-header m-0" id="headingOne">
+                                      <button className="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        정보처리기사
+                                      </button>
+                                    </h5>
+                                    <div id="collapseOne" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                      <div className="accordion-body">
 
-                          </div>
-                        </div>
-                      </div>
-                      {/* <div className="accordion-item">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  {/* <div className="accordion-item">
                         <h5 className="accordion-header m-0" id="headingTwo">
                           <button className="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             전자책 뷰어(epub)
@@ -220,12 +257,21 @@ export default function IndexPage() {
                         </div>
                       </div> */}
 
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        {/* 내가 딴 자격증! 끝 */}
+                      </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
-            {/* 내가 딴 자격증! 끝 */}
+
+
           </div>
         </div>
       </div>
