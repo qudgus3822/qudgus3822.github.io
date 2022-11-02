@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 
 export default function IndexPage() {
   let hosturl = "";
+
+  let highSchoolMap;
+  let universityMap;
   useEffect(() => {
     let script = document.querySelector(
       `script[src="/nextjs-blog/assets/js/app.js"]`
@@ -17,6 +20,38 @@ export default function IndexPage() {
     }
 
     hosturl = window.location.host;
+
+
+    script = document.querySelector(
+      `script[src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=b15q7nzk9p"]`
+    );
+
+    if (!script) {
+      script = document.createElement("script");
+      script.src = "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=b15q7nzk9p";
+      script.async = true;
+      document.body.appendChild(script);
+
+      script.addEventListener("load", () => {
+        highSchoolMap = new naver.maps.Map('mapHighSchool', {
+          center: new naver.maps.LatLng(36.7935697, 126.4587419),
+          zoom: 15
+        });
+        universityMap = new naver.maps.Map('mapUniversity', {
+          center: new naver.maps.LatLng(36.8374266, 127.1687229),
+          zoom: 15
+        });
+
+        let highSchoolMarker = new naver.maps.Marker({
+          position: new naver.maps.LatLng(36.7935697, 126.4587419),
+          map: highSchoolMap
+        });
+        let universityMarker = new naver.maps.Marker({
+          position: new naver.maps.LatLng(36.8374266, 127.1687229),
+          map: universityMap
+        });
+      })
+    }
   }, []);
   return (
     <>
@@ -81,10 +116,10 @@ export default function IndexPage() {
                         <div id="collapseProjectOne" className="accordion-collapse collapse" aria-labelledby="headingProjectOne" data-bs-parent="#accordionExample">
                           <div className="accordion-body">
                             {/* .epub :  <a href="/nextjs-blog/EbookViewer/epub/web/epub-viewer.html">클릭해서 이동</a> */}
-                            .epub :  <a href={hosturl + "/nextjs-blog/ebookviewer/epub/web/epub-viewer.html"}>클릭해서 이동</a>
+                            .epub :  <a href={hosturl + "/nextjs-blog/EbookViewer/epub/web/epub-viewer.html"}>클릭해서 이동</a>
                             <br></br>
                             <br></br>
-                            .PDF :  <a href={hosturl + "/nextjs-blog/ebookviewer/epub/web/pdf-viewer.html"}>클릭해서 이동</a>
+                            .PDF :  <a href={hosturl + "/nextjs-blog/EbookViewer/pdf/web/pdf-viewer.html"}>클릭해서 이동</a>
                           </div>
                         </div>
                       </div>
@@ -125,7 +160,8 @@ export default function IndexPage() {
                         </h5>
                         <div id="collapseSchoolOne" className="accordion-collapse collapse" aria-labelledby="headingSchoolOne" data-bs-parent="#accordionExample">
                           <div className="accordion-body">
-
+                            위치 : <br></br>
+                            <div id="mapHighSchool" className="gmaps" style={{ position: "relative", overflow: "hidden", width: "30vw" }}></div>
                           </div>
                         </div>
                       </div>
@@ -137,7 +173,7 @@ export default function IndexPage() {
                         </h5>
                         <div id="collapseSchoolTwo" className="accordion-collapse collapse" aria-labelledby="headingSchoolTwo" data-bs-parent="#accordionExample" >
                           <div className="accordion-body">
-
+                            위치 : <br></br><div id="mapUniversity" className="gmaps" style={{ position: "relative", overflow: "hidden", width: "30vw" }}></div>
                           </div>
                         </div>
                       </div>
