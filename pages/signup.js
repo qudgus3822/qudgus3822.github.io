@@ -3,8 +3,6 @@ import Head from "next/head";
 import Router from "next/router";
 import { useCurrentUser } from "../hooks/index";
 
-import { insertUser, findUserByEmail } from "../db/index";
-
 const SignupPage = () => {
   const [user, { mutate }] = useCurrentUser();
   const [errorMsg, setErrorMsg] = useState("");
@@ -20,17 +18,21 @@ const SignupPage = () => {
       name: e.currentTarget.name.value,
       password: e.currentTarget.password.value,
     };
-    const res = await fetch("/api/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (res.status === 201) {
-      const userObj = await res.json();
-      mutate(userObj);
-    } else {
-      setErrorMsg(await res.text());
+    if (typeof window != "undefined") {
+    
+      const res = await fetch(window.location.protocol + "//" + window.location.host + "/nextjs-blog/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (res.status === 201) {
+        const userObj = await res.json();
+        mutate(userObj);
+      } else {
+        setErrorMsg(await res.text());
+      }
     }
+
 
     // insertUser()
   };

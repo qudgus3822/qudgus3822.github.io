@@ -2,7 +2,13 @@ import useSWR from "swr";
 import fetcher from "../lib/fetch";
 
 export function useBlog() {
-    const { data, mutate } = useSWR("/api/getBlogs", fetcher);
-    const blog = data?.blog;
-    return [blog, { mutate }];
+    if (typeof window != "undefined") {
+
+        const { data, mutate } = useSWR(window.location.protocol + "//" + window.location.host + "/nextjs-blog/api/getBlogs", fetcher);
+        const blog = data?.blog;
+        return [blog, { mutate }];
+    }
+    else {
+        return [null, null];
+    }
 }

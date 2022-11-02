@@ -1,0 +1,12 @@
+<svg id="ico_search_L" xmlns="http://www.w3.org/2000/svg" width="50" height="50">
+    <defs>
+        <style>
+            .cls-3{fill:none;stroke:#333;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.3px}
+        </style>
+    </defs>
+    <path id="사각형_172" data-name="사각형 172" style="fill:none" d="M0 0h50v50H0z"/>
+    <g id="그룹_10193" data-name="그룹 10193" transform="translate(-.505 .444)" style="opacity:.1">
+        <circle id="타원_34" data-name="타원 34" class="cls-3" cx="12.349" cy="12.349" r="12.349" transform="rotate(30 -.385 37.003)"/>
+        <path id="선_203" data-name="선 203" class="cls-3" transform="translate(32.508 30.853)" d="M8.992 8.647 0 0"/>
+    </g>
+</svg>

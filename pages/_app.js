@@ -16,6 +16,9 @@ function App({ Component, pageProps }) {
         {/* // Responsive meta tag */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* // bootstrap CDN */}
+        <link rel="shortcut icon" href="#">
+        </link>
+        
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -24,22 +27,23 @@ function App({ Component, pageProps }) {
         />
 
         <link
-          href="/assets/css/icons.min.css"
+          href="/nextjs-blog/assets/css/icons.min.css"
           rel="stylesheet"
           crossOrigin="anonymous"
         />
         <link
-          href="/assets/css/app.min.css"
+          href="/nextjs-blog/assets/css/app.min.css"
           rel="stylesheet"
           crossOrigin="anonymous"
         />
 
         <link
-          href="/global.css"
+          href="/nextjs-blog/global.css"
           rel="stylesheet"
           crossOrigin="anonymous"
         />
 
+        <base href="/nextjs-blog"></base>
       </Head>
       <Component {...pageProps} />
     </>

@@ -13,22 +13,25 @@ const LoginPage = () => {
     if (user) router.push("/posts/first-post");
   }, [user]);
 
-  async function onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const body = {
       email: e.currentTarget.email.value,
       password: e.currentTarget.password.value,
     };
-    const res = await fetch("/api/auth", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (res.status === 200) {
-      const userObj = await res.json();
-      mutate(userObj);
-    } else {
-      setErrorMsg("Incorrect username or password. Try again!");
+    if (typeof window != "undefined") {
+
+      const res = await fetch(window.location.protocol + "//" + window.location.host + "/nextjs-blog/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (res.status === 200) {
+        const userObj = await res.json();
+        mutate(userObj);
+      } else {
+        setErrorMsg("Incorrect username or password. Try again!");
+      }
     }
   }
 

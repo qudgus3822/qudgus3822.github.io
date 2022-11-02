@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import useSWR from "swr";
 import BlogBox from "../../components/posts/blogBox";
-import { getBlogs } from "../../db/blog";
 import { useBlog } from "../../hooks/blog";
 import Router from "next/router";
 export default function Blogs() {
@@ -9,12 +7,12 @@ export default function Blogs() {
 
   useEffect(() => {
     let script = document.querySelector(
-      `script[src="/assets/js/app.js"]`
+      `script[src="/nextjs-blog/assets/js/app.js"]`
     );
 
     if (!script) {
       script = document.createElement("script");
-      script.src = "/assets/js/app.js";
+      script.src = "/nextjs-blog/assets/js/app.js";
       script.async = true;
       document.body.appendChild(script);
     }
@@ -95,15 +93,18 @@ export default function Blogs() {
 
 
   async function test22() {
-    const res = await fetch("/api/getBlogs", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    });
-    if (res.status === 200) {
-      const userObj = await res.json();
-      console.log(userObj);
-    } else {
-      setErrorMsg("Incorrect username or password. Try again!");
+    if (typeof window != "undefined") {
+
+      const res = await fetch(window.location.protocol + "//" + window.location.host + "/nextjs-blog/api/getBlogs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (res.status === 200) {
+        const userObj = await res.json();
+        console.log(userObj);
+      } else {
+        setErrorMsg("Incorrect username or password. Try again!");
+      }
     }
   }
 
@@ -127,7 +128,7 @@ export default function Blogs() {
                 </div>
               </div>
             </div>
-            <button className="btn btn-de-primary float-end" onClick={()=>{Router.replace("write-blog")}}>글쓰기</button>
+            <button className="btn btn-de-primary float-end" onClick={() => { Router.replace("/posts/write-blog") }}>글쓰기</button>
             <div className="row">
               {
                 t && t.map((data, i) => {

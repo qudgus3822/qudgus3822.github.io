@@ -5,12 +5,12 @@ export default function WriteBlog() {
     const [errorMsg, setErrorMsg] = useState("");
     useEffect(() => {
         let script = document.querySelector(
-            `script[src="/assets/js/app.js"]`
+            `script[src="/nextjs-blog/assets/js/app.js"]`
         );
 
         if (!script) {
             script = document.createElement("script");
-            script.src = "/assets/js/app.js";
+            script.src = "/nextjs-blog/assets/js/app.js";
             script.async = true;
             document.body.appendChild(script);
         }
@@ -33,17 +33,20 @@ export default function WriteBlog() {
             blogImage: e.currentTarget.blogImage.value,
             category: e.currentTarget.category.value
         };
-        const res = await fetch("/api/writeBlog", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-        });
-        if (res.status === 201) {
-            const userObj = await res.json();
-            mutate(userObj);
-        } else {
-            setErrorMsg(await res.text());
+        if (typeof window != "undefined") {
 
+            const res = await fetch(window.location.protocol + "//" + window.location.host + "/nextjs-blog/api/writeBlog", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+            if (res.status === 201) {
+                const userObj = await res.json();
+                mutate(userObj);
+            } else {
+                setErrorMsg(await res.text());
+
+            }
         }
     }
     const style = {
