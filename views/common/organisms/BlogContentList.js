@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { readFile } from "../../../db/fileProcess";
+import BlogContent from "../components/BlogContent";
 
 export default function BlogContentList() {
 
@@ -25,13 +26,22 @@ export default function BlogContentList() {
                         resultData.push(tempData);
                     }
                 }
+
+                setData(resultData);
             }
-        })
+        });
     }, []);
 
     return (<>
-        <div class="row">
+        {data && data.length > 0 && data.map((rowItem) => {
+            rowItem.map((item) => {
+                return (
+                    <div div class="row" >
+                        <BlogContent data={item}></BlogContent>
+                    </div>
+                )
+            })
+        })}
 
-        </div>
     </>)
 }

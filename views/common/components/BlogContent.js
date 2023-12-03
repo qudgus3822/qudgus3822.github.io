@@ -1,6 +1,6 @@
-export default function BlogContent() {
+export default function BlogContent({ data }) {
 
-    
+
     return (<>
         <div className="col-lg-4">
             <div className="card">
