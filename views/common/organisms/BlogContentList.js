@@ -21,6 +21,7 @@ export default function BlogContentList() {
                         resultData.push(tempData);
                         tempData = [];
                     }
+
                     
 
                     if (index == res.length && tempData.length > 0) {
