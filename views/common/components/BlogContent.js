@@ -6,13 +6,12 @@ export default function BlogContent({ data }) {
             <div className="card">
                 <div className="card-body">
                     <div className="blog-card">
-                        <img src="assets/images/small/img-1.jpg" alt="" className="img-fluid rounded"></img>
-                        <span className="badge badge-purple px-3 py-2 bg-soft-primary fw-semibold mt-3">Photography</span>
+                        <img src={data.image ? data.image : "/images/profile.png"} alt="" className="img-fluid rounded" style={{ height: "250px" }}></img>
                         <h4 className="my-3">
-                            <a href="" className="">There are many variations of passages of Lorem</a>
+                            <a href="" className="">{data.subject}</a>
                         </h4>
-                        <p className="text-muted">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Cum sociis natoque penatibus et magnis.</p>
-                        <hr className="hr-dashed"></hr>
+                        <p className="text-muted">{data.description}</p>
+                        {/* <hr className="hr-dashed"></hr>
                         <div className="d-flex justify-content-between">
                             <div className="meta-box">
                                 <div className="media">
@@ -29,7 +28,7 @@ export default function BlogContent({ data }) {
                             <div className="align-self-center">
                                 <a href="#" className="text-dark">Read more <i className="fas fa-long-arrow-alt-right"></i></a>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

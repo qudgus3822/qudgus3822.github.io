@@ -91,13 +91,16 @@ export default function IndexPage() {
                             <li className="mt-2"><i className="las la-globe text-secondary font-22 align-middle mr-2"></i> <b> Website </b> :
                               <a href="https://qudgus3822.github.io/" className="font-14 text-primary">https://qudgus3822.github.io/</a>
                             </li>
+                            <li className="mt-2"><i className="las la-globe text-secondary font-22 align-middle mr-2"></i> <b> 블로그 </b> :
+                              <a href="blog" className="font-14 text-primary">이동</a>
+                            </li>
                           </ul>
 
                         </div>
                       </div>
                     </div>
                   </div>
-                  
+
 
 
                   <div className="card-body p-0">
@@ -129,7 +132,7 @@ export default function IndexPage() {
                                 <h5 className="font-20 fw-bold d-block mt-3 mb-4">좋아하는 것</h5>
                               </div>
                               <div className="card-body">
-                                <p className="font-15 mt-4">김양홍
+                                <p className="font-15 mt-4">
                                 </p>
                               </div>
                             </div>
