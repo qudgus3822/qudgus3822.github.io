@@ -27,23 +27,23 @@ function App({ Component, pageProps }) {
         />
 
         <link
-          href="/nextjs-blog/assets/css/icons.min.css"
+          href="/assets/css/icons.min.css"
           rel="stylesheet"
           crossOrigin="anonymous"
         />
         <link
-          href="/nextjs-blog/assets/css/app.min.css"
+          href="/assets/css/app.min.css"
           rel="stylesheet"
           crossOrigin="anonymous"
         />
 
         <link
-          href="/nextjs-blog/global.css"
+          href="/global.css"
           rel="stylesheet"
           crossOrigin="anonymous"
         />
 
-        <base href="/nextjs-blog"></base>
+        <base href=""></base>
       </Head>
       <Component {...pageProps} />
     </>

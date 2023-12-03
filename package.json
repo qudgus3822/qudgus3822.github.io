@@ -3,12 +3,14 @@
   "scripts": {
     "lint": "next lint",
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
-    "build2" : "next build",
-    "build": "next build && next export",
+    "build": "next build",
+    "build2": "next build && next export",
     "start": "next start",
+    "deploy2": "touch out/.nojekyll && gh-pages -d out --dotfiles",
     "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add -f out/ && git checkout -b temp-for-deploy-gh-pages && git commit -m \"Deploy Next.js to gh-pages\" && git subtree split --prefix out -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages && git checkout main && git branch -D temp-for-deploy-gh-pages"
   },
   "dependencies": {
+    "@octokit/core": "^5.0.2",
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^4.6.0",
     "connect-mongodb-session": "^3.1.1",
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "eslint": "8.26.0",
-    "eslint-config-next": "13.0.1"
+    "eslint-config-next": "13.0.1",
+    "gh-pages": "^6.1.0"
   }
 }

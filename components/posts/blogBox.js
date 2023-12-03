@@ -9,22 +9,22 @@ export default function BlogBox(props) {
 
     let imagePath = "";
     if (props.blogImage == 1) {
-        imagePath = "/nextjs-blog/assets/images/small/img-1.jpg";
+        imagePath = "/assets/images/small/img-1.jpg";
     }
     if (props.blogImage == 2) {
-        imagePath = "/nextjs-blog/assets/images/small/img-2.jpg";
+        imagePath = "/assets/images/small/img-2.jpg";
     }
     if (props.blogImage == 3) {
-        imagePath = "/nextjs-blog/assets/images/small/img-3.jpg";
+        imagePath = "/assets/images/small/img-3.jpg";
     }
     if (props.blogImage == 4) {
-        imagePath = "/nextjs-blog/assets/images/small/img-4.jpg";
+        imagePath = "/assets/images/small/img-4.jpg";
     }
     if (props.blogImage == 5) {
-        imagePath = "/nextjs-blog/assets/images/small/img-5.jpg";
+        imagePath = "/assets/images/small/img-5.jpg";
     }
     if (props.blogImage == 6) {
-        imagePath = "/nextjs-blog/assets/images/small/img-6.jpg";
+        imagePath = "/assets/images/small/img-6.jpg";
     }
 
     return (<>
@@ -43,7 +43,7 @@ export default function BlogBox(props) {
                         <div className="d-flex justify-content-between">
                             <div className="meta-box">
                                 <div className="media">
-                                    <img src="/nextjs-blog/assets/images/users/user-5.jpg" alt="" className="thumb-sm rounded-circle me-2" layout="fill"></img>
+                                    <img src="/assets/images/users/user-5.jpg" alt="" className="thumb-sm rounded-circle me-2" layout="fill"></img>
                                     <div className="media-body align-self-center text-truncate">
                                         <h6 className="m-0 text-dark">김병현</h6>
                                         <ul className="p-0 list-inline mb-0">

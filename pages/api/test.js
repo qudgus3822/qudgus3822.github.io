@@ -1,14 +1,19 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import all from "../../middlewares/index";
-import { extractUser } from "../../lib/api-helper";
-import { insertUser, findUserByEmail } from "../../db/index";
-import nc from "next-connect";
-const handler = nc();
+export default function handler(req, res) {
+    const protocol = req.headers['x-forwarded-proto'] || 'http'
+    const baseUrl = req ? `${protocol}://${req.headers.host}` : ''
 
-handler.use(all);
+    fetch(baseUrl + "/test.json")
+        .then((res) => res.json())
+        .then((text) => {
+            // do something with "text"
+            res.status(200).json(text);
+        })
+        .catch((e) => console.error(e));
 
-handler.get(async (req, res) => {
-    return res.json({ test: "test", test2: "정상입니다." });
-});
+    // fetch(baseUrl + "/test.json")
+    //     .then((text) => {
+    //         debugger
 
-export default handler;
+    //     });
+    // res.status(200).json({ test: "test" });
+}

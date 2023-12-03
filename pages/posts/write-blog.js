@@ -5,12 +5,12 @@ export default function WriteBlog() {
     const [errorMsg, setErrorMsg] = useState("");
     useEffect(() => {
         let script = document.querySelector(
-            `script[src="/nextjs-blog/assets/js/app.js"]`
+            `script[src="/assets/js/app.js"]`
         );
 
         if (!script) {
             script = document.createElement("script");
-            script.src = "/nextjs-blog/assets/js/app.js";
+            script.src = "/assets/js/app.js";
             script.async = true;
             document.body.appendChild(script);
         }
@@ -35,7 +35,7 @@ export default function WriteBlog() {
         };
         if (typeof window != "undefined") {
 
-            const res = await fetch(window.location.protocol + "//" + window.location.host + "/nextjs-blog/api/writeBlog", {
+            const res = await fetch(window.location.protocol + "//" + window.location.host + "/api/writeBlog", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body),

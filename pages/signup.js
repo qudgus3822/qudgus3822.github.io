@@ -20,7 +20,7 @@ const SignupPage = () => {
     };
     if (typeof window != "undefined") {
     
-      const res = await fetch(window.location.protocol + "//" + window.location.host + "/nextjs-blog/api/users", {
+      const res = await fetch(window.location.protocol + "//" + window.location.host + "/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

@@ -7,10 +7,14 @@ const nextConfig = {
         loader: 'akamai',
         path: '/',
     },
-    basePath: '/nextjs-blog',
+    basePath: '/',
     aeestPrefix: './',
     reactStrictMode: true,
     staticDirs: ['/public/static'],
+    env: {
+        FileUrl: process.env.FileUrl,
+        GitHubAccessToken: process.env.GitHubAccessToken
+    },
 }
 
 module.exports = nextConfig

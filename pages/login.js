@@ -21,7 +21,7 @@ const LoginPage = () => {
     };
     if (typeof window != "undefined") {
 
-      const res = await fetch(window.location.protocol + "//" + window.location.host + "/nextjs-blog/api/auth", {
+      const res = await fetch(window.location.protocol + "//" + window.location.host + "/api/auth", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -47,13 +47,12 @@ const LoginPage = () => {
             {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
             <div className="form-floating mb-2">
               <input
-                id="email"
-                name="email"
+                name="id"
                 type="email"
                 className="form-control"
-                placeholder="이메일 주소"
+                placeholder="아이디"
               />
-              <label forhtml="email">이메일 주소</label>
+              <label forhtml="id">아이디</label>
             </div>
             <div className="form-floating mb-2">
               <input

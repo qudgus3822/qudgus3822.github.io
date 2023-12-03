@@ -1,20 +1,25 @@
 import React from "react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { readFile, uploadFile } from "../db/fileProcess";
 
 export default function IndexPage() {
   let hosturl = "";
 
   let highSchoolMap;
   let universityMap;
+
+  useEffect(() => {
+
+  }, []);
   useEffect(() => {
     let script = document.querySelector(
-      `script[src="/nextjs-blog/assets/js/app.js"]`
+      `script[src="/assets/js/app.js"]`
     );
 
     if (!script) {
       script = document.createElement("script");
-      script.src = "/nextjs-blog/assets/js/app.js";
+      script.src = "/assets/js/app.js";
       script.async = true;
       document.body.appendChild(script);
     }
@@ -55,10 +60,8 @@ export default function IndexPage() {
   }, []);
   return (
     <>
-      <div className="page-wrapper" style={{ marginTop: "20px;" }}>
-
+      <div className="page-wrapper" style={{ marginTop: "20px" }}>
         <div className="page-content-tab">
-
           <div className="container-fluid">
             <div className="row">
               <div className="col-12">
@@ -69,7 +72,7 @@ export default function IndexPage() {
                         <div className="col-lg-6 align-self-center mb-3 mb-lg-0">
                           <div className="met-profile-main">
                             <div className="met-profile-main-pic">
-                              <img src="/nextjs-blog/images/profile.png" alt="" height="110" className="rounded-circle"></img>
+                              <img src="/images/profile.png" alt="" height="110" className="rounded-circle"></img>
                               {/* <span className="met-profile_main-pic-change">
                                 <i className="fas fa-camera"></i>
                               </span> */}
@@ -86,7 +89,7 @@ export default function IndexPage() {
                             <li className=""><i className="las la-phone mr-2 text-secondary font-22 align-middle"></i> <b> phone </b> : +82 2835 3822</li>
                             <li className="mt-2"><i className="las la-envelope text-secondary font-22 align-middle mr-2"></i> <b> Email </b> : qudgus3822@gmail.com</li>
                             <li className="mt-2"><i className="las la-globe text-secondary font-22 align-middle mr-2"></i> <b> Website </b> :
-                              <a href="https://qudgus3822.github.io/nextjs-blog/" className="font-14 text-primary">https://qudgus3822.github.io/nextjs-blog/</a>
+                              <a href="https://qudgus3822.github.io/" className="font-14 text-primary">https://qudgus3822.github.io/</a>
                             </li>
                           </ul>
 
@@ -99,33 +102,33 @@ export default function IndexPage() {
                   <div className="card-body p-0">
                     <ul className="nav nav-tabs" role="tablist">
                       <li className="nav-item" >
-                        <a class="nav-link active" data-bs-toggle="tab" href="#intro" role="tab" aria-selected="false">소개</a>
+                        <a className="nav-link active" data-bs-toggle="tab" href="#intro" role="tab" aria-selected="false">소개</a>
                       </li>
                       <li className="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#info" role="tab" aria-selected="false">정보</a>
+                        <a className="nav-link" data-bs-toggle="tab" href="#info" role="tab" aria-selected="false">정보</a>
                       </li>
 
                     </ul>
                     <div className="tab-content">
                       <div className="tab-pane p-3 active" id="intro" role="tabpanel">
-                        <div class="row">
+                        <div className="row">
                           <div className="col-12">
                             <div className="card">
                               <div className="card-header">
-                                <h5 class="font-20 fw-bold d-block mt-3 mb-4">자기소개</h5>
+                                <h5 className="font-20 fw-bold d-block mt-3 mb-4">자기소개</h5>
                               </div>
                               <div className="card-body">
-                                <p class="font-15 mt-4">저는 김병현입니다.
+                                <p className="font-15 mt-4">저는 김병현입니다.
                                 </p>
                               </div>
                             </div>
 
                             <div className="card">
                               <div className="card-header">
-                                <h5 class="font-20 fw-bold d-block mt-3 mb-4">좋아하는 것</h5>
+                                <h5 className="font-20 fw-bold d-block mt-3 mb-4">좋아하는 것</h5>
                               </div>
                               <div className="card-body">
-                                <p class="font-15 mt-4">김양홍
+                                <p className="font-15 mt-4">김양홍
                                 </p>
                               </div>
                             </div>
@@ -152,11 +155,11 @@ export default function IndexPage() {
                                     </h5>
                                     <div id="collapseProjectOne" className="accordion-collapse collapse" aria-labelledby="headingProjectOne" data-bs-parent="#accordionExample">
                                       <div className="accordion-body">
-                                        {/* .epub :  <a href="/nextjs-blog/EbookViewer/epub/web/epub-viewer.html">클릭해서 이동</a> */}
-                                        .epub :  <a href={hosturl + "/nextjs-blog/EbookViewer/epub/web/epub-viewer.html"}>클릭해서 이동</a>
+                                        {/* .epub :  <a href="/EbookViewer/epub/web/epub-viewer.html">클릭해서 이동</a> */}
+                                        .epub :  <a href={hosturl + "/EbookViewer/epub/web/epub-viewer.html"}>클릭해서 이동</a>
                                         <br></br>
                                         <br></br>
-                                        .PDF :  <a href={hosturl + "/nextjs-blog/EbookViewer/pdf/web/pdf-viewer.html"}>클릭해서 이동</a>
+                                        .PDF :  <a href={hosturl + "/EbookViewer/pdf/web/pdf-viewer.html"}>클릭해서 이동</a>
                                       </div>
                                     </div>
                                   </div>

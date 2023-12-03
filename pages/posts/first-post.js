@@ -7,12 +7,12 @@ export default function Blogs() {
 
   useEffect(() => {
     let script = document.querySelector(
-      `script[src="/nextjs-blog/assets/js/app.js"]`
+      `script[src="/assets/js/app.js"]`
     );
 
     if (!script) {
       script = document.createElement("script");
-      script.src = "/nextjs-blog/assets/js/app.js";
+      script.src = "/assets/js/app.js";
       script.async = true;
       document.body.appendChild(script);
     }
@@ -95,7 +95,7 @@ export default function Blogs() {
   async function test22() {
     if (typeof window != "undefined") {
 
-      const res = await fetch(window.location.protocol + "//" + window.location.host + "/nextjs-blog/api/getBlogs", {
+      const res = await fetch(window.location.protocol + "//" + window.location.host + "/api/getBlogs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
