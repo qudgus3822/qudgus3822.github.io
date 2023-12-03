@@ -1,0 +1,14 @@
+<svg id="menu_list" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+    <defs>
+        <style>
+            .cls-2,.cls-3{fill:none;stroke:#333;stroke-linecap:round;stroke-linejoin:round}.cls-2{stroke-width:1.3px}.cls-3{stroke-width:2px}
+        </style>
+    </defs>
+    <path id="사각형_1149" data-name="사각형 1149" style="fill:none" d="M0 0h24v24H0z"/>
+    <path id="선_393" data-name="선 393" class="cls-2" transform="translate(7.658 4.04)" d="M0 0h14.083"/>
+    <path id="선_395" data-name="선 395" class="cls-2" transform="translate(7.658 19.96)" d="M0 0h14.083"/>
+    <path id="선_397" data-name="선 397" class="cls-2" transform="translate(7.658 12)" d="M0 0h14.083"/>
+    <path id="선_399" data-name="선 399" class="cls-3" transform="translate(2.759 4.04)" d="M0 0h0"/>
+    <path id="선_401" data-name="선 401" class="cls-3" transform="translate(2.759 19.96)" d="M0 0h0"/>
+    <path id="선_403" data-name="선 403" class="cls-3" transform="translate(2.759 12)" d="M0 0h0"/>
+</svg>

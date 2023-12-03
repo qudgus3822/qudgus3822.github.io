@@ -1,0 +1,10 @@
+<svg id="ico_close" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+    <defs>
+        <style>
+            .cls-2{fill:#999}
+        </style>
+    </defs>
+    <path id="사각형_147" data-name="사각형 147" style="fill:none" d="M0 0h20v20H0z"/>
+    <rect id="사각형_27" data-name="사각형 27" class="cls-2" width="18.757" height="1.042" rx=".521" transform="rotate(-135 11.531 5.123)"/>
+    <rect id="사각형_28" data-name="사각형 28" class="cls-2" width="18.757" height="1.042" rx=".521" transform="rotate(-45 20.91 4.704)"/>
+</svg>

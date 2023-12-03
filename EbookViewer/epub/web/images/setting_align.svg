@@ -1,0 +1,15 @@
+<svg id="ico_6_align" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+    <defs>
+        <style>
+            .cls-2{fill:none;stroke:#999;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.3px}
+        </style>
+    </defs>
+    <path id="사각형_1118" data-name="사각형 1118" style="fill:none" d="M0 0h24v24H0z"/>
+    <g id="그룹_10219" data-name="그룹 10219" transform="translate(6207.32 -2106.18)">
+        <path id="선_162" data-name="선 162" class="cls-2" transform="translate(-6203.82 2110.18)" d="M0 0h16"/>
+        <path id="선_163" data-name="선 163" class="cls-2" transform="translate(-6203.82 2118.18)" d="M0 0h17"/>
+        <path id="선_458" data-name="선 458" class="cls-2" transform="translate(-6203.82 2126.18)" d="M0 0h12"/>
+        <path id="선_459" data-name="선 459" class="cls-2" transform="translate(-6203.82 2122.18)" d="M0 0h11"/>
+        <path id="선_164" data-name="선 164" class="cls-2" transform="translate(-6203.82 2114.18)" d="M0 0h5"/>
+    </g>
+</svg>
