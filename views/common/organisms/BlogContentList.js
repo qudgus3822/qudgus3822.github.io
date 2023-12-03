@@ -27,11 +27,12 @@ export default function BlogContentList() {
                     }
                 }
 
+                
                 setData(resultData);
             }
         });
     }, []);
-    
+
 
     return (<>
         {data && data.length > 0 && data.map((rowItem) => {
