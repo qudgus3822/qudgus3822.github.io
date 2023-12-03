@@ -36,7 +36,7 @@ export default function BlogContentList() {
         {data && data.length > 0 && data.map((rowItem) => {
             rowItem.map((item) => {
                 return (
-                    <div div class="row" >
+                    <div div class="row" >  
                         <BlogContent data={item}></BlogContent>
                     </div>
                 )
