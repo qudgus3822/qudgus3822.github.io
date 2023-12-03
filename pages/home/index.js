@@ -1,7 +1,5 @@
 import React from "react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import { readFile, uploadFile } from "../db/fileProcess";
 
 export default function IndexPage() {
     let hosturl = "";
