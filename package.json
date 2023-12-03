@@ -3,8 +3,8 @@
   "scripts": {
     "lint": "next lint",
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
-    "build": "next build",
-    "build2": "next build && next export",
+    "build2": "next build",
+    "build": "next build && next export",
     "test" : "",
     "start": "next start",
     "deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles",
