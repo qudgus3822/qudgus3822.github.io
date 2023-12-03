@@ -7,7 +7,7 @@ const nextConfig = {
         loader: 'akamai',
         path: '/',
     },
-    basePath: '/',
+    // basePath: '/',
     aeestPrefix: './',
     reactStrictMode: true,
     staticDirs: ['/public/static'],
