@@ -3,8 +3,9 @@
   "scripts": {
     "lint": "next lint",
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
-    "build2": "next build",
-    "build": "next build && next export",
+    "build": "next build",
+    "build2": "next build && next export",
+    "test" : "",
     "start": "next start",
     "deploy2": "touch out/.nojekyll && gh-pages -d out --dotfiles",
     "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add -f out/ && git checkout -b temp-for-deploy-gh-pages && git commit -m \"Deploy Next.js to gh-pages\" && git subtree split --prefix out -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages && git checkout main && git branch -D temp-for-deploy-gh-pages"
