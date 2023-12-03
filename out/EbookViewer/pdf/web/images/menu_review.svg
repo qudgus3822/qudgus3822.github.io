@@ -1,0 +1,13 @@
+<svg id="ic_review" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+    <defs>
+        <style>
+            .cls-2{fill:none;stroke:#333;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.3px}
+        </style>
+    </defs>
+    <path id="사각형_1121" data-name="사각형 1121" style="fill:none" d="M0 0h24v24H0z"/>
+    <g id="그룹_10177" data-name="그룹 10177" transform="translate(-211.543 -2607.5)">
+        <path id="선_423" data-name="선 423" class="cls-2" transform="translate(218.242 2615.786)" d="M0 0h10.49"/>
+        <path id="선_424" data-name="선 424" class="cls-2" transform="translate(218.242 2619.486)" d="M0 0h10.49"/>
+        <path id="패스_24861" data-name="패스 24861" class="cls-2" d="M1605.889 158h-17.777a1.1 1.1 0 0 0-1.111 1.087v11.951a1.1 1.1 0 0 0 1.111 1.087h4.384v4.375l.025-.02 5.65-4.356h7.717a1.1 1.1 0 0 0 1.111-1.087v-11.95a1.1 1.1 0 0 0-1.11-1.087z" transform="translate(-1373.5 2452.5)"/>
+    </g>
+</svg>

@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html dir="ltr" mozdisallowselectionprint>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width,height=device-height, initial-scale=1, maximum-scale=3.0, minimum-scale=1">
+  <meta name="google" content="notranslate">
+  <title>PDF.js viewer</title>
+  <link rel="stylesheet" href="viewer.css">
+  <link rel="resource" type="application/l10n" href="locale/locale.properties">
+  <script src="../build/pdf.js"></script>
+  <script src="viewer.js"></script>
+  <script src="./api-connect.js"></script>
+  <style>
+    body *::-webkit-scrollbar {
+      display: none;
+    }
+
+    body * {
+      -ms-overflow-style: none;
+
+      /* 셀렉트 막기 */
+      overflow: hidden;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    /* .oneSide, .oneSide div{
+    width:97vw !important;
+    height:97vh !important;
+   
+  }
+
+  .twoSide, .twoSide div{
+    width:50vw !important;
+    height:100vh !important;
+  }
+
+  .nonScroll, .nonScroll *{
+    touch-action: none;
+  }
+
+
+  .page canvas{
+    margin-left:auto !important;
+    margin-right:auto !important;
+  } */
+    .paginated {
+      margin-bottom: 100vh !important;
+    }
+
+    .page {
+      border: 0 !important;
+    }
+
+    #div-loading.show {
+      width: 100vw;
+      height: 100vh;
+      /* opacity: 0.3; */
+      /* background-color: black; */
+      display: block !important;
+    }
+
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+
+</head>
+
+<body tabindex="1">
+  <div id="outerContainer">
+
+    <div id="sidebarContainer" style="display:none">
+      <div id="toolbarSidebar">
+        <div id="toolbarSidebarLeft">
+          <div class="splitToolbarButton toggled">
+            <button id="viewThumbnail" class="toolbarButton toggled" title="Show Thumbnails" tabindex="2"
+              data-l10n-id="thumbs">
+              <span data-l10n-id="thumbs_label">Thumbnails</span>
+            </button>
+            <button id="viewOutline" class="toolbarButton"
+              title="Show Document Outline (double-click to expand/collapse all items)" tabindex="3"
+              data-l10n-id="document_outline">
+              <span data-l10n-id="document_outline_label">Document Outline</span>
+            </button>
+            <button id="viewAttachments" class="toolbarButton" title="Show Attachments" tabindex="4"
+              data-l10n-id="attachments">
+              <span data-l10n-id="attachments_label">Attachments</span>
+            </button>
+            <button id="viewLayers" class="toolbarButton"
+              title="Show Layers (double-click to reset all layers to the default state)" tabindex="5"
+              data-l10n-id="layers">
+              <span data-l10n-id="layers_label">Layers</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="toolbarSidebarRight">
+          <div id="outlineOptionsContainer" class="hidden">
+            <div class="verticalToolbarSeparator"></div>
+            <button id="currentOutlineItem" class="toolbarButton" disabled="disabled" title="Find Current Outline Item"
+              tabindex="6" data-l10n-id="current_outline_item">
+              <span data-l10n-id="current_outline_item_label">Current Outline Item</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="sidebarContent">
+        <div id="thumbnailView">
+        </div>
+        <div id="outlineView" class="hidden">
+        </div>
+        <div id="attachmentsView" class="hidden">
+        </div>
+        <div id="layersView" class="hidden">
+        </div>
+      </div>
+      <div id="sidebarResizer"></div>
+    </div> <!-- sidebarContainer -->
+
+    <div id="mainContainer">
+      <div class="findbar hidden doorHanger" id="findbar">
+        <div id="findbarInputContainer">
+          <input id="findInput" class="toolbarField" title="Find" placeholder="Find in document…" tabindex="91"
+            data-l10n-id="find_input">
+          <div class="splitToolbarButton">
+            <button id="findPrevious" class="toolbarButton findPrevious"
+              title="Find the previous occurrence of the phrase" tabindex="92" data-l10n-id="find_previous">
+              <span data-l10n-id="find_previous_label">Previous</span>
+            </button>
+            <div class="splitToolbarButtonSeparator"></div>
+            <button id="findNext" class="toolbarButton findNext" title="Find the next occurrence of the phrase"
+              tabindex="93" data-l10n-id="find_next">
+              <span data-l10n-id="find_next_label">Next</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="findbarOptionsOneContainer">
+          <input type="checkbox" id="findHighlightAll" class="toolbarField" tabindex="94">
+          <label for="findHighlightAll" class="toolbarLabel" data-l10n-id="find_highlight">Highlight all</label>
+          <input type="checkbox" id="findMatchCase" class="toolbarField" tabindex="95">
+          <label for="findMatchCase" class="toolbarLabel" data-l10n-id="find_match_case_label">Match case</label>
+        </div>
+        <div id="findbarOptionsTwoContainer">
+          <input type="checkbox" id="findEntireWord" class="toolbarField" tabindex="96">
+          <label for="findEntireWord" class="toolbarLabel" data-l10n-id="find_entire_word_label">Whole words</label>
+          <span id="findResultsCount" class="toolbarLabel hidden"></span>
+        </div>
+
+        <div id="findbarMessageContainer">
+          <span id="findMsg" class="toolbarLabel"></span>
+        </div>
+      </div> <!-- findbar -->
+
+      <div id="secondaryToolbar" class="secondaryToolbar hidden doorHangerRight" style="display:none">
+        <div id="secondaryToolbarButtonContainer">
+          <button id="secondaryPresentationMode" class="secondaryToolbarButton presentationMode visibleLargeView"
+            title="Switch to Presentation Mode" tabindex="51" data-l10n-id="presentation_mode">
+            <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
+          </button>
+
+          <button id="secondaryOpenFile" class="secondaryToolbarButton openFile visibleLargeView" title="Open File"
+            tabindex="52" data-l10n-id="open_file">
+            <span data-l10n-id="open_file_label">Open</span>
+          </button>
+
+          <button id="secondaryPrint" class="secondaryToolbarButton print visibleMediumView" title="Print" tabindex="53"
+            data-l10n-id="print">
+            <span data-l10n-id="print_label">Print</span>
+          </button>
+
+          <button id="secondaryDownload" class="secondaryToolbarButton download visibleMediumView" title="Download"
+            tabindex="54" data-l10n-id="download">
+            <span data-l10n-id="download_label">Download</span>
+          </button>
+
+          <a href="#" id="secondaryViewBookmark" class="secondaryToolbarButton bookmark visibleSmallView"
+            title="Current view (copy or open in new window)" tabindex="55" data-l10n-id="bookmark">
+            <span data-l10n-id="bookmark_label">Current View</span>
+          </a>
+
+          <div class="horizontalToolbarSeparator visibleLargeView"></div>
+
+          <button id="firstPage" class="secondaryToolbarButton firstPage" title="Go to First Page" tabindex="56"
+            data-l10n-id="first_page">
+            <span data-l10n-id="first_page_label">Go to First Page</span>
+          </button>
+          <button id="lastPage" class="secondaryToolbarButton lastPage" title="Go to Last Page" tabindex="57"
+            data-l10n-id="last_page">
+            <span data-l10n-id="last_page_label">Go to Last Page</span>
+          </button>
+
+          <div class="horizontalToolbarSeparator"></div>
+
+          <button id="pageRotateCw" class="secondaryToolbarButton rotateCw" title="Rotate Clockwise" tabindex="58"
+            data-l10n-id="page_rotate_cw">
+            <span data-l10n-id="page_rotate_cw_label">Rotate Clockwise</span>
+          </button>
+          <button id="pageRotateCcw" class="secondaryToolbarButton rotateCcw" title="Rotate Counterclockwise"
+            tabindex="59" data-l10n-id="page_rotate_ccw">
+            <span data-l10n-id="page_rotate_ccw_label">Rotate Counterclockwise</span>
+          </button>
+
+          <div class="horizontalToolbarSeparator"></div>
+
+          <button id="cursorSelectTool" class="secondaryToolbarButton selectTool toggled"
+            title="Enable Text Selection Tool" tabindex="60" data-l10n-id="cursor_text_select_tool">
+            <span data-l10n-id="cursor_text_select_tool_label">Text Selection Tool</span>
+          </button>
+          <button id="cursorHandTool" class="secondaryToolbarButton handTool" title="Enable Hand Tool" tabindex="61"
+            data-l10n-id="cursor_hand_tool">
+            <span data-l10n-id="cursor_hand_tool_label">Hand Tool</span>
+          </button>
+
+          <div class="horizontalToolbarSeparator"></div>
+
+          <button id="scrollVertical" class="secondaryToolbarButton scrollModeButtons scrollVertical toggled"
+            title="Use Vertical Scrolling" tabindex="62" data-l10n-id="scroll_vertical">
+            <span data-l10n-id="scroll_vertical_label">Vertical Scrolling</span>
+          </button>
+          <button id="scrollHorizontal" class="secondaryToolbarButton scrollModeButtons scrollHorizontal"
+            title="Use Horizontal Scrolling" tabindex="63" data-l10n-id="scroll_horizontal">
+            <span data-l10n-id="scroll_horizontal_label">Horizontal Scrolling</span>
+          </button>
+          <button id="scrollWrapped" class="secondaryToolbarButton scrollModeButtons scrollWrapped"
+            title="Use Wrapped Scrolling" tabindex="64" data-l10n-id="scroll_wrapped">
+            <span data-l10n-id="scroll_wrapped_label">Wrapped Scrolling</span>
+          </button>
+
+          <div class="horizontalToolbarSeparator scrollModeButtons"></div>
+
+          <button id="spreadNone" class="secondaryToolbarButton spreadModeButtons spreadNone toggled"
+            title="Do not join page spreads" tabindex="65" data-l10n-id="spread_none">
+            <span data-l10n-id="spread_none_label">No Spreads</span>
+          </button>
+          <button id="spreadOdd" class="secondaryToolbarButton spreadModeButtons spreadOdd"
+            title="Join page spreads starting with odd-numbered pages" tabindex="66" data-l10n-id="spread_odd">
+            <span data-l10n-id="spread_odd_label">Odd Spreads</span>
+          </button>
+          <button id="spreadEven" class="secondaryToolbarButton spreadModeButtons spreadEven"
+            title="Join page spreads starting with even-numbered pages" tabindex="67" data-l10n-id="spread_even">
+            <span data-l10n-id="spread_even_label">Even Spreads</span>
+          </button>
+
+          <div class="horizontalToolbarSeparator spreadModeButtons"></div>
+
+          <button id="documentProperties" class="secondaryToolbarButton documentProperties" title="Document Properties…"
+            tabindex="68" data-l10n-id="document_properties">
+            <span data-l10n-id="document_properties_label">Document Properties…</span>
+          </button>
+        </div>
+      </div> <!-- secondaryToolbar -->
+
+      <div class="toolbar" style="display:none">
+        <div id="toolbarContainer">
+          <div id="toolbarViewer">
+            <div id="toolbarViewerLeft">
+              <button id="sidebarToggle" class="toolbarButton" title="Toggle Sidebar" tabindex="11"
+                data-l10n-id="toggle_sidebar" aria-expanded="false" aria-controls="sidebarContainer">
+                <span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>
+              </button>
+              <div class="toolbarButtonSpacer"></div>
+              <button id="viewFind" class="toolbarButton" title="Find in Document" tabindex="12" data-l10n-id="findbar"
+                aria-expanded="false" aria-controls="findbar">
+                <span data-l10n-id="findbar_label">Find</span>
+              </button>
+              <div class="splitToolbarButton hiddenSmallView">
+                <button class="toolbarButton pageUp" title="Previous Page" id="previous" tabindex="13"
+                  data-l10n-id="previous">
+                  <span data-l10n-id="previous_label">Previous</span>
+                </button>
+                <div class="splitToolbarButtonSeparator"></div>
+                <button class="toolbarButton pageDown" title="Next Page" id="next" tabindex="14" data-l10n-id="next">
+                  <span data-l10n-id="next_label">Next</span>
+                </button>
+              </div>
+              <input type="number" id="pageNumber" class="toolbarField pageNumber" title="Page" value="1" size="4"
+                min="1" tabindex="15" data-l10n-id="page" autocomplete="off">
+              <span id="numPages" class="toolbarLabel"></span>
+            </div>
+            <div id="toolbarViewerRight">
+              <button id="presentationMode" class="toolbarButton presentationMode hiddenLargeView"
+                title="Switch to Presentation Mode" tabindex="31" data-l10n-id="presentation_mode">
+                <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
+              </button>
+
+              <button id="openFile" class="toolbarButton openFile hiddenLargeView" title="Open File" tabindex="32"
+                data-l10n-id="open_file">
+                <span data-l10n-id="open_file_label">Open</span>
+              </button>
+
+              <button id="print" class="toolbarButton print hiddenMediumView" title="Print" tabindex="33"
+                data-l10n-id="print">
+                <span data-l10n-id="print_label">Print</span>
+              </button>
+
+              <button id="download" class="toolbarButton download hiddenMediumView" title="Download" tabindex="34"
+                data-l10n-id="download">
+                <span data-l10n-id="download_label">Download</span>
+              </button>
+              <a href="#" id="viewBookmark" class="toolbarButton bookmark hiddenSmallView"
+                title="Current view (copy or open in new window)" tabindex="35" data-l10n-id="bookmark">
+                <span data-l10n-id="bookmark_label">Current View</span>
+              </a>
+
+              <div class="verticalToolbarSeparator hiddenSmallView"></div>
+
+              <button id="secondaryToolbarToggle" class="toolbarButton" title="Tools" tabindex="36" data-l10n-id="tools"
+                aria-expanded="false" aria-controls="secondaryToolbar">
+                <span data-l10n-id="tools_label">Tools</span>
+              </button>
+            </div>
+            <div id="toolbarViewerMiddle">
+              <div class="splitToolbarButton">
+                <button id="zoomOut" class="toolbarButton zoomOut" title="Zoom Out" tabindex="21"
+                  data-l10n-id="zoom_out">
+                  <span data-l10n-id="zoom_out_label">Zoom Out</span>
+                </button>
+                <div class="splitToolbarButtonSeparator"></div>
+                <button id="zoomIn" class="toolbarButton zoomIn" title="Zoom In" tabindex="22" data-l10n-id="zoom_in">
+                  <span data-l10n-id="zoom_in_label">Zoom In</span>
+                </button>
+              </div>
+              <span id="scaleSelectContainer" class="dropdownToolbarButton">
+                <select id="scaleSelect" title="Zoom" tabindex="23" data-l10n-id="zoom">
+                  <option id="pageAutoOption" title="" value="auto" selected="selected" data-l10n-id="page_scale_auto">
+                    Automatic Zoom</option>
+                  <option id="pageActualOption" title="" value="page-actual" data-l10n-id="page_scale_actual">Actual
+                    Size</option>
+                  <option id="pageFitOption" title="" value="page-fit" data-l10n-id="page_scale_fit">Page Fit</option>
+                  <option id="pageWidthOption" title="" value="page-width" data-l10n-id="page_scale_width">Page Width
+                  </option>
+                  <option id="customScaleOption" title="" value="custom" disabled="disabled" hidden="true"></option>
+                  <option title="" value="0.5" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 50 }'>50%
+                  </option>
+                  <option title="" value="0.75" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 75 }'>75%
+                  </option>
+                  <option title="" value="1" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 100 }'>100%
+                  </option>
+                  <option title="" value="1.25" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 125 }'>125%
+                  </option>
+                  <option title="" value="1.5" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 150 }'>150%
+                  </option>
+                  <option title="" value="2" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 200 }'>200%
+                  </option>
+                  <option title="" value="3" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 300 }'>300%
+                  </option>
+                  <option title="" value="4" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 400 }'>400%
+                  </option>
+                </select>
+              </span>
+            </div>
+          </div>
+          <div id="loadingBar">
+            <div class="progress">
+              <div class="glimmer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="toolBarContainer" style="z-index: 5; display:none">
+        <button id="zoomOut" class="toolbarButton zoomOut" title="Zoom Out">
+          <span data-l10n-id="zoom_out_label">Zoom Out</span>
+        </button>
+        <button id="zoomIn" class="toolbarButton zoomIn" title="Zoom In">
+          <span data-l10n-id="zoom_in_label">Zoom In</span>
+        </button>
+      </div>
+      <div id="viewerContainer" tabindex="0">
+        <div id="viewer" class="pdfViewer"></div>
+      </div>
+
+      <!--#if !MOZCENTRAL-->
+      <div id="errorWrapper" hidden='true'>
+        <div id="errorMessageLeft">
+          <span id="errorMessage"></span>
+          <button id="errorShowMore" data-l10n-id="error_more_info">
+            More Information
+          </button>
+          <button id="errorShowLess" data-l10n-id="error_less_info" hidden='true'>
+            Less Information
+          </button>
+        </div>
+        <div id="errorMessageRight">
+          <button id="errorClose" data-l10n-id="error_close">
+            Close
+          </button>
+        </div>
+        <div class="clearBoth"></div>
+        <textarea id="errorMoreInfo" hidden='true' readonly="readonly"></textarea>
+      </div>
+      <!--#endif-->
+    </div> <!-- mainContainer -->
+
+    <div id="overlayContainer" class="hidden">
+      <div id="passwordOverlay" class="container hidden">
+        <div class="dialog">
+          <div class="row">
+            <p id="passwordText" data-l10n-id="password_label">Enter the password to open this PDF file:</p>
+          </div>
+          <div class="row">
+            <input type="password" id="password" class="toolbarField">
+          </div>
+          <div class="buttonRow">
+            <button id="passwordCancel" class="overlayButton"><span
+                data-l10n-id="password_cancel">Cancel</span></button>
+            <button id="passwordSubmit" class="overlayButton"><span data-l10n-id="password_ok">OK</span></button>
+          </div>
+        </div>
+      </div>
+      <div id="documentPropertiesOverlay" class="container hidden">
+        <div class="dialog">
+          <div class="row">
+            <span data-l10n-id="document_properties_file_name">File name:</span>
+            <p id="fileNameField">-</p>
+          </div>
+          <div class="row">
+            <span data-l10n-id="document_properties_file_size">File size:</span>
+            <p id="fileSizeField">-</p>
+          </div>
+          <div class="separator"></div>
+          <div class="row">
+            <span data-l10n-id="document_properties_title">Title:</span>
+            <p id="titleField">-</p>
+          </div>
+          <div class="row">
+            <span data-l10n-id="document_properties_author">Author:</span>
+            <p id="authorField">-</p>
+          </div>
+          <div class="row">
+            <span data-l10n-id="document_properties_subject">Subject:</span>
+            <p id="subjectField">-</p>
+          </div>
+          <div class="row">
+            <span data-l10n-id="document_properties_keywords">Keywords:</span>
+            <p id="keywordsField">-</p>
+          </div>
+          <div class="row">
+            <span data-l10n-id="document_properties_creation_date">Creation Date:</span>
+            <p id="creationDateField">-</p>
+          </div>
+          <div class="row">
+            <span data-l10n-id="document_properties_modification_date">Modification Date:</span>
+            <p id="modificationDateField">-</p>
+          </div>
+          <div class="row">
+            <span data-l10n-id="document_properties_creator">Creator:</span>
+            <p id="creatorField">-</p>
+          </div>
+          <div class="separator"></div>
+          <div class="row">
+            <span data-l10n-id="document_properties_producer">PDF Producer:</span>
+            <p id="producerField">-</p>
+          </div>
+          <div class="row">
+            <span data-l10n-id="document_properties_version">PDF Version:</span>
+            <p id="versionField">-</p>
+          </div>
+          <div class="row">
+            <span data-l10n-id="document_properties_page_count">Page Count:</span>
+            <p id="pageCountField">-</p>
+          </div>
+          <div class="row">
+            <span data-l10n-id="document_properties_page_size">Page Size:</span>
+            <p id="pageSizeField">-</p>
+          </div>
+          <div class="separator"></div>
+          <div class="row">
+            <span data-l10n-id="document_properties_linearized">Fast Web View:</span>
+            <p id="linearizedField">-</p>
+          </div>
+          <div class="buttonRow">
+            <button id="documentPropertiesClose" class="overlayButton"><span
+                data-l10n-id="document_properties_close">Close</span></button>
+          </div>
+        </div>
+      </div>
+      <!--#if !MOZCENTRAL-->
+      <div id="printServiceOverlay" class="container hidden">
+        <div class="dialog">
+          <div class="row">
+            <span data-l10n-id="print_progress_message">Preparing document for printing…</span>
+          </div>
+          <div class="row">
+            <progress value="0" max="100"></progress>
+            <span data-l10n-id="print_progress_percent" data-l10n-args='{ "progress": 0 }'
+              class="relative-progress">0%</span>
+          </div>
+          <div class="buttonRow">
+            <button id="printCancel" class="overlayButton"><span
+                data-l10n-id="print_progress_close">Cancel</span></button>
+          </div>
+        </div>
+      </div>
+      <!--#endif-->
+      <!--#if CHROME-->
+      <!--#include viewer-snippet-chrome-overlays.html-->
+      <!--#endif-->
+    </div> <!-- overlayContainer -->
+
+  </div> <!-- outerContainer -->
+  <div id="printContainer" style="display:none"></div>
+
+  <!-- <label id="label-bookmark" style="position:fixed; top:3em; right:1em; z-index: 5; ">북마크 off</label> -->
+
+  <div id="image-bookmark" style="position:fixed; top:0em; right:1.3em; z-index:5; height:80px; width:80px; opacity:0;">
+    <img src="images/bookmark_on.png" width="25" height="25" style="float:right">
+    </img>
+  </div>
+
+  <!-- //로딩창 -->
+  <div id="div-loading" style="
+        position: absolute;
+        z-index: 9000;
+        display: none;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        text-align: center;
+        align-items: center;" class="Background-1 show">
+    <div style="margin: auto;top: 50%;left: 50%;position: absolute;transform: translate(-50%,-50%);">
+      <img src="./images/duranno-logo-mobile.png"
+        style="position:relative; display:block; margin:auto; width:min(30vw, 30vh);" />
+      <span style="position: relative; margin: auto; text-align: center; font-size:min(3vh, 3vw)">정보를 불러오고 있습니다.</span>
+      <p></p>
+    </div>
+  </div>
+
+  <!-- <input id="hidden-definition" type="hidden" value="false"> -->
+
+  <script>
+    //#region 멤버, 책 정보 
+    let _memberNo = 2;
+    let _bookNo = 2;
+    let _completeReadYN = "N";
+    let _contentNo = 2;
+    let _highDefinition = false;
+    function setInformation(bookNo, memberNo) {
+      _memberNo = memberNo;
+      _bookNo = bookNo;
+    }
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("memberNo") != null) {
+      _memberNo = urlParams.get("memberNo");
+    }
+    if (urlParams.get("bookNo") != null) {
+      _bookNo = urlParams.get("bookNo");
+    }
+
+    if (urlParams.get("highDefinition") != null) {
+      _highDefinition = urlParams.get("highDefinition");
+
+      if (_highDefinition == "true" || _highDefinition == "True") {
+        _highDefinition = true;
+      }
+      else if (_highDefinition == "false" || _highDefinition == "False") {
+        _highDefinition = false;
+      }
+    }
+    //#endregion
+
+    let prevClick = false;
+    let prevPage = [];
+    function pushPage(page) {
+      prevPage.push(page);
+      if (prevPage.length > 30) {
+        prevPage.splice(0, 1);
+      }
+    }
+    function popPage() {
+      return prevPage.pop() || null;
+    }
+    const APP_EVENT = {
+      SCROLL_MODE: {
+        HORIZONTAL: 1,
+        VERTICAL: 0,
+        WRAPPING: 2,
+      },
+      VIEW_FORMAT: {
+        ONE_SIDE: "oneSide",
+        TWO_SIDE: "twoSide"
+      },
+
+      BACKGROUND_COLOR: {
+        BACKGROUND1: "Background-1",
+        BACKGROUND2: "Background-2",
+        BACKGROUND3: "Background-3",
+        BACKGROUND4: "Background-4",
+        BACKGROUND5: "Background-5",
+        BACKGROUND6: "Background-6",
+        BACKGROUND7: "Background-7",
+      },
+
+      SPREAD: {
+        NONE: 0,
+        EVEN: 1,
+        ODD: 2,
+      },
+      SCALE: {
+        AUTO: "auto",
+        PAGE_FIT: "page-fit",
+        PAGE_WIDTH: "page-width",
+      }
+    };
+
+    let currentScale = "page-fit";
+    let pdfResizing = false;
+    let resizingTime = null;
+    let tt = 0;
+    document.addEventListener("pdfstarted", function () {
+      document.getElementById("div-loading").classList.remove("show");
+      document.getElementById("div-loading").getElementsByTagName("p")[0].innerHTML = "";
+      PDFViewerApplication.pdfViewer.currentScaleValue = currentScale;
+      changeScrollType(APP_EVENT.SCROLL_MODE.VERTICAL);
+      PDFViewerApplication.pdfLinkService.goToPage(1);
+      //북마크 가져오기 
+
+      httpGet("getbookmark", { BookNo: _bookNo, MemberNo: _memberNo }).then(function (bookmark) {
+        for (let i = 0; i < bookmark.length; i++) {
+          bookmarkList.push(bookmark[i]);
+        }
+
+        //bookmark 검사 1일때 
+        for (let i = 0; i < bookmarkList.length; i++) {
+          if (bookmarkList[i].BookMarkPositionValue == "1") {
+            changeBookmarkStatus();
+          }
+        }
+      })
+
+      PDFViewerApplication.eventBus._on("pagechanging", function (e) {
+        if (!prevClick) {
+          pushPage(e.previous);
+        }
+        prevClick = false;
+
+        let param = {};
+        param.MemberNo = _memberNo;
+        param.ContentNo = _bookNo;
+        param.BookReadingPositionValue = PDFViewerApplication.pdfViewer.currentPageNumber.toString();
+        param.BookReadingProgressRate = Math.round(PDFViewerApplication.pdfViewer.currentPageNumber / PDFViewerApplication.pdfDocument.numPages * 100);
+        httpPost("ManageRecentUseContentData", param).then(function (result) {
+
+        })
+
+        bookmark.style.opacity = "0"
+        //0820 여기에서 북마크 off - 김형도
+        invokeCSharpAction('{"func": "UncheckBookmark", "params": null}');
+        // 김형도 추가
+        invokeCSharpAction('{"func": "PageChanged", "params": [{ "current": ' + PDFViewerApplication.pdfViewer.currentPageNumber + ' }]}');
+        //북마크 검사  
+        //펼쳐짐 없음
+        for (var i = 0; i < bookmarkList.length; i++) {
+          if (PDFViewerApplication.pdfViewer.spreadMode == 0) {
+            if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber) {
+              changeBookmarkStatus();
+              //0820 여기에서 북마크 on - 김형도
+              invokeCSharpAction('{"func": "CheckBookmark", "params": null}');
+            }
+          }
+          //짝수 펼쳐짐
+          else if (PDFViewerApplication.pdfViewer.spreadMode == 2) {
+            if (PDFViewerApplication.pdfViewer.currentPageNumber % 2 == 0) {
+              if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber) {
+                changeBookmarkStatus();
+                //0820 여기에서 북마크 on - 김형도
+                invokeCSharpAction('{"func": "CheckBookmark", "params": null}');
+              }
+
+              if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber + 1) {
+                changeBookmarkStatus();
+                //0820 여기에서 북마크 on - 김형도
+                invokeCSharpAction('{"func": "CheckBookmark", "params": null}');
+              }
+            }
+            else if (PDFViewerApplication.pdfViewer.currentPageNumber % 2 == 1) {
+              if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber) {
+                changeBookmarkStatus();
+                //0820 여기에서 북마크 on - 김형도
+                invokeCSharpAction('{"func": "CheckBookmark", "params": null}');
+              }
+            }
+          }
+          // 홀수펼쳐짐
+          else if (PDFViewerApplication.pdfViewer.spreadMode == 1) {
+            if (PDFViewerApplication.pdfViewer.currentPageNumber % 2 == 0) {
+              if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber) {
+                changeBookmarkStatus();
+                //0820 여기에서 북마크 on - 김형도
+                invokeCSharpAction('{"func": "CheckBookmark", "params": null}');
+              }
+            }
+            else if (PDFViewerApplication.pdfViewer.currentPageNumber % 2 == 1) {
+              if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber) {
+                changeBookmarkStatus();
+                //0820 여기에서 북마크 on - 김형도
+                invokeCSharpAction('{"func": "CheckBookmark", "params": null}');
+              }
+              if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber + 1) {
+                changeBookmarkStatus();
+                //0820 여기에서 북마크 on - 김형도
+                invokeCSharpAction('{"func": "CheckBookmark", "params": null}');
+              }
+            }
+          }
+        }
+        changeViewport(true);
+
+        getCurrentChapter().then(function (data) {
+
+          let param = {};
+          param.chapterName = "";
+          param.progress = 0;
+          param.href = Number(PDFViewerApplication.pdfViewer.currentPageNumber);
+          param.cfi = Number(PDFViewerApplication.pdfViewer.currentPageNumber);
+          param.currentPage = PDFViewerApplication.pdfViewer.currentPageNumber;
+          if (data && data.label) {
+            param.chapterName = data.label;
+          }
+          if (data && data.href) {
+            param.cfi = data.href;
+            param.href = data.href;
+          }
+          invokeCSharpAction('{"func": "ProgressChanged", "params": [' + JSON.stringify(param) + ']}');
+        });
+      })
+
+      if (PDFViewerApplication.pdfViewer.scrollMode == APP_EVENT.SCROLL_MODE.HORIZONTAL) {
+        const viewer = document.getElementById("viewer");
+        viewer.style.marginTop = ((window.innerHeight - viewer.offsetHeight) / 2) - document.getElementById("toolbarContainer").clientHeight + "px";
+        // const viewerContainer = document.getElementById("viewerContainer");
+        // viewerContainer.style.marginLeft = ((window.innerWidth - viewer.offsetWidth + 9) / 2) + "px";
+      }
+      else {
+        const viewer = document.getElementById("viewer");
+        viewer.style.marginTop = "0";
+      }
+
+      PDFViewerApplication.eventBus.on("resize", function () {
+        // // invokeCSharpAction('{"func": "ResizeComplete", "params": null}');
+
+        // // if (resizingTime) {
+        // //   window.clearTimeout(resizingTime);
+        // // }
+        // // window.setTimeout(function () {
+        // //   fixLocation();
+        // // }, 1);
+        pdfResizing = true;
+        // // resizingTime = window.setTimeout(function () {
+        // //   invokeCSharpAction(`{"func": "HideLoadingWindow", "params": null}`);
+        // // }, 1000);
+      })
+
+      PDFViewerApplication.eventBus.on("pagerendered", function () {
+        if (resizingTime) window.clearTimeout(resizingTime);
+        if (pdfResizing) {
+          resizingTime = window.setTimeout(function () {
+            invokeCSharpAction(`{"func": "HideLoadingWindow", "params": null}`);
+            pdfResizing = false;
+            changeViewport(false);
+            changeViewport(true);
+            fixLocation();
+          }, 800);
+        }
+      })
+
+      // changePageMode();
+      // addLeftRightTouchEventHandler();
+
+      // changeSpreadMode(0);
+      // changeScrollMode();
+      // backgroundChange("Background-3");
+      // toggleFindbar()
+      // 김형도 추가
+      //읽고있던 페이지로 넘어가기 
+      httpGet("GetRecentUseContent", { MemberNo: _memberNo, BookNo: _bookNo }).then((recentUseData) => {
+        // if (!recentUseData) {
+        //   PDFViewerApplication.pdfLinkService.goToPage(1);
+        // }
+        // else {
+        //   moveToPage(recentUseData[0].BookReadingPositionValue);
+        // }
+        if (recentUseData && recentUseData.length > 0) {
+          _completeReadYN = recentUseData[0].CompleteReadYN;
+          _contentNo = recentUseData[0].ContentNo;
+        }
+        if (recentUseData) {
+          invokeCSharpAction(`{"func": "InitEbookSetting", "params": ${JSON.stringify(recentUseData)}}`);
+        }
+        else {
+          invokeCSharpAction(`{"func": "InitEbookSetting", "params": null}`);
+          moveToPage(1);
+        }
+        let param = {};
+        param.MemberNo = _memberNo;
+        param.ContentNo = _bookNo;
+        param.BookReadingPositionValue = "1";
+        param.BookReadingProgressRate = 0;
+        httpPost("ManageRecentUseContentData", param).then(function (result) {
+
+        })
+
+        // changeSpreadMode(0);
+        // addLeftRightTouchEventHandler();
+        // bindChapter();
+        // window.setTimeout(() => {
+        //   fixLocation();
+        // }, 100);
+
+        window.setTimeout(() => {
+          fixLocation();
+        }, 500)
+      })
+
+      invokeCSharpAction('{"func": "SetProgressTotal", "params": [{ "total": ' + PDFViewerApplication.pdfViewer.pagesCount + ' }]}');
+      invokeCSharpAction('{"func": "RenderComplete", "params": null}');
+
+      //테스트 코드 (지워야할거)
+      // changePageMode();
+      // addLeftRightTouchEventHandler();
+      // moveToPage(57);
+
+    })
+
+    function swipeLeft() {
+      if (document.documentElement.scrollWidth == window.innerWidth) {
+        changeViewport(false);
+        prevPageClick = true;
+        PDFViewerApplication.pdfViewer.previousPage();
+      }
+      // if (document.documentElement.scrollWidth == window.innerWidth) {
+      //   PDFViewerApplication.pdfViewer.nextPage();
+      // }
+    }
+
+    function swipeRight() {
+      if (PDFViewerApplication.pdfViewer.currentPageNumber == PDFViewerApplication.pdfViewer.pagesCount) {
+        invokeCSharpAction('{"func": "LastPageAlert", "params":' + JSON.stringify([{ CompleteReadYN: _completeReadYN }]) + '}');
+        return;
+      }
+
+      if (document.documentElement.scrollWidth == window.innerWidth) {
+        changeViewport(false);
+        prevPageClick = true;
+        PDFViewerApplication.pdfViewer.nextPage();
+      }
+
+      // if (document.documentElement.scrollWidth == window.innerWidth) {
+      //   PDFViewerApplication.pdfViewer.nextPage();
+      // }
+
+    }
+
+    async function prevChapter() {
+      const chapters = await getChapter(false);
+      let currentChapter = await getCurrentChapter();
+      if (currentChapter) {
+        if (currentChapter.order > 0) {
+          let prevChapter = chapters[currentChapter.order - 1];
+          if (prevChapter.page == PDFViewerApplication.pdfViewer.currentPageNumber) {
+            prevChapter = chapters[currentChapter.order - 2];
+          }
+          moveToPage(prevChapter.page);
+        }
+      }
+    }
+
+    async function nextChapter() {
+      const chapters = await getChapter(false);
+      let currentChapter = await getCurrentChapter();
+      if (currentChapter) {
+        if (currentChapter.order < chapters.length - 1) {
+          let prevChapter = chapters[currentChapter.order + 1];
+          if (prevChapter.page == PDFViewerApplication.pdfViewer.currentPageNumber) {
+            prevChapter = chapters[currentChapter.order + 2];
+          }
+          moveToPage(prevChapter.page);
+        }
+      }
+    }
+
+    function changeScrollType(mode) {
+      PDFViewerApplication.pdfViewer.currentScaleValue = currentScale;
+      PDFViewerApplication.pdfViewer.scrollMode = mode;
+
+      fixLocation();
+    }
+
+    async function getChapter(useInvokeMethod = true) {
+      const chapterData = await PDFViewerApplication.pdfDocument.getOutline();
+      let resultList = [];
+      if (chapterData && chapterData.length > 0) {
+        for (let i = 0; i < chapterData.length; i++) {
+          let result = {};
+          result.label = chapterData[i].title;
+          if (chapterData[i].dest && chapterData[i].dest[0] && chapterData[i].dest[0].num) {
+            result.href = await PDFViewerApplication.pdfDocument.getPageIndex({ num: chapterData[i].dest[0].num, gen: chapterData[i].dest[0].gen });
+          }
+          else {
+            continue;
+          }
+          result.page = result.href = result.href + 1;
+          result.progress = 0;
+          result.firstDepth = false;
+          resultList.push(result);
+
+          if (chapterData[i].items && chapterData[i].items.length > 0) {
+            for (let item of chapterData[i].items) {
+              let result = {};
+              result.label = item.title;
+              if (item.dest && item.dest[0] && item.dest[0].num) {
+                result.href = await PDFViewerApplication.pdfDocument.getPageIndex({ num: item.dest[0].num, gen: item.dest[0].gen });
+              }
+              else {
+                continue;
+              }
+              result.page = result.href = result.href + 1;
+              result.progress = 0;
+              result.firstDepth = true;
+              resultList.push(result);
+            }
+          }
+        }
+      }
+      // 김형도 수정
+      if (useInvokeMethod) {
+        invokeCSharpAction('{"func": "SetChapters", "params": ' + JSON.stringify(resultList) + '}');
+      }
+
+      return resultList;
+    }
+
+    function moveToPage(page) {
+      PDFViewerApplication.pdfLinkService.goToPage(parseInt(page));
+    }
+
+    function moveToPrevPage() {
+      if (prevPage.length > 0) {
+        prevClick = true;
+        PDFViewerApplication.pdfLinkService.goToPage(prevPage.pop());
+      }
+    }
+
+    var bookmarkList = [];
+    const bookmark = document.getElementById("image-bookmark");
+    bookmark.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (bookmark.style.opacity == "0") {
+        addBookmark();
+      }
+      else {
+        bookmark.style.opacity = "0";
+        for (var i = 0; i < bookmarkList.length; i++) {
+          //펼쳐짐 없음
+          if (PDFViewerApplication.pdfViewer.spreadMode == 0) {
+            if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber) {
+              bookmarkList.splice(i, 1);
+              httpPost("removebookmark", { BookNo: _bookNo, MemberNo: _memberNo, BookMarkPositionValue: PDFViewerApplication.pdfViewer.currentPageNumber.toString() });
+              break;
+            }
+          }
+          //짝수 펼쳐짐
+          else if (PDFViewerApplication.pdfViewer.spreadMode == 2) {
+            if (PDFViewerApplication.pdfViewer.currentPageNumber % 2 == 0) {
+              if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber) {
+                bookmarkList.splice(i, 1);
+                httpPost("removebookmark", { BookNo: _bookNo, MemberNo: _memberNo, BookMarkPositionValue: PDFViewerApplication.pdfViewer.currentPageNumber.toString() });
+                break;
+              }
+
+              else if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber + 1) {
+                bookmarkList.splice(i, 1);
+                httpPost("removebookmark", { BookNo: _bookNo, MemberNo: _memberNo, BookMarkPositionValue: (PDFViewerApplication.pdfViewer.currentPageNumber + 1).toString() });
+                break;
+              }
+            }
+            else if (PDFViewerApplication.pdfViewer.currentPageNumber % 2 == 1) {
+              if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber) {
+                bookmarkList.splice(i, 1);
+                httpPost("removebookmark", { BookNo: _bookNo, MemberNo: _memberNo, BookMarkPositionValue: PDFViewerApplication.pdfViewer.currentPageNumber.toString() });
+                break;
+              }
+            }
+          }
+          // 홀수펼쳐짐
+          else if (PDFViewerApplication.pdfViewer.spreadMode == 1) {
+            if (PDFViewerApplication.pdfViewer.currentPageNumber % 2 == 0) {
+              if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber) {
+                bookmarkList.splice(i, 1);
+                httpPost("removebookmark", { BookNo: _bookNo, MemberNo: _memberNo, BookMarkPositionValue: PDFViewerApplication.pdfViewer.currentPageNumber.toString() });
+                break;
+              }
+            }
+            else if (PDFViewerApplication.pdfViewer.currentPageNumber % 2 == 1) {
+              if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber) {
+                bookmarkList.splice(i, 1);
+                httpPost("removebookmark", { BookNo: _bookNo, MemberNo: _memberNo, BookMarkPositionValue: PDFViewerApplication.pdfViewer.currentPageNumber.toString() });
+                break;
+              }
+              else if (bookmarkList[i].BookMarkPositionValue == PDFViewerApplication.pdfViewer.currentPageNumber + 1) {
+                bookmarkList.splice(i, 1);
+                httpPost("removebookmark", { BookNo: _bookNo, MemberNo: _memberNo, BookMarkPositionValue: (PDFViewerApplication.pdfViewer.currentPageNumber + 1).toString() });
+                break;
+              }
+            }
+          }
+        }
+
+        invokeCSharpAction('{"func": "UncheckBookmark", "params": null}');
+      }
+    });
+
+    function removeBookmark() {
+      bookmark.click();
+    }
+
+    function addBookmark() {
+      getCurrentChapter().then(function (chapter) {
+        if (chapter.order == -1) {
+          chapter = {};
+          chapter.label = PDFViewerApplication.pdfViewer.currentPageNumber.toString() + "페이지";
+        }
+        httpPost("addBookmark", {
+          MemberNo: _memberNo, BookNo: _bookNo,
+          BookMarkPositionValue: PDFViewerApplication.pdfViewer.currentPageNumber.toString(),
+          BookMarkTableContent: chapter.label, BookMarkTableContentSub: "",
+          BookMarkPage: PDFViewerApplication.pdfViewer.currentPageNumber,
+          BookMarkPercentage: PDFViewerApplication.pdfViewer.currentPageNumber
+        }).then(function (result) {
+          if (result > 0) {
+            httpGet("getbookmark", { BookNo: _bookNo, MemberNo: _memberNo }).then(function (bookmark) {
+              bookmarkList = [];
+              for (let i = 0; i < bookmark.length; i++) {
+                bookmarkList.push(bookmark[i]);
+              }
+            })
+            invokeCSharpAction('{"func": "CheckBookmark", "params": null}');
+          }
+          else {
+            alert("북마크 등록 실패 관리자에게 문의바랍니다.");
+          }
+        })
+        bookmark.style.opacity = "1";
+        // bookmarkList.push({ MemberNo: _memberNo, BookNo: _bookNo, BookMarkPositionValue: PDFViewerApplication.pdfViewer.currentPageNumber.toString(), BookMarkTableContent: chapter.label, BookMarkTableContentSub: "", BookMarkPage: PDFViewerApplication.pdfViewer.currentPageNumber, BookMarkPercentage: 0 });
+
+      });
+    }
+
+    async function getCurrentChapter() {
+      let chapter = await getChapter(false);
+      if (chapter && chapter.length > 0) {
+        let currentChapter = chapter[chapter.length - 1];
+        currentChapter.order = chapter.length - 1;
+        for (let i = 0; i < chapter.length; i++) {
+          if (chapter[i].page == PDFViewerApplication.pdfViewer.currentPageNumber) {
+            currentChapter = chapter[i];
+            currentChapter.order = i;
+            break;
+          }
+          else if (PDFViewerApplication.pdfViewer.spreadMode == 2 && chapter[i].page == PDFViewerApplication.pdfViewer.currentPageNumber + 1) {
+            currentChapter = chapter[i];
+            currentChapter.order = i;
+            break;
+          }
+          else if (chapter[i].page > PDFViewerApplication.pdfViewer.currentPageNumber) {
+            if (i == 0) {
+              currentChapter = {};
+            }
+            else {
+              currentChapter = chapter[i - 1];
+            }
+            currentChapter.order = i - 1;
+            break;
+          }
+        }
+        return currentChapter;
+      }
+      return null;
+    }
+    // 김형도 수정
+    function getBookmark() {
+      return bookmarkList;
+    }
+
+    // 김형도 수정
+    function backgroundChange(theme) {
+      let className = document.body.className;
+      let classes = className.split(' ');
+      for (let i = 0; i < classes.length; i++) {
+        if (classes[i].indexOf("Background") >= 0) {
+          document.body.classList.remove(classes[i]);
+        }
+      }
+      document.body.classList.add(theme);
+    }
+
+    function zoomIn(ticks) {
+      PDFViewerApplication.zoomIn(ticks);
+    }
+
+    function zoomOut(ticks) {
+      PDFViewerApplication.zoomOut(ticks);
+    }
+    // document.getElementById("zoomIn").addEventListener("click",function(){
+    //   zoomIn();
+    // })
+    // document.getElementById("zoomOut").addEventListener("click",function(){
+    //   zoomOut();
+    // })
+    function resetZoom() {
+      PDFViewerApplication.pdfViewer.currentScaleValue = currentScale;
+    }
+
+    window.addEventListener("selectDocument", function (e) {
+      //select 코드
+    });
+
+    function fixLocation() {
+      if (currentScrollMode == "page") {
+        let page = document.getElementsByClassName("page");
+        if (((document.documentElement.clientHeight / 2) - (page[PDFViewerApplication.pdfViewer.currentPageNumber - 1].children[0].clientHeight / 2)) > 2) {
+          document.getElementById("viewerContainer").style.top = ((document.documentElement.clientHeight / 2) - (page[PDFViewerApplication.pdfViewer.currentPageNumber - 1].children[0].clientHeight / 2)) + "px";
+        }
+        else {
+          document.getElementById("viewerContainer").style.top = "1px";
+        }
+      }
+      // else if (currentScrollMode == "scroll") {
+      //   let page = document.getElementsByClassName("page");
+      //   document.getElementById("viewerContainer").style.top = ((document.documentElement.clientHeight / 2) - (page[PDFViewerApplication.pdfViewer.currentPageNumber - 1].children[0].clientHeight / 2)) + "px";
+      // }
+      else {
+        document.getElementById("viewerContainer").style.top = "";
+      }
+    }
+
+    function changeSpreadMode(mode) {
+      PDFViewerApplication.pdfViewer.spreadMode = mode;
+      fixLocation();
+    }
+
+    function changeScale(scale) {
+      currentScale = scale;
+      PDFViewerApplication.pdfViewer.currentScaleValue = scale;
+    }
+
+    function toggleFindbar() {
+      PDFViewerApplication.findBar.toggle();
+    }
+
+    function changeFindbarTop(top) {
+      var findbar = document.getElementsByClassName("findbar");
+      findbar[0].style.top = top;
+    }
+
+    function getFindbarLocation() {
+      let findbar = document.getElementByClassName("findbar");
+      let location = {};
+      location.width = findbar[0].clientWidth;
+      location.height = findbar[0].clientHeight;
+    }
+
+    document.getElementById("findbar").addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+
+    window.addEventListener("click", function (e) {
+      if (e.detail > 1) {
+        e.preventDefault();
+      }
+      // if (PDFViewerApplication.findBar.opened) {
+      //   toggleFindbar();
+      // }
+    })
+
+    var currentScrollMode = "scroll";
+    let loadingIndicator = false;
+    function changeScrollMode() {
+      loadingIndicator = true;
+      let beforePage = PDFViewerApplication.pdfViewer.currentPageNumber;
+      let page = document.getElementsByClassName("page");
+      for (let i = 0; i < page.length; i++) {
+        page[i].classList.remove("paginated");
+        page[i].style.border = "";
+      }
+      document.getElementById("viewerContainer").style.overflow = "";
+      currentScrollMode = "scroll";
+
+      fixLocation();
+
+      //페이지 가로에 맞추기
+      moveToPage(beforePage);
+      window.setTimeout(() => {
+        changeScale("page-width");
+        loadingIndicator = false;
+      }, 500)
+    }
+    //#region paginated
+    function changePageMode() {
+      let page = document.getElementsByClassName("page");
+      for (let i = 0; i < page.length; i++) {
+        page[i].classList.add("paginated");
+        page[i].style.border = "0px";
+      }
+      document.getElementById("viewerContainer").style.overflow = "hidden";
+      currentScrollMode = "page";
+
+      fixLocation();
+
+      //페이지 맞추기
+      window.setTimeout(() => {
+        changeScale("page-fit");
+      }, 500)
+    }
+
+
+    let moved = false;
+    function addLeftRightTouchEventHandler() {
+      window.removeEventListener("click", leftRightEventHandler);
+      window.removeEventListener("click", leftRightReverseEventHandler);
+      window.removeEventListener("click", leftRightNextOnlyEventHandler);
+      window.removeEventListener("click", topBottomEventHandler);
+      window.addEventListener("click", leftRightEventHandler)
+    }
+
+    function addLeftRightReverseTouchEventHandler() {
+      window.removeEventListener("click", leftRightEventHandler);
+      window.removeEventListener("click", leftRightReverseEventHandler);
+      window.removeEventListener("click", leftRightNextOnlyEventHandler);
+      window.removeEventListener("click", topBottomEventHandler);
+      window.addEventListener("click", leftRightReverseEventHandler)
+    }
+
+    function addLeftRightNextOnlyTouchEventHandler() {
+      window.removeEventListener("click", leftRightEventHandler);
+      window.removeEventListener("click", leftRightReverseEventHandler);
+      window.removeEventListener("click", leftRightNextOnlyEventHandler);
+      window.removeEventListener("click", topBottomEventHandler);
+      window.addEventListener("click", leftRightNextOnlyEventHandler)
+    }
+
+    function addTopBottomTouchEventHandler() {
+      window.removeEventListener("click", leftRightEventHandler);
+      window.removeEventListener("click", leftRightReverseEventHandler);
+      window.removeEventListener("click", leftRightNextOnlyEventHandler);
+      window.removeEventListener("click", topBottomEventHandler);
+      window.addEventListener("click", topBottomEventHandler)
+    }
+    let timeoutFunc;
+    function topBottomEventHandler(e) {
+      let documentHeight = document.documentElement.clientHeight;
+      let documentWidth = document.documentElement.clientWidth;
+
+      let nextArea = documentHeight - documentHeight * 3 / 10;
+      let prevArea = documentHeight * 3 / 10;
+      if (currentScrollMode == "scroll") {
+        timeoutFunc = window.setTimeout(function () {
+          // 김형도 추가
+          invokeCSharpAction('{"func": "ShowMenuToggle", "params": null}');
+        }, 300);
+      }
+      else {
+        if (e.clientY > nextArea) {
+          swipeRight();
+        }
+        else if (e.clientY < prevArea) {
+          swipeLeft();
+        }
+        else {
+          timeoutFunc = window.setTimeout(function () {
+            // 김형도 추가
+            invokeCSharpAction('{"func": "ShowMenuToggle", "params": null}');
+          }, 300);
+        }
+      }
+    }
+
+    function leftRightEventHandler(e) {
+
+      let documentHeight = document.documentElement.clientHeight;
+      let documentWidth = document.documentElement.clientWidth;
+
+      let nextArea = documentWidth - documentWidth * 3 / 10;
+      let prevArea = documentWidth * 3 / 10;
+      if (currentScrollMode == "scroll") {
+        timeoutFunc = window.setTimeout(function () {
+          invokeCSharpAction('{"func": "ShowMenuToggle", "params": null}');
+        }, 300);
+      }
+      else {
+        if (e.clientX > nextArea) {
+          swipeRight();
+        }
+        else if (e.clientX < prevArea) {
+          swipeLeft();
+        }
+        else {
+          timeoutFunc = window.setTimeout(function () {
+            invokeCSharpAction('{"func": "ShowMenuToggle", "params": null}');
+          }, 300);
+        }
+      }
+    }
+
+    function leftRightReverseEventHandler(e) {
+
+      let documentHeight = document.documentElement.clientHeight;
+      let documentWidth = document.documentElement.clientWidth;
+
+      let nextArea = documentWidth - documentWidth * 3 / 10;
+      let prevArea = documentWidth * 3 / 10;
+      if (currentScrollMode == "scroll") {
+        timeoutFunc = window.setTimeout(function () {
+          invokeCSharpAction('{"func": "ShowMenuToggle", "params": null}');
+        }, 300);
+      }
+      else {
+        if (e.clientX > nextArea) {
+          swipeLeft();
+        }
+        else if (e.clientX < prevArea) {
+          swipeRight();
+        }
+        else {
+          timeoutFunc = window.setTimeout(function () {
+            invokeCSharpAction('{"func": "ShowMenuToggle", "params": null}');
+          }, 300);
+        }
+      }
+    }
+
+    function leftRightNextOnlyEventHandler(e) {
+
+      let documentHeight = document.documentElement.clientHeight;
+      let documentWidth = document.documentElement.clientWidth;
+
+      let nextArea = documentWidth - documentWidth * 3 / 10;
+      let prevArea = documentWidth * 3 / 10;
+      if (currentScrollMode == "scroll") {
+        timeoutFunc = window.setTimeout(function () {
+          invokeCSharpAction('{"func": "ShowMenuToggle", "params": null}');
+        }, 300);
+      }
+      else {
+        if (e.clientX > nextArea) {
+          swipeRight();
+        }
+        else if (e.clientX < prevArea) {
+          swipeRight();
+        }
+        else {
+          timeoutFunc = window.setTimeout(function () {
+            invokeCSharpAction('{"func": "ShowMenuToggle", "params": null}');
+          }, 300);
+        }
+      }
+    }
+
+    // left: 37, up: 38, right: 39, down: 40,
+    // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+    var keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
+
+    function preventDefault(e) {
+      e.preventDefault();
+    }
+
+    function preventDefaultForScrollKeys(e) {
+      if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+      }
+    }
+
+    // modern Chrome requires { passive: false } when adding event
+    var supportsPassive = false;
+    try {
+      window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+        get: function () { supportsPassive = true; }
+      }));
+    } catch (e) { }
+
+    var wheelOpt = supportsPassive ? { passive: false } : false;
+    var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
+    // call this to Disable
+    function disableScroll() {
+      window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+      window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+      window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+      window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+
+    // call this to Enable
+    function enableScroll() {
+      window.removeEventListener('DOMMouseScroll', preventDefault, false);
+      window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+      window.removeEventListener('touchmove', preventDefault, wheelOpt);
+      window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+    }
+    //#endregion
+
+    //#region 뷰포트 변경
+    function changeViewport(isUserScale) {
+      let viewport = document.querySelector("meta[name=viewport]");
+      let content;
+      if (!viewport) {
+        let viewport = document.createElement("meta");
+        viewport.name = "viewport";
+        document.getElementsByTagName("head")[0].appendChild(viewport);
+      }
+      if (isUserScale) {
+        content = "width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=3.0"
+      }
+      else {
+        content = "width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+      }
+      viewport.setAttribute("content", content);
+    }
+    window.addEventListener("resize", function () {
+      //리사이즈할때 이상한 화면 나와서 여기서함
+      invokeCSharpAction(`{"func": "ShowLoadingWindow", "params": null}`);
+    })
+    //#endregion
+
+    function changeBookmarkStatus() {
+      bookmark.style.opacity = "1";
+    }
+
+    function getNote() {
+      httpGet("getnote", { MemberNo: _memberNo, BookNo: _bookNo }).then(function (result) {
+        invokeCSharpAction(`{"func": "GetNote", "params": ${JSON.stringify(result)}}`)
+      })
+    }
+
+    function removeBookmarkInNote(loc) {
+      httpPost("removebookmark", {
+        MemberNo: _memberNo,
+        BookNo: _bookNo,
+        BookMarkPositionValue: loc,
+      }).then(function (result) {
+        if (result < 1) {
+          alert("북마크 삭제 실패 관리자에게 문의바랍니다.");
+        } else {
+          if (loc == PDFViewerApplication.pdfViewer.currentPageNumber) {
+            removeBookmark();
+          }
+        }
+      });
+    }
+
+
+
+    //마지막페이지 이벤트 시작=============================================
+    document.getElementById("viewerContainer").addEventListener("scroll", () => {
+      if (loadingIndicator) return;
+      if ((window.innerHeight + document.getElementById("viewerContainer").scrollTop) == document.getElementById("viewerContainer").scrollHeight) {
+        invokeCSharpAction('{"func": "LastPageAlert", "params":' + JSON.stringify([{ CompleteReadYN: _completeReadYN }]) + '}');
+      }
+    })
+
+    function modifyCompleteRead() {
+      httpPost("ModifyCompleteRead", { ContentNo: _contentNo, MemberNo: _memberNo }).then(function (data) {
+        if (data > 0) {
+          _completeReadYN = "Y";
+        }
+      })
+    }
+    //마지막페이지 이벤트 끝==============================================
+
+
+    //앱에서 북마크 지웠을 때 웹도 업데이트를 해야함
+    function updateBookmarkList() {
+      httpGet("getbookmark", { BookNo: _bookNo, MemberNo: _memberNo }).then(function (bookmark) {
+        bookmarkList = [];
+        for (let i = 0; i < bookmark.length; i++) {
+          bookmarkList.push(bookmark[i]);
+        }
+      })
+    }
+    //
+  </script>
+</body>
+
+</html>
