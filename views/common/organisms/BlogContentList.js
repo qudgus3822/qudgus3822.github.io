@@ -31,6 +31,7 @@ export default function BlogContentList() {
             }
         });
     }, []);
+    
 
     return (<>
         {data && data.length > 0 && data.map((rowItem) => {
