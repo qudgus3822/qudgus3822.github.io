@@ -5,7 +5,7 @@
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build2": "next build",
     "build": "next build && next export",
-    "test" : "",
+    "test": "",
     "start": "next start",
     "deploy2": "touch out/.nojekyll && gh-pages -d out --dotfiles",
     "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages"
@@ -29,6 +29,9 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.7",
+    "@babel/plugin-proposal-do-expressions": "^7.23.3",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.1",
     "gh-pages": "^6.1.0"

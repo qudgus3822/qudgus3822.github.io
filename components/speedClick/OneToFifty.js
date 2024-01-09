@@ -6,7 +6,7 @@ for (let i = 1; i <= 25; i++) {
     array.push(i);
 }
 
-function OneToFifty() {
+export default function OneToFifty() {
 
     const [numbers, setNumbers] = useState(array);
     const [gameFlag, setGameFlag] = useState(false);
@@ -42,4 +42,4 @@ const Container = {
 };
 
 
-export default OneToFifty;
+// export default OneToFifty;

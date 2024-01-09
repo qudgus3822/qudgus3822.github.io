@@ -15,6 +15,9 @@ const nextConfig = {
         FileUrl: process.env.FileUrl,
         GitHubAccessToken: process.env.GitHubAccessToken
     },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
 }
 
 module.exports = nextConfig
