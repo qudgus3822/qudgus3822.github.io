@@ -103,13 +103,14 @@ export default function IndexPage() {
                             <li className=""><i className="las la-phone mr-2 text-secondary font-22 align-middle"></i> <b> phone </b> : +82 2835 3822</li>
                             <li className="mt-2"><i className="las la-envelope text-secondary font-22 align-middle mr-2"></i> <b> Email </b> : qudgus3822@gmail.com</li>
                             <li className="mt-2"><i className="las la-globe text-secondary font-22 align-middle mr-2"></i> <b> Website </b> :
-                              <a href="https://qudgus3822.github.io/" className="font-14 text-primary">https://qudgus3822.github.io/</a>
+                              <Link href="https://qudgus3822.github.io/">https://qudgus3822.github.io/</Link>
                             </li>
                             <li className="mt-2"><i className="las la-globe text-secondary font-22 align-middle mr-2"></i> <b> BLOG </b> :
-                              <a href="/blog" className="font-14 text-primary">이동</a>
+                              <Link href="/blog">
+                                이동
+                              </Link>
                             </li>
                           </ul>
-
                         </div>
                       </div>
                     </div>
@@ -304,7 +305,8 @@ export default function IndexPage() {
                                           <label className="input-group-text" htmlFor="inputGroupFile01">Epub</label>
                                           <input type="file" className="form-control" id="inputGroupFile01" accept=".epub" onChange={changeEpubFile}></input>
                                         </div> */}
-                                        <a href={hosturl + "/nextjs-blog/EbookViewer/epub/web/epub-viewer.html?epub=" + epubUrl}>클릭해서 이동</a>
+                                        <Link href={hosturl + "/nextjs-blog/EbookViewer/epub/web/epub-viewer.html?epub=" + epubUrl}> 클릭해서 이동</Link>
+
                                         <br></br>
                                         <br></br>
                                         .PDF :
@@ -312,7 +314,9 @@ export default function IndexPage() {
                                           <label className="input-group-text" htmlFor="inputGroupFile02">PDF</label>
                                           <input type="file" className="form-control" id="inputGroupFile02"></input>
                                         </div> */}
-                                        <a href={hosturl + "/nextjs-blog/EbookViewer/pdf/web/pdf-viewer.html?file=" + pdfUrl}>클릭해서 이동</a>
+                                        <Link href={hosturl + "/nextjs-blog/EbookViewer/pdf/web/pdf-viewer.html?file=" + pdfUrl}>
+                                          클릭해서 이동
+                                        </Link>
                                       </div>
                                     </div>
                                   </div>

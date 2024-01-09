@@ -83,10 +83,7 @@ export default function BlogWriteView() {
                                 <input type="file" id="input-file" name="input-file" accept="image/*" onChange={handleChange}></input>
                                 <label className="btn-upload btn btn-primary mt-4" htmlFor="input-file">Upload Image</label>
                             </div>
-
                         </form>
-
-
                     </div>
                 </div>
             </div>

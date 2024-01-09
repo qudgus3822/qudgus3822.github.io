@@ -77,7 +77,7 @@ const LoginPage = () => {
             홈으로
           </button>
           <Link href="/forget-password">
-            <a>Forget password</a>
+            Forget password
           </Link>
         </div>
       </div>

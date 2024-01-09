@@ -36,7 +36,7 @@ export default function BlogBox(props) {
                         <img src={imagePath} alt="" className="img-fluid rounded" layout="fill"></img>
                         <span className="badge badge-purple px-3 py-2 bg-soft-primary fw-semibold mt-3">{props.category}</span>
                         <h4 className="my-3">
-                            <a href="" className="">{props.subject}</a>
+                            <a className="">{props.subject}</a>
                         </h4>
                         <p className="text-muted">{props.content}</p>
                         <hr className="hr-dashed"></hr>
@@ -48,14 +48,12 @@ export default function BlogBox(props) {
                                         <h6 className="m-0 text-dark">김병현</h6>
                                         <ul className="p-0 list-inline mb-0">
                                             <li className="list-inline-item">26 mars 2020</li>
-                                            <li className="list-inline-item">by <a href="">admin</a></li>
+                                            <li className="list-inline-item">by <a>admin</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="align-self-center">
-                                <a href="#" className="text-dark">Read more <i className="fas fa-long-arrow-alt-right"></i></a>
-                            </div> */}
+                           
                         </div>
                     </div>
 
