@@ -88,6 +88,5 @@ export default function BlogWriteView() {
                 </div>
             </div>
         </CommonLayout>
-
     )
 }
