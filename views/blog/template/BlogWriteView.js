@@ -19,8 +19,7 @@ export default function BlogWriteView() {
     }
 
     const writeComplete = () => {
-        uploadFile("blog.json", { subject: subject, description: description, image: imgSrc }).then((res) => {
-            debugger
+        uploadFile("blog.json", { subject: unescape(encodeURIComponent(subject)), description: unescape(encodeURIComponent(description)), image: imgSrc }).then((res) => {
             router.replace("/blog");
         });
 

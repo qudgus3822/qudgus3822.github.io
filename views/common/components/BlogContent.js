@@ -6,7 +6,7 @@ export default function BlogContent({ data }) {
             <div className="card">
                 <div className="card-body">
                     <div className="blog-card">
-                        <img src={data.image ? data.image : "/images/profile.png"} alt="" className="img-fluid rounded" style={{ height: "250px" }}></img>
+                        <img src={data.image ? data.image : "/images/profile.png"} alt="" className="img-fluid rounded" style={{ height: "250px", margin: "0 auto" }}></img>
                         <h4 className="my-3">
                             <a href="" className="">{data.subject}</a>
                         </h4>

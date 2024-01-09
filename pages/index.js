@@ -105,6 +105,9 @@ export default function IndexPage() {
                             <li className="mt-2"><i className="las la-globe text-secondary font-22 align-middle mr-2"></i> <b> Website </b> :
                               <a href="https://qudgus3822.github.io/" className="font-14 text-primary">https://qudgus3822.github.io/</a>
                             </li>
+                            <li className="mt-2"><i className="las la-globe text-secondary font-22 align-middle mr-2"></i> <b> BLOG </b> :
+                              <a href="/blog" className="font-14 text-primary">이동</a>
+                            </li>
                           </ul>
 
                         </div>
