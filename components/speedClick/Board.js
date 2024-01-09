@@ -21,5 +21,4 @@ const Container = {
     gridTemplateRows: "repeat(5, 1fr)"
 }
 
-
 export default Board;
