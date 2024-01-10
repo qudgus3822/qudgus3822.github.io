@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { readFile } from "../../../db/fileProcess";
-import BlogContent from "../components/BlogContent";
+import BlogContent from "../../../views/common/components/BlogContent";
 
 export default function BlogContentList() {
     const [data, setData] = useState([]);

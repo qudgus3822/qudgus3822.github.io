@@ -1,4 +1,4 @@
-import BlogWriteView from "../../components/blog/template/BlogWriteView";
+import BlogWriteView from "../../views/blog/template/BlogWriteView";
 
 export default function BlogWritePage() {
     return (<>

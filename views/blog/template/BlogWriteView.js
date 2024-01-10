@@ -3,6 +3,7 @@ import CommonLayout from "../../common/organisms/CommonLayout";
 import { getBase64 } from "../../../lib/base64"
 import { uploadFile } from "../../../db/fileProcess";
 import { useRouter } from "next/router";
+import { setFirebaseData, getFirebaseData, pushFirebaseData } from "../../../db/firebase"
 export default function BlogWriteView() {
 
     const [imgSrc, setImgSrc] = useState("");
@@ -10,6 +11,7 @@ export default function BlogWriteView() {
     const [description, setDescription] = useState("");
 
     const router = useRouter();
+
     const handleChange = (e) => {
         let file = e.target.files[0];
         let reader = getBase64(file);
@@ -19,9 +21,9 @@ export default function BlogWriteView() {
     }
 
     const writeComplete = () => {
-        uploadFile("blog.json", { subject: unescape(encodeURIComponent(subject)), description: unescape(encodeURIComponent(description)), image: imgSrc }).then((res) => {
-            router.replace("/blog");
-        });
+        pushFirebaseData("blogs/", { subject: subject, description: description, image: imgSrc }).then((res) => {
+            router.back();
+        })
 
     }
     return (

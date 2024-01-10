@@ -11,6 +11,8 @@
     "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
+    "@firebase/app": "^0.9.25",
+    "@firebase/database": "^1.0.2",
     "@octokit/core": "^5.0.2",
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^4.6.0",

@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react"
 import { readFile } from "../../../db/fileProcess";
 import BlogContent from "../components/BlogContent";
+import { getFirebaseData } from "../../../db/firebase";
 
 export default function BlogContentList() {
     const [data, setData] = useState([]);
     useEffect(() => {
-        readFile("blog.json").then((res) => {
-            if (res && res.length > 0) {
+
+        const blogData = getFirebaseData("blogs/").then((res) => {
+            debugger
+            if (res && res.success) {
+                let data = Object.values(res.data);
                 let tempData = [];
                 let resultData = [];
                 let index = 0;
-                for (let item of res) {
+                for (let item of data) {
                     tempData.push(item);
                     index++;
 
@@ -18,13 +22,34 @@ export default function BlogContentList() {
                         resultData.push(tempData);
                         tempData = [];
                     }
-                    if (index == res.length && tempData.length > 0) {
+                    if (index == data.length && tempData.length > 0) {
                         resultData.push(tempData);
                     }
                 }
                 setData(resultData);
             }
-        });
+
+        })
+        // readFile("blog.json").then((res) => {
+        //     if (res && res.length > 0) {
+        //         let tempData = [];
+        //         let resultData = [];
+        //         let index = 0;
+        //         for (let item of res) {
+        //             tempData.push(item);
+        //             index++;
+
+        //             if (tempData.length == 3) {
+        //                 resultData.push(tempData);
+        //                 tempData = [];
+        //             }
+        //             if (index == res.length && tempData.length > 0) {
+        //                 resultData.push(tempData);
+        //             }
+        //         }
+        //         setData(resultData);
+        //     }
+        // });
     }, []);
 
 
