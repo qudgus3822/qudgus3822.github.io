@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Router, useRouter } from "next/router";
 import { readFile, uploadFile } from "../db/fileProcess";
+import CommonLayout from "../views/common/organisms/CommonLayout";
 
 export default function IndexPage() {
   let router = useRouter();
@@ -72,11 +73,8 @@ export default function IndexPage() {
     setEpubFile(e.target.value);
   }
   return (
-    <>
-      <div className="page-wrapper">
-
-        <div className="page-content-tab">
-          <div className="container-fluid" style={{ marginTop: "20px" }}>
+    <CommonLayout>
+      
             <div className="row">
               <div className="col-12">
                 <div className="card">
@@ -486,9 +484,6 @@ export default function IndexPage() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div >
-    </>
+    </CommonLayout>
   );
 }

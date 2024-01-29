@@ -244,45 +244,45 @@
     }
 }
 
-document.querySelectorAll('.menu-body a')
-.forEach(function (element, index) {
-  var pageUrl = window.location.href.split(/[?#]/)[0];
-  const target = element;
-  if (element.href == pageUrl) {
+// document.querySelectorAll('.menu-body a')
+// .forEach(function (element, index) {
+//   var pageUrl = window.location.href.split(/[?#]/)[0];
+//   const target = element;
+//   if (element.href == pageUrl) {
 
-    target.classList.add('active');
-    target.parentNode.classList.add('menuitem-active');
-    target.parentNode.querySelector('.nav-link')?.setAttribute('aria-expanded',"true");
-    target.parentNode.parentNode.parentNode.classList.add('show');
-    target.parentNode.parentNode.parentNode.parentNode.classList.add('menuitem-active'); 
-    target.parentNode.parentNode.parentNode.parentNode.querySelector('.nav-link')?.setAttribute('aria-expanded',"true");// add active to li of the current link
+//     target.classList.add('active');
+//     target.parentNode.classList.add('menuitem-active');
+//     target.parentNode.querySelector('.nav-link')?.setAttribute('aria-expanded',"true");
+//     target.parentNode.parentNode.parentNode.classList.add('show');
+//     target.parentNode.parentNode.parentNode.parentNode.classList.add('menuitem-active'); 
+//     target.parentNode.parentNode.parentNode.parentNode.querySelector('.nav-link')?.setAttribute('aria-expanded',"true");// add active to li of the current link
 
-    var firstLevelParent = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-    if (firstLevelParent.getAttribute('id') !== 'sidebar-menu') {
-      firstLevelParent.classList.add('show');
-    }
+//     var firstLevelParent = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+//     if (firstLevelParent.getAttribute('id') !== 'sidebar-menu') {
+//       firstLevelParent.classList.add('show');
+//     }
 
-    target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.classList.add('menuitem-active');
-    target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('.nav-link')?.setAttribute('aria-expanded',"true");
+//     target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.classList.add('menuitem-active');
+//     target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('.nav-link')?.setAttribute('aria-expanded',"true");
 
-    var secondLevelParent = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-    if (secondLevelParent && secondLevelParent instanceof HTMLElement) {
-        if(secondLevelParent.getAttribute('id') !== 'wrapper')
-            secondLevelParent.classList.add('show');
-    }
+//     var secondLevelParent = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+//     if (secondLevelParent && secondLevelParent instanceof HTMLElement) {
+//         if(secondLevelParent.getAttribute('id') !== 'wrapper')
+//             secondLevelParent.classList.add('show');
+//     }
 
-    var upperLevelParent = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-    if (upperLevelParent) {
-      upperLevelParent = upperLevelParent.parentNode;
-    }
+//     var upperLevelParent = target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+//     if (upperLevelParent) {
+//       upperLevelParent = upperLevelParent.parentNode;
+//     }
 
-    if (upperLevelParent) {
-      upperLevelParent.classList.add('menuitem-active');
-      //upperLevelParent.querySelector('.nav-link')?.setAttribute('aria-expanded',"true");
+//     if (upperLevelParent) {
+//       upperLevelParent.classList.add('menuitem-active');
+//       //upperLevelParent.querySelector('.nav-link')?.setAttribute('aria-expanded',"true");
 
-    }
-  }
-});
+//     }
+//   }
+// });
 
 
 if (document.querySelectorAll("#navigation").length) {

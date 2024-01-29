@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { readFile } from "../../../db/fileProcess";
 import BlogContent from "../components/BlogContent";
 import { getFirebaseData } from "../../../db/firebase";
 
@@ -8,7 +7,6 @@ export default function BlogContentList() {
     useEffect(() => {
 
         const blogData = getFirebaseData("blogs/").then((res) => {
-            debugger
             if (res && res.success) {
                 let data = Object.values(res.data);
                 let tempData = [];

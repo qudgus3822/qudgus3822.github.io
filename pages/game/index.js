@@ -1,14 +1,14 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
+import CommonLayout from "../../views/common/organisms/CommonLayout";
 
 export default function GamePage() {
     const router = useRouter();
 
-    return (<>
-        <div className="page-wrapper">
-
+    return (<CommonLayout>
+        {/* <div className="page-wrapper">
             <div className="page-content-tab">
-                <div className="container-fluid" style={{ marginTop: "20px" }}>
+                <div className="container-fluid" style={{ marginTop: "20px" }}> */}
                     <div className="col-lg-12">
                         <div className="card">
                             <div className="card-header">
@@ -25,8 +25,8 @@ export default function GamePage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                {/* </div>
             </div>
-        </div>
-    </>);
+        </div> */}
+    </CommonLayout>);
 }

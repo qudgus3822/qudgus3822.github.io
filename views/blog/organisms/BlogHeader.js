@@ -1,5 +1,8 @@
+import { useRouter } from "next/router";
+
 export default function BlogHeader() {
 
+    const router = useRouter();
     return (<>
         <div className="row">
             <div className="col-sm-12">
