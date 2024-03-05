@@ -9,10 +9,12 @@ export default function BlogContentList() {
         const blogData = getFirebaseData("blogs/").then((res) => {
             if (res && res.success) {
                 let data = Object.values(res.data);
+                let keys = Object.keys(res.data);
                 let tempData = [];
                 let resultData = [];
                 let index = 0;
                 for (let item of data) {
+                    item.key = keys[index];
                     tempData.push(item);
                     index++;
 

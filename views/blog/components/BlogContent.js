@@ -1,4 +1,15 @@
+import { useEffect, useState } from "react";
+import { setFirebaseData, getFirebaseData, pushFirebaseData, deleteFirebaseData } from "../../../db/firebase"
+import { commonIsAdmin } from "../../../cookies/handler";
 export default function BlogContent({ data }) {
+    const [isAdmin, setIsAdmin] = useState('');
+    useEffect(() => {
+        setIsAdmin(commonIsAdmin());
+    }, [])
+
+    const deleteBlog = (key) => {
+        deleteFirebaseData("/blogs/" + key);
+    }
     return (<>
         <div className="col-lg-4">
             <div className="card">
@@ -27,6 +38,9 @@ export default function BlogContent({ data }) {
                                 <a href="#" className="text-dark">Read more <i className="fas fa-long-arrow-alt-right"></i></a>
                             </div>
                         </div> */}
+                        {isAdmin && <button type="button" className="btn-close" aria-label="Close" onClick={(e) => {
+                            deleteBlog(data.key);
+                        }}></button>}
                     </div>
                 </div>
             </div>

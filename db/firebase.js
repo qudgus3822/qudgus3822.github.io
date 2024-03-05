@@ -50,3 +50,9 @@ export function getFirebaseData(path) {
 
     return promise;
 }
+
+export function deleteFirebaseData(path) {
+    const database = getDatabase(app);
+    const result = set(ref(database, path), null);
+    return result;
+}

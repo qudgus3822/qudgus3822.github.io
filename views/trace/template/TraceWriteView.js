@@ -19,7 +19,6 @@ export default function TraceWriteView() {
 
     const writeComplete = () => {
         const today = new Date();
-debugger
         pushFirebaseData("traces/", { name: name, contents: contents, date: today.toLocaleString() }).then((res) => {
             router.back();
         })
