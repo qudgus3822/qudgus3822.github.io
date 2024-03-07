@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EPUB.js setting</title>
+    <link rel="stylesheet" type="text/css" href="examples.css">
+    <link rel="stylesheet" type="text/css" href="readium-all.css">
+    <link rel="stylesheet" type="text/css" href="fonts.css">
+</head>
+
+<body>
+    <!-- 레디움====================================== -->
+    <!-- div class="modal-header">
+         <h4 class="modal-title" id="settings-label">Settings</h4>
+        </div -->
+
+    <div class="modal-body">
+        <button type="button" class="close" id="closeSettingsCross" data-dismiss="modal" title="Close Settings"
+            aria-label="Close Settings"><span aria-hidden="true">×</span></button>
+
+
+        <!-- button  type="button" title="TESTING" aria-label="TESTING">TESTING DANIEL</button -->
+
+        <h5 id="setting-header-font-size" class="setting-header">글씨크기</h5>
+        <div class="row">
+            <div class="col-xs-8  col-xs-offset-2">
+                <input type="range" aria-labelledby="setting-header-font-size" id="font-size-input" min="60"
+                    aria-value-min="60" aria-valuemin="60" step="10" max="170" aria-value-max="170" aria-valuemax="170"
+                    value="100" aria-valuenow="100" aria-value-now="100" aria-valuetext="100%" aria-value-text="100%"
+                    title="FONT SIZE 100%" aria-label="FONT SIZE 100%">
+            </div>
+        </div>
+
+        
+
+        <h5 id="setting-header-font-selection" class="setting-header">글꼴</h5>
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <select style="width: 100%; padding: 0.5em;" aria-labelledby="setting-header-font-selection"
+                    id="font-selection-input" title="FONT FACE" aria-label="FONT FACE">
+                    <option value="0" aria-label="Default" title="Default">원본</option>
+                    <option value="1" aria-label="Default" title="Default">바탕체</option>
+                    <option value="2" aria-label="Open Dyslexic" title="Open Dyslexic">궁서체</option>
+                    <option value="3" aria-label="Default" title="Default">맑은고딕</option>
+                    <option value="4" aria-label="Default" title="Default">본고딕</option>
+                    <option value="5" aria-label="Default" title="Default">나눔명조</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- <h5 id="setting-header-display-legend" class="setting-header">보기 형식</h5>
+
+        <div role="radiogroup" class="row" style="width:100%;text-align:center;"
+            aria-labelledby="setting-header-display-legend">
+
+            <div role="radio" id="one-up-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input name="display-format" value="none" type="radio" id="single-page-radio" checked>
+                <label style="" for="spread-default-radio" class="underlinedLabel">
+                    한쪽보기
+                </label>
+            </div>
+            <div role="radio" id="two-up-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input name="display-format" value="both" type="radio" id="double-page-radio">
+                <label style="" for="spread-default-radio" class="underlinedLabel">
+                    두쪽보기
+                </label>
+            </div>
+        </div> -->
+
+        <h5 id="setting-header-scroll-legend" class="setting-header">SCROLL MODE</h5>
+
+        <div role="radiogroup" class="row" style="width:100%;text-align:center;"
+            aria-labelledby="setting-header-scroll-legend">
+
+            <div role="radio" id="scroll-doc-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="scrolling" value="paginated" type="radio" id="scroll-doc-radio" checked>
+                <label style="" for="scroll-doc-radio" class="underlinedLabel">
+                    페이지
+                </label>
+            </div>
+
+            <div role="radio" id="scroll-continuous-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="scrolling" value="scrolled" type="radio" id="scroll-continuous-radio">
+                <label style="" for="scroll-continuous-radio" class="underlinedLabel">
+                    스크롤
+                </label>
+            </div>
+        </div>
+
+        <h5 id="setting-header-scroll-legend" class="setting-header">배경색</h5>
+        <div role="radiogroup" class="row" style="width:100%;text-align:center;" aria-labelledby="setting-header-scroll-legend">
+        
+            <div role="radio" id="scroll-doc-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="backgroundColor" value="Background-1" type="radio" id="scroll-doc-radio" checked>
+                <label style="" for="scroll-doc-radio" class="underlinedLabel Background-1">
+                    테마
+                </label>
+            </div>
+        
+            <div role="radio" id="scroll-continuous-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="backgroundColor" value="Background-2" type="radio" id="scroll-continuous-radio">
+                <label style="" for="scroll-continuous-radio" class="underlinedLabel Background-2">
+                    테마
+                </label>
+            </div>
+        
+            <div role="radio" id="scroll-doc-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="backgroundColor" value="Background-3" type="radio" id="scroll-doc-radio" checked>
+                <label style="" for="scroll-doc-radio" class="underlinedLabel Background-3">
+                    테마
+                </label>
+            </div>
+        
+            <div role="radio" id="scroll-continuous-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="backgroundColor" value="Background-4" type="radio" id="scroll-continuous-radio">
+                <label style="" for="scroll-continuous-radio" class="underlinedLabel Background-4">
+                    테마
+                </label>
+            </div>
+        
+            <div role="radio" id="scroll-doc-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="backgroundColor" value="Background-5" type="radio" id="scroll-doc-radio" checked>
+                <label style="" for="scroll-doc-radio" class="underlinedLabel Background-5">
+                    테마
+                </label>
+            </div>
+            <div role="radio" id="scroll-doc-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="backgroundColor" value="Background-6" type="radio" id="scroll-doc-radio" checked>
+                <label style="" for="scroll-doc-radio" class="underlinedLabel Background-6">
+                    테마
+                </label>
+            </div>
+        
+            <div role="radio" id="scroll-continuous-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="backgroundColor" value="Background-7" type="radio" id="scroll-continuous-radio">
+                <label style="" for="scroll-continuous-radio" class="underlinedLabel Background-7">
+                    테마
+                </label>
+        
+            </div>
+
+        <!-- <h5 id="setting-header-font-selection" class="setting-header">배경색</h5>
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <select style="width: 100%; padding: 0.5em;" aria-labelledby="setting-header-font-selection"
+                    id="background-selection-input" title="FONT FACE" aria-label="FONT FACE">
+                    <option value="Background-1" aria-label="Default" title="Default">
+                        <p class="Background-1">배경</p>
+                    </option>
+                    <option value="Background-2" aria-label="Default" title="Default">
+                        <p class="Background-2">배경</p>
+                    </option>
+                    <option value="Background-3" aria-label="Default" title="Default">
+                        <p class="Background-3">배경</p>
+                    </option>
+                    <option value="Background-4" aria-label="Default" title="Default">
+                        <p class="Background-4">배경</p>
+                    </option>
+                    <option value="Background-5" aria-label="Default" title="Default">
+                        <p class="Background-5">배경</p>
+                    </option>
+                    <option value="Background-6" aria-label="Default" title="Default">
+                        <p class="Background-6">배경</p>
+                    </option>
+                    <option value="Background-7" aria-label="Default" title="Default">
+                        <p class="Background-7">배경</p>
+                    </option>
+                </select>
+            </div>
+        </div> -->
+
+        
+        <h5 id="setting-header-font-size" class="setting-header">줄간격</h5>
+        <div class="row">
+            <div class="col-xs-8  col-xs-offset-2">
+                <input type="range" aria-labelledby="setting-header-font-size" id="line-height-input" min="1"
+                    aria-value-min="1" aria-valuemin="1" step="1" max="6" aria-value-max="6" aria-valuemax="6"
+                    value="3" aria-valuenow="3" aria-value-now="3">
+            </div>
+        </div>
+
+        <h5 id="setting-header-font-size" class="setting-header">문단간격</h5>
+        <div class="row">
+            <div class="col-xs-8  col-xs-offset-2">
+                <input type="range" aria-labelledby="setting-header-font-size" id="paragraph-height-input" min="1"
+                    aria-value-min="1" aria-valuemin="1" step="1" max="6" aria-value-max="6" aria-valuemax="6"
+                    value="3" aria-valuenow="3" aria-value-now="3">
+            </div>
+        </div>
+
+        <h5 id="setting-header-font-size" class="setting-header">문단너비</h5>
+        <div class="row">
+            <div class="col-xs-8  col-xs-offset-2">
+                <input type="range" aria-labelledby="setting-header-font-size" id="paragraph-width-input" min="1"
+                    aria-value-min="1" aria-valuemin="1" step="1" max="6" aria-value-max="6" aria-valuemax="6"
+                    value="3" aria-valuenow="3" aria-value-now="3">
+            </div>
+        </div>
+
+        <h5 id="setting-header-scroll-legend" class="setting-header">정렬</h5>
+        <div role="radiogroup" class="row" style="width:100%;text-align:center;"
+            aria-labelledby="setting-header-scroll-legend">
+
+            <div role="radio" id="scroll-doc-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="textAlign" value="left" type="radio" id="scroll-doc-radio" checked>
+                <label style="" for="scroll-doc-radio" class="underlinedLabel">
+                    왼쪽정렬
+                </label>
+            </div>
+
+            <div role="radio" id="scroll-continuous-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="textAlign" value="center" type="radio" id="scroll-continuous-radio">
+                <label style="" for="scroll-continuous-radio" class="underlinedLabel">
+                    중앙정렬
+                </label>
+            </div>
+
+            <div role="radio" id="scroll-continuous-option"
+                style="vertical-align:middle;width:30%;display:inline-block;position:relative;">
+                <input style="" name="textAlign" value="right" type="radio" id="scroll-continuous-radio">
+                <label style="" for="scroll-continuous-radio" class="underlinedLabel">
+                    오른쪽정렬
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+        <button id="buttClose" type="button" class="btn btn-default" data-dismiss="modal" title="Close [c]"
+            aria-label="Close [c]" accesskey="c">Close</button>
+        <button id="buttSave" type="button" class="btn btn-primary" data-dismiss="modal" title="Save changes [s]"
+            aria-label="Save changes [s]" accesskey="s">Save changes</button>
+    </div>
+    <!-- ========================================================================== -->
+
+    <input type="hidden" id="fontSize" />
+    <input type="hidden" id="font" />
+    <!-- <input type="hidden" id="viewFormat" /> -->
+    <input type="hidden" id="scroll" />
+    <input type="hidden" id="width" />
+    <input type="hidden" id="backgroundColor" />
+    <input type="hidden" id="lineHeight" />
+    <input type="hidden" id="textAlign" />
+
+    <input type="hidden" id="paragraphHeight"/>
+    <input type="hidden" id="paragraphWidth"/>
+    <input type="hidden" id="cancel" />
+</body>
+
+<script>
+    reset();
+
+    var fontSizeInput = document.getElementById("font-size-input");
+    var font;
+    // var viewFormat;
+    var scroll;
+
+    var completeButton = document.getElementById("buttSave");
+    completeButton.onclick = function () {
+
+        document.getElementById("fontSize").value = fontSizeInput.value;
+        font = document.getElementById("font-selection-input");
+        document.getElementById("font").value = font.options[font.selectedIndex].value;
+
+        // viewFormat = document.getElementsByName("display-format");
+
+        // for (i = 0; i < viewFormat.length; i++) {
+        //     if (viewFormat[i].checked) {
+        //         document.getElementById("viewFormat").value = viewFormat[i].value;
+        //     }
+        // }
+
+
+        scroll = document.getElementsByName("scrolling");
+
+        for (i = 0; i < scroll.length; i++) {
+            if (scroll[i].checked) {
+                document.getElementById("scroll").value = scroll[i].value;
+            }
+        }
+
+        var backgroundColor = document.getElementsByName("backgroundColor");
+
+        for (i = 0; i < backgroundColor.length; i++) {
+            if (backgroundColor[i].checked) {
+                document.getElementById("backgroundColor").value = backgroundColor[i].value;
+            }
+        }
+
+        var lineHeight = document.getElementById("line-height-input");
+
+        document.getElementById("lineHeight").value = lineHeight.value;
+
+
+        var textAlign = document.getElementsByName("textAlign");
+
+        for (i = 0; i < textAlign.length; i++) {
+            if (textAlign[i].checked) {
+                document.getElementById("textAlign").value = textAlign[i].value;
+            }
+        }
+
+        var paragraphHeight = document.getElementById("paragraph-height-input");
+
+        document.getElementById("paragraphHeight").value = paragraphHeight.value;
+
+        var paragraphWidth = document.getElementById("paragraph-width-input");
+
+        document.getElementById("paragraphWidth").value = paragraphWidth.value;
+    
+
+        document.getElementById("cancel").value = "false";
+        window.close();
+    }
+
+    function reset() {
+        document.getElementById("fontSize").value = null;
+        document.getElementById("font").value = null;
+        // document.getElementById("viewFormat").value = null;
+        document.getElementById("scroll").value = null;
+        document.getElementById("backgroundColor").value = null;
+        document.getElementById("lineHeight").value = null;
+        document.getElementById("paragraphHeight").value = null;
+        document.getElementById("paragraphWidth").value = null;
+    }
+
+    document.getElementById("buttClose").addEventListener("click", function () {
+        document.getElementById("cancel").value = "true";
+        window.close();
+    })
+
+</script>
+
+</html>

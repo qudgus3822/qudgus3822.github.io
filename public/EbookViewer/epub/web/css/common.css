@@ -597,3 +597,23 @@ input, button, select, textarea, a {
   height: 24px;
   background: url('../images/btn_more_gray_24.svg') center/contain no-repeat;
 }
+
+.highlight-color-1 {
+  background-color: #FFEDA8;
+}
+
+.highlight-color-2 {
+  background-color: #BCECFF;
+}
+
+.highlight-color-3 {
+  background-color: #DCC6FF;
+}
+
+.highlight-color-4 {
+  background-color: #FEC2be;
+}
+
+.highlight-color-5 {
+  background-color: #ECFEB9;
+}

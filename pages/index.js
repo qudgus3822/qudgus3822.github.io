@@ -303,7 +303,7 @@ export default function IndexPage() {
                                           <label className="input-group-text" htmlFor="inputGroupFile01">Epub</label>
                                           <input type="file" className="form-control" id="inputGroupFile01" accept=".epub" onChange={changeEpubFile}></input>
                                         </div> */}
-                                        <Link href={hosturl + "/nextjs-blog/EbookViewer/epub/web/epub-viewer.html?epub=" + epubUrl}> 클릭해서 이동</Link>
+                                  <Link href={hosturl + "/EbookViewer/epub/web/desktop-viewer.html?epub=" + epubUrl}> 클릭해서 이동</Link>
 
                                         <br></br>
                                         <br></br>
@@ -312,7 +312,7 @@ export default function IndexPage() {
                                           <label className="input-group-text" htmlFor="inputGroupFile02">PDF</label>
                                           <input type="file" className="form-control" id="inputGroupFile02"></input>
                                         </div> */}
-                                        <Link href={hosturl + "/nextjs-blog/EbookViewer/pdf/web/pdf-viewer.html?file=" + pdfUrl}>
+                                        <Link href={hosturl + "/EbookViewer/pdf/web/pdf-viewer.html?file=" + pdfUrl}>
                                           클릭해서 이동
                                         </Link>
                                       </div>
