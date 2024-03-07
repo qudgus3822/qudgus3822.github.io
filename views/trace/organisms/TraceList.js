@@ -23,7 +23,7 @@ export default function TraceList() {
     }, []);
 
     return (<>
-        <div className="row">
+        <div className="row" style={{ marginTop: "10px" }}>
             <div className="col-lg-12">
                 <div className="card">
                     <div className="card-body">

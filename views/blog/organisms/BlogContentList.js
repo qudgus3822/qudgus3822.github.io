@@ -53,7 +53,7 @@ export default function BlogContentList() {
     }, []);
 
 
-    return (<>
+    return (<div style={{ marginTop: "10px" }}>
         {data && data.length > 0 && data.map((rowItem, rowIndex) => {
             return (
                 <div key={rowIndex} className="row" >
@@ -66,8 +66,6 @@ export default function BlogContentList() {
                     }
                 </div>
             )
-
         })}
-
-    </>)
+    </div>)
 }

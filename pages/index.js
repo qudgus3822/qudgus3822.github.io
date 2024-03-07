@@ -98,7 +98,7 @@ export default function IndexPage() {
 
                         <div className="col-lg-6 ms-auto align-self-center">
                           <ul className="list-unstyled personal-detail mb-0">
-                            <li className=""><i className="las la-phone mr-2 text-secondary font-22 align-middle"></i> <b> phone </b> : +82 2835 3822</li>
+                            <li className=""><i className="las la-phone mr-2 text-secondary font-22 align-middle"></i> <b> phone </b> : 010 2835 3822</li>
                             <li className="mt-2"><i className="las la-envelope text-secondary font-22 align-middle mr-2"></i> <b> Email </b> : qudgus3822@gmail.com</li>
                             <li className="mt-2"><i className="las la-globe text-secondary font-22 align-middle mr-2"></i> <b> Website </b> :
                               <Link href="https://qudgus3822.github.io/">https://qudgus3822.github.io/</Link>
