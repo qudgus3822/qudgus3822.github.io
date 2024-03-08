@@ -6,8 +6,8 @@
   <meta name="viewport"
     content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>두플러스 : 복음을 읽는 새로운 습관</title>
-  <link rel="icon" href="../../../images/ic_mo_home.svg" type="/duranno/image/x-icon">
+  <title>병현's 뷰어</title>
+  <!-- <link rel="icon" href="../../../images/ic_mo_home.svg" type="/duranno/image/x-icon"> -->
   <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="./css/common.css" />
   <link rel="stylesheet" href="./css/desktop-viewer.css" />
@@ -229,12 +229,12 @@
             <span class="action-buttons__text">보기 설정</span>
           </button>
         </li>
-        <li>
+        <!-- <li>
           <button class="action-buttons__button" onclick="openReviewModal()">
             <img src="./images/menu_review.svg" alt="" class="action-buttons__icon" />
             <span class="action-buttons__text">리뷰</span>
           </button>
-        </li>
+        </li> -->
         <li>
           <button class="action-buttons__button" onclick="openFindTextModal();">
             <img src="./images/menu_search.svg" alt="" class="action-buttons__icon" />
@@ -327,7 +327,7 @@
   <div id="modal-setting" class="modal-parent">
     <div style="position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%);" class="setting modal">
       <div class="modal__top-bar">
-        <img alt="duplus" src="./images/logo_text.svg" width="56" />
+        <!-- <img alt="duplus" src="./images/logo_text.svg" width="56" /> -->
         <button class="modal__close" onClick="closeSettingModal();">
           <img src="./images/close.svg" alt="닫기" />
         </button>
@@ -537,7 +537,7 @@
   <div id="modal-chapter" class="modal-parent">
     <div class="modal" style="position: absolute; inset: 50% auto auto 50%;transform: translate(-50%, -50%);">
       <div class="modal__top-bar">
-        <img alt="duplus" src="./images/logo_text.svg" width="56" />
+        <!-- <img alt="duplus" src="./images/logo_text.svg" width="56" /> -->
         <button class="modal__close" onClick="closeChapterList();">
           <img src="./images/close.svg" alt="닫기" />
         </button>
@@ -612,7 +612,7 @@
         transform: translate(-50%, -50%);
       ">
       <div class="modal__top-bar bd0">
-        <img alt="duplus" src="./images/logo_text.svg" width="56" />
+        <!-- <img alt="duplus" src="./images/logo_text.svg" width="56" /> -->
         <button class="modal__close" onclick="closeModal();">
           <img src="./images/close.svg" alt="닫기" />
         </button>
@@ -658,7 +658,7 @@
         transform: translate(-50%, -50%);
       ">
       <div class="modal__top-bar">
-        <img alt="duplus" src="./images/logo_text.svg" width="56" />
+        <!-- <img alt="duplus" src="./images/logo_text.svg" width="56" /> -->
         <button class="modal__close" onClick="closeReadingNote();">
           <img src="./images/close.svg" alt="닫기" />
         </button>
@@ -789,7 +789,7 @@
         height: auto;
       ">
       <div class="modal__top-bar">
-        <img alt="duplus" src="./images/logo_text.svg" width="56" />
+        <!-- <img alt="duplus" src="./images/logo_text.svg" width="56" /> -->
         <button class="modal__close" onclick="closeModal()">
           <img src="./images/close.svg" alt="닫기" />
         </button>
@@ -861,7 +861,7 @@
           height: auto;
         ">
       <div class="modal__top-bar">
-        <img alt="duplus" src="./images/logo_text.svg" width="56" />
+        <!-- <img alt="duplus" src="./images/logo_text.svg" width="56" /> -->
         <button class="modal__close" onclick="closeModal()">
           <img src="./images/close.svg" alt="닫기" />
         </button>
@@ -904,7 +904,7 @@
     <div class="modal"
       style="position: absolute;inset: 50% auto auto 50%;transform: translate(-50%, -50%); height: auto;">
       <div class="modal__top-bar">
-        <img alt="duplus" src="./images/logo_text.svg" width="56">
+        <!-- <img alt="duplus" src="./images/logo_text.svg" width="56"> -->
         <button class="modal__close" onClick="closeModal();">
           <img src="./images/close.svg" alt="닫기">
         </button>
@@ -1175,7 +1175,7 @@
     if (urlParams.get("bookNo") != null) {
       _bookNo = urlParams.get("bookNo");
 
-      httpGet("GetBookTitleByContentNo", { ContentNo: _bookNo }).then(function (data) {
+      httpGet("bookTitleByContentNo", { ContentNo: _bookNo }).then(function (data) {
         document.getElementById("h1-title").innerHTML = data[0].ContentTitle;
       })
     }
@@ -1527,37 +1527,38 @@
         closeModalDetail();
       });
 
-      httpGet("getnote", { MemberNo: _memberNo, BookNo: _bookNo }).then((data) => {
+      httpGet("note", { MemberNo: _memberNo, BookNo: _bookNo }).then((data) => {
+        debugger
         for (let i = 0; i < data.length; i++) {
           if (rendition.epubcfi.checkType(data[i].NotePositionValue)) {
             if (data[i].NoteHighlightColorKindcode.length > 0) {
-              httpGet("getValueByCode", {
-                Code: data[i].NoteHighlightColorKindcode,
-                GroupCode: "V01",
-              }).then(function (value) {
-                value = value[0].backgroundColor;
-                if (data[i].NoteText.length > 0) {
-                  rendition.annotations.add(
-                    "highlight",
-                    data[i].NotePositionValue,
-                    { memo: true },
-                    undefined,
-                    undefined,
-                    undefined,
-                    value
-                  );
-                } else {
-                  rendition.annotations.add(
-                    "highlight",
-                    data[i].NotePositionValue,
-                    undefined,
-                    undefined,
-                    undefined,
-                    undefined,
-                    value
-                  );
-                }
-              })
+              // httpGet("valueByCode", {
+              //   Code: data[i].NoteHighlightColorKindcode,
+              //   GroupCode: "V01",
+              // }).then(function (value) {
+              // value = value[0].backgroundColor;
+              if (data[i].NoteText.length > 0) {
+                rendition.annotations.add(
+                  "highlight",
+                  data[i].NotePositionValue,
+                  { memo: true },
+                  undefined,
+                  undefined,
+                  undefined,
+                  data[i].NoteHighlightColorKindcode
+                );
+              } else {
+                rendition.annotations.add(
+                  "highlight",
+                  data[i].NotePositionValue,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  data[i].NoteHighlightColorKindcode
+                );
+              }
+              // })
             }
           }
         }
@@ -1566,7 +1567,18 @@
 
       rendition.on("markClicked", function (cfi, data, content, range) {
         let loc = content.selectionObserver.getLoc(rendition.getRange(cfi));
-        httpGet("GetNoteByPosition", { MemberNo: _memberNo, BookNo: _bookNo, NotePositionValue: cfi }).then((result) => {
+        httpGet("note", { MemberNo: _memberNo, BookNo: _bookNo, NotePositionValue: cfi }).then((result) => {
+          if (result && result.length > 0) {
+            for (let item of result) {
+              if (item.NotePositionValue == cfi) {
+                result = [];
+                result.push(item);
+              }
+            }
+          }
+          else {
+            result = [{ NoteTableContent: "" }]
+          }
           window.setTimeout(() => {
             let startTop;
             let endTop;
@@ -1625,7 +1637,19 @@
         param.BookNo = _bookNo;
         param.MemberNo = _memberNo;
         param.NotePositionValue = data.epubcfi;
-        httpGet("GetNoteByPosition", param).then((data) => {
+        httpGet("note", param).then((data) => {
+          if (data && data.length > 0) {
+            for (let item of data) {
+              if (item.NotePositionValue == cfi) {
+                data = [];
+                data.push(item);
+              }
+            }
+          }
+          else {
+            data = [{ NoteTableContent: "" }]
+          }
+
           if (data && data.length > 0) {
             document.getElementById("modal-memo-view").getElementsByClassName("note-item__content")[0].getElementsByTagName("p")[0].innerHTML = data[0].NoteTableContent;
             document.getElementById("modal-memo-view").getElementsByClassName("memo__text")[0].innerHTML = data[0].NoteText;
@@ -1639,7 +1663,7 @@
 
             document.getElementById("memo-view-delete").addEventListener("click", () => {
               rendition.annotations.remove(param.NotePositionValue, "highlight");
-              httpPost("removenote", {
+              httpDelete("note", {
                 MemberNo: _memberNo,
                 BookNo: _bookNo,
                 NotePositionValue: param.NotePositionValue,
@@ -1664,7 +1688,7 @@
         }, 200)
       });
 
-      httpGet("getbookmark", { BookNo: _bookNo, MemberNo: _memberNo }).then(function (data) {
+      httpGet("bookmark", { BookNo: _bookNo, MemberNo: _memberNo }).then(function (data) {
         for (let i = 0; i < data.length; i++) {
           if (rendition.epubcfi.checkType(data[i].BookMarkPositionValue)) {
             var bookmarkItem = {};
@@ -1704,6 +1728,9 @@
           sval = temp[1];
         }
       }
+      if (!sval) {
+        sval = "test.epub"
+      }
       return decodeURIComponent(sval);
     }
     //#endregion
@@ -1716,7 +1743,7 @@
     let _completeReadYN = "N";
 
     //페이지 인지 스크롤 인지 제일 먼저 가져와야함
-    httpGet("GetSettingByCode", { Code: "007", MemberNo: _memberNo }).then((data) => {
+    httpGet("settingByCode", { Code: "007", MemberNo: _memberNo }).then((data) => {
       if (!data) {
         bookChange(getParam("epub"), "paginated", "none");
       }
@@ -1726,7 +1753,7 @@
       InitializeBook();
 
       //읽고있던 페이지로 넘어가기 
-      httpGet("GetRecentUseContent", { MemberNo: _memberNo, BookNo: _bookNo }).then((recentUseData) => {
+      httpGet("recentUseContent", { MemberNo: _memberNo, BookNo: _bookNo }).then((recentUseData) => {
         if (recentUseData && recentUseData.length > 0) {
           _completeReadYN = recentUseData[0].CompleteReadYN;
           _contentNo = recentUseData[0].ContentNo;
@@ -2499,7 +2526,7 @@
       if (this.style.opacity == 1) {
         for (var i = 0; i < bookmarkList.length; i++) {
           if (checkBookmarkThisPage(bookmarkList[i].cfi)) {
-            httpPost("removebookmark", { MemberNo: _memberNo, BookNo: _bookNo, BookMarkPositionValue: bookmarkList[i].cfi, }).then(function (result) {
+            httpDelete("bookmark", { MemberNo: _memberNo, BookNo: _bookNo, BookMarkPositionValue: bookmarkList[i].cfi, }).then(function (result) {
               if (result < 1) {
                 alert("북마크 삭제 실패 관리자에게 문의바랍니다.");
               }
@@ -2526,7 +2553,7 @@
         bookmarkList.push(bookmarkItem);
         onBookmarkImage();
         chapterFromCfi(bookmarkItem.cfi).then((chapter) => {
-          httpPost("addbookmark", {
+          httpPost("bookmark", {
             MemberNo: _memberNo, BookNo: _bookNo, BookMarkPositionValue: bookmarkItem.cfi, BookMarkTableContent: chapter.chapter,
             BookMarkTableContentSub: chapter.chapterParent, BookMarkPage: 1, BookMarkPercentage: Math.round(bookmarkItem.progress * 100),
           }).then(function (result) {
@@ -2836,12 +2863,14 @@
           }
         }
       }
-      chapter.chapter = chapter.chapter.replace(/(\r\n|\n|\r)/gm, "");
-      chapter.chapterParent = chapter.chapterParent.replace(/(\r\n|\n|\r)/gm, "");
-      chapter.chapter = chapter.chapter.replace(/^\s+/, "");
-      chapter.chapter = chapter.chapter.replace(/\s+$/, "");
-      chapter.chapterParent = chapter.chapterParent.replace(/^\s+/, "");
-      chapter.chapterParent = chapter.chapterParent.replace(/\s+$/, "");
+      if (chapter && chapter.chapter) {
+        chapter.chapter = chapter.chapter.replace(/(\r\n|\n|\r)/gm, "");
+        chapter.chapterParent = chapter.chapterParent.replace(/(\r\n|\n|\r)/gm, "");
+        chapter.chapter = chapter.chapter.replace(/^\s+/, "");
+        chapter.chapter = chapter.chapter.replace(/\s+$/, "");
+        chapter.chapterParent = chapter.chapterParent.replace(/^\s+/, "");
+        chapter.chapterParent = chapter.chapterParent.replace(/\s+$/, "");
+      }
       return chapter;
     }
     //#endregion
@@ -2943,7 +2972,7 @@
           param.BookReadingProgressRate = Math.ceil((book.locations.percentageFromCfi(rendition.location.start.cfi) * 100));
         }
 
-        httpPost("ManageRecentUseContentData", param).then(function (result) {
+        httpPatch("recentUseContent", param).then(function (result) {
 
         })
         rendition.on("locationChanged", (e) => {
@@ -2952,7 +2981,7 @@
           param.ContentNo = _bookNo;
           param.BookReadingPositionValue = e.start;
           param.BookReadingProgressRate = Math.ceil((book.locations.percentageFromCfi(e.start) * 100));
-          httpPost("ManageRecentUseContentData", param).then(function (result) {
+          httpPatch("recentUseContent", param).then(function (result) {
           })
         });
       });
@@ -3394,7 +3423,7 @@
 
 
       let section;
-      httpGet("getnote", { MemberNo: _memberNo, BookNo: _bookNo }).then((data) => {
+      httpGet("note", { MemberNo: _memberNo, BookNo: _bookNo }).then((data) => {
         for (let i = 0; i < data.length; i++) {
           if (divTotalTab.children.length == 0 || data[i - 1].TableContentName != data[i].TableContentName) {
             section = document.createElement("section");
@@ -3420,12 +3449,12 @@
           buttonColor.classList.add("color-label");
           buttonColor.classList.add("size-13");
           if (data[i].NoteHighlightColorKindcode.length > 0) {
-            httpGet("getValueByCode", {
-              Code: data[i].NoteHighlightColorKindcode,
-              GroupCode: "V01",
-            }).then(function (value) {
-              buttonColor.classList.add("highlight-color-" + value[0].order);
-            });
+            // httpGet("valueByCode", {
+            //   Code: data[i].NoteHighlightColorKindcode,
+            //   GroupCode: "V01",
+            // }).then(function (value) {
+            //   buttonColor.classList.add("highlight-color-" + value[0].order);
+            // });
             divColor.appendChild(buttonColor);
             divItem.appendChild(divColor);
           } else {
@@ -3536,7 +3565,7 @@
               };
             } else {
               removeFunc = function () {
-                httpPost("removebookmark", {
+                httpDelete("bookmark", {
                   MemberNo: _memberNo,
                   BookNo: _bookNo,
                   BookMarkPositionValue: data[i].NotePositionValue,
@@ -3609,13 +3638,13 @@
             buttonColor.classList.add("color-label");
             buttonColor.classList.add("size-13");
             if (data[i].NoteHighlightColorKindcode.length > 0) {
-              httpGet("getValueByCode", {
-                Code: data[i].NoteHighlightColorKindcode,
-                GroupCode: "V01",
-              }).then(function (value) {
-                buttonColor.classList.add("highlight-color-" + value[0].order);
-                divItem.setAttribute("color", value[0].order);
-              });
+              // httpGet("valueByCode", {
+              //   Code: data[i].NoteHighlightColorKindcode,
+              //   GroupCode: "V01",
+              // }).then(function (value) {
+              // buttonColor.classList.add("highlight-color-" + value[0].order);
+              // divItem.setAttribute("color", value[0].order);
+              // });
               divColor.appendChild(buttonColor);
               divItem.appendChild(divColor);
             } else {
@@ -3732,12 +3761,12 @@
             buttonColor.classList.add("color-label");
             buttonColor.classList.add("size-13");
             if (data[i].NoteHighlightColorKindcode.length > 0) {
-              httpGet("getValueByCode", {
-                Code: data[i].NoteHighlightColorKindcode,
-                GroupCode: "V01",
-              }).then(function (value) {
-                buttonColor.classList.add("highlight-color-" + value[0].order);
-              })
+              // httpGet("valueByCode", {
+              //   Code: data[i].NoteHighlightColorKindcode,
+              //   GroupCode: "V01",
+              // }).then(function (value) {
+              //   buttonColor.classList.add("highlight-color-" + value[0].order);
+              // })
             }
             divColor.appendChild(buttonColor);
             divItem.appendChild(divColor);
@@ -3911,7 +3940,7 @@
               ea.stopPropagation();
 
               let removeFunc = function () {
-                httpPost("removebookmark", {
+                httpDelete("bookmark", {
                   MemberNo: _memberNo,
                   BookNo: _bookNo,
                   BookMarkPositionValue: data[i].NotePositionValue,
@@ -4349,22 +4378,33 @@
         document.getElementById("button-modify-complete").style.display = "none";
         document.getElementById("memo-window-circle").setAttribute("style", "");
       } else if (type == "modify") {
-        httpGet("GetNoteByPosition", {
+        httpGet("note", {
           MemberNo: _memberNo,
           BookNo: _bookNo,
           NotePositionValue: modifier.cfi,
         }).then(function (result) {
-          httpGet("getValueByCode", {
-            Code: result[0].NoteHighlightColorKindcode,
-            GroupCode: "V01",
-          }).then(function (data) {
-            document.getElementById("memo-window-circle").style.borderColor =
-              data[0].borderColor;
-            document.getElementById(
-              "memo-window-circle"
-            ).style.backgroundColor = data[0].backgroundColor;
-            modifier.color = data[0].backgroundColor;
-          })
+          if (result && result.length > 0) {
+            for (let item of result) {
+              if (item.NotePositionValue == cfi) {
+                result = [];
+                result.push(item);
+              }
+            }
+          }
+          else {
+            result = [{ NoteTableContent: "" }]
+          }
+          // httpGet("valueByCode", {
+          //   Code: result[0].NoteHighlightColorKindcode,
+          //   GroupCode: "V01",
+          // }).then(function (data) {
+          document.getElementById("memo-window-circle").style.borderColor =
+            data[0].borderColor;
+          document.getElementById(
+            "memo-window-circle"
+          ).style.backgroundColor = data[0].backgroundColor;
+          modifier.color = data[0].backgroundColor;
+          // })
         })
         document.getElementById("button-add-complete").style.display = "none";
         document.getElementById("button-modify-complete").style.display =
@@ -4401,7 +4441,7 @@
         memoCfi = adder.cfi;
       }
       chapterFromCfi(memoCfi).then((chapter) => {
-        httpPost("addnote", {
+        httpPost("note", {
           MemberNo: _memberNo,
           BookNo: _bookNo,
           NotePositionValue: memoCfi,
@@ -4437,7 +4477,7 @@
     }
 
     function modifyMemoComplete() {
-      httpPost("modifynote", {
+      httpPatch("note", {
         MemberNo: _memberNo,
         BookNo: _bookNo,
         NotePositionValue: modifier.cfi,
@@ -4477,7 +4517,7 @@
         e.detail.color
       );
       chapterFromCfi(e.detail.cfi).then((chapter) => {
-        httpPost("addnote", {
+        httpPost("note", {
           MemberNo: _memberNo,
           BookNo: _bookNo,
           NotePositionValue: e.detail.cfi,
@@ -4498,7 +4538,7 @@
     });
     document.addEventListener("removeHighlight", (e) => {
       rendition.annotations.remove(e.detail.cfi, "highlight");
-      httpPost("removenote", {
+      httpDelete("note", {
         MemberNo: _memberNo,
         BookNo: _bookNo,
         NotePositionValue: e.detail.cfi,
@@ -4510,7 +4550,7 @@
     });
 
     document.addEventListener("modifyHighlight", (e) => {
-      httpPost("modifynotecolor", {
+      httpPatch("notecolor", {
         MemberNo: _memberNo,
         BookNo: _bookNo,
         NotePositionValue: e.detail.cfi,
@@ -4544,7 +4584,7 @@
     });
 
     function modifyHighlightColor(cfi, color) {
-      httpPost("modifynotecolor", {
+      httpPatch("notecolor", {
         MemberNo: _memberNo,
         BookNo: _bookNo,
         NotePositionValue: cfi,
@@ -4582,11 +4622,22 @@
     });
     document.addEventListener("modifyMemo", (e) => {
       inNote = e.detail.inNote;
-      httpGet("GetNoteByPosition", {
+      httpGet("note", {
         MemberNo: _memberNo,
         BookNo: _bookNo,
         NotePositionValue: e.detail.cfi,
       }).then(function (result) {
+        if (result && result.length > 0) {
+          for (let item of result) {
+            if (item.NotePositionValue == cfi) {
+              result = [];
+              result.push(item);
+            }
+          }
+        }
+        else {
+          result = [{ NoteTableContent: "" }]
+        }
         modifier.cfi = e.detail.cfi;
         openMemoModal(
           result[0].NoteTableContent,
@@ -4889,7 +4940,7 @@
         alert("리뷰를 입력해 주세요.");
         return;
       }
-      httpPost("addContentFeedbackByMember", {
+      httpPost("contentFeedbackByMember", {
         MemberNo: _memberNo, ContentNo: _bookNo,
         ReviewText: document.getElementById("textarea-review").value,
         StarPoint: document.getElementById("input-star").value,
@@ -4927,7 +4978,7 @@
         alert("리뷰를 입력해 주세요.");
         return;
       }
-      httpPost("ModifyContentFeedbackByMember", {
+      httpPatch("contentFeedbackByMember", {
         ContentFeedbackNo: document.getElementById("div-mine").getAttribute("ContentFeedbackNo"),
         ReviewText: document.getElementById("textarea-review").value,
         StarPoint: document.getElementById("input-star").value,
@@ -4939,7 +4990,7 @@
 
     function removeReview(contentFeedbackNo) {
       if (confirm("삭제하시겠습니까?")) {
-        httpPost("RemoveContentFeedbackByMember", { "ContentFeedbackNo": contentFeedbackNo }).then(function (data) {
+        httpPost("contentFeedbackByMember", { "ContentFeedbackNo": contentFeedbackNo }).then(function (data) {
           if (data) {
             openReviewModal();
           }
@@ -5128,7 +5179,7 @@
     function getSetting() {
       let param = {};
       param.MemberNo = _memberNo;
-      httpGet("GetSetting", param).then(function (data) {
+      httpGet("setting", param).then(function (data) {
         for (let i = 0; i < data.length; i++) {
           applySetting(data[i].SettingValueKineCode, data[i].SettingValue);
         }
@@ -5179,7 +5230,7 @@
       param.MemberNo = _memberNo;
       param.Code = code;
       param.Value = value;
-      httpPost("ManageSetting", param).then(function (data) {
+      httpPost("setting", param).then(function (data) {
         if (data > 0) {
 
         }
@@ -5193,7 +5244,7 @@
       let param = {};
       param.MemberNo = _memberNo;
       param.Code = code;
-      httpPost("RemoveSetting", param).then(function (data) {
+      httpDelete("setting", param).then(function (data) {
         if (data > 0) {
 
         }
@@ -5223,7 +5274,7 @@
     /* #region CSS 다이나믹 바인딩  */
 
     function getColorData() {
-      httpGet("GetCommonCodeByCodeGroup", { GroupCode: "V01" }).then(function (colorData) {
+      httpGet("commonCodeByCodeGroup", { GroupCode: "V01" }).then(function (colorData) {
         if (colorData && colorData.length > 0) {
           for (let i = 0; i < colorData.length; i++) {
             const style = document.createElement("style");
@@ -5275,21 +5326,20 @@
 
     function getBackgroundData(doc) {
       for (let i = 1; i <= 6; i++) {
-        httpGet("GetValueByCode", { GroupCode: "V02", Code: "00" + i }).then(function (data) {
-          if (i < 4) {
-            const style = document.createElement("style");
-            style.innerHTML = `.${data[0].value} {background-color : ${data[0].backgroundColor}; color : ${data[0].order}; 
-          border-color:${data[0].borderColor};}`;
-            doc.getElementsByTagName("head")[0].appendChild(style);
-          }
-          else {
-            const style = document.createElement("style");
-            style.innerHTML = `.${data[0].value},  .${data[0].value} *:not(svg) {background-color : ${data[0].backgroundColor}; color : ${data[0].order};
-          border-color:${data[0].borderColor};}`;
-            doc.getElementsByTagName("head")[0].appendChild(style);
-          }
-
-        })
+        // httpGet("valueByCode", { GroupCode: "V02", Code: "00" + i }).then(function (data) {
+        // if (i < 4) {
+        //   const style = document.createElement("style");
+        //   style.innerHTML = `.${data[0].value} {background-color : ${data[0].backgroundColor}; color : ${data[0].order}; 
+        // border-color:${data[0].borderColor};}`;
+        //   doc.getElementsByTagName("head")[0].appendChild(style);
+        // }
+        // else {
+        //   const style = document.createElement("style");
+        //   style.innerHTML = `.${data[0].value},  .${data[0].value} *:not(svg) {background-color : ${data[0].backgroundColor}; color : ${data[0].order};
+        // border-color:${data[0].borderColor};}`;
+        //   doc.getElementsByTagName("head")[0].appendChild(style);
+        // }
+        // })
       }
     }
     getBackgroundData(document);
@@ -5318,11 +5368,11 @@
         lastScroll = true;
         if (_completeReadYN == "N") {
           if (confirm("마지막 페이지 입니다. 완독하셨습니까?")) {
-            httpPost("ModifyCompleteRead", { ContentNo: _contentNo, MemberNo: _memberNo }).then(function (data) {
-              if (data > 0) {
-                _completeReadYN = "Y";
-              }
-            })
+            // httpPost("completeRead", { ContentNo: _contentNo, MemberNo: _memberNo }).then(function (data) {
+            //   if (data > 0) {
+            //     _completeReadYN = "Y";
+            //   }
+            // })
           }
 
         }
@@ -5339,37 +5389,37 @@
 
 
     //신고하기 시작==========
-    getValueByCodeGroupCode("N03").then(function (data) {
-      for (let item of data) {
-        const ele = `<option value=${item.code}>${item.codeNameKor}</option>`;
-        const template = document.createElement("template");
-        template.innerHTML = ele;
-        document.getElementById("option-report").appendChild(template.content.cloneNode(true));
+    // getValueByCodeGroupCode("N03").then(function (data) {
+    //   for (let item of data) {
+    //     const ele = `<option value=${item.code}>${item.codeNameKor}</option>`;
+    //     const template = document.createElement("template");
+    //     template.innerHTML = ele;
+    //     document.getElementById("option-report").appendChild(template.content.cloneNode(true));
 
-      }
-    })
+    //   }
+    // })
 
-    document.getElementById("option-report").addEventListener("change", function (e) {
-      if (e.target.value == "005") {
-        document.getElementById("div-report-text").style.display = "block";
-      }
-      else {
-        document.getElementById("div-report-text").style.display = "none";
-      }
-    })
+    // document.getElementById("option-report").addEventListener("change", function (e) {
+    //   if (e.target.value == "005") {
+    //     document.getElementById("div-report-text").style.display = "block";
+    //   }
+    //   else {
+    //     document.getElementById("div-report-text").style.display = "none";
+    //   }
+    // })
 
-    function reportComplete() {
-      if (confirm(document.getElementById("modal-report").getAttribute("nickname") + "님의 리뷰를 신고할까요?")) {
-        reportReview(document.getElementById("modal-report").getAttribute("contentFeedbackNo"), document.getElementById("option-report").value, document.getElementById("textarea-report").value, _memberNo).then(function (result) {
-          if (result > 0) {
-            alert("신고되었습니다.");
-          }
+    // function reportComplete() {
+    //   if (confirm(document.getElementById("modal-report").getAttribute("nickname") + "님의 리뷰를 신고할까요?")) {
+    //     reportReview(document.getElementById("modal-report").getAttribute("contentFeedbackNo"), document.getElementById("option-report").value, document.getElementById("textarea-report").value, _memberNo).then(function (result) {
+    //       if (result > 0) {
+    //         alert("신고되었습니다.");
+    //       }
 
-          document.getElementById("modal-report").style.display = "none";
-        })
-      }
+    //       document.getElementById("modal-report").style.display = "none";
+    //     })
+    //   }
 
-    }
+    // }
     //신고하기 끝 ============
   </script>
 </body>
