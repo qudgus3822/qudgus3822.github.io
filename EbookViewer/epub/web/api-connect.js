@@ -1,15 +1,3 @@
-//개발
-// const apiUrl = "https://dev-dplus-api.azurewebsites.net/";
-// apim 개발
-// let apiUrl = "https://dplusapimgmt-dev.azure-api.net/";
-// apim 운영
-// const apiUrl = "https://dplusprd.azurefd.net/";
-
-// const apiUrl = "http://localhost:10000/";
-// if (process && process.env && process.env.API_URL) {
-//     apiUrl = process.env.API_URL;
-// }
-// import { getFirebaseData, pushFirebaseData, deleteFirebaseData, setFirebaseData } from "../../../../db/firebase"
 
 //firebase
 const apiUrl = "https://bhproject-305102-default-rtdb.asia-southeast1.firebasedatabase.app/";

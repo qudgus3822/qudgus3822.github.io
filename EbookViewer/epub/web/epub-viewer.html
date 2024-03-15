@@ -6,8 +6,6 @@
   <meta name="viewport"
     content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>두플러스 : 복음을 읽는 새로운 습관</title>
-  <link rel="icon" href="../../../images/ic_mo_home.svg" type="/duranno/image/x-icon">
   <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="./css/common.css" />
   <link rel="stylesheet" href="./css/desktop-viewer.css" />
@@ -82,7 +80,6 @@
     }
 
     #div-loading.show {
-      background-image: "/images/duranno-logo-pc.png" !important;
       width: 100vw;
       height: 100vh;
       /* opacity: 0.3; */
@@ -315,8 +312,7 @@
         align-items: center;
         top : 10px;" class="Background-1 show">
     <div style="margin: auto;top: 50%;left: 50%;position: absolute;transform: translate(-50%,-50%);">
-      <img src="./images/duranno-logo-pc.png"
-        style="position:relative; display:block; margin:auto; width:min(15vw, 15vh);" />
+     
       <span style="position: relative; margin: auto; text-align: center; font-size:min(1.5vh, 1.5vw); top : 10px;">정보를
         불러오고
         있습니다.</span>
@@ -1195,28 +1191,7 @@
     }
     const token = getCookie("Token");
     const user = getCookie("user");
-    // const token = "ZXlKaGJHY2lPaUpvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh5TURBeEx6QTBMM2h0YkdSemFXY3RiVzl5WlNOb2JXRmpMWE5vWVRJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SlZjMlZ5VG04aU9pSXlNVElpTENKRVpYWnBZMlZKUkNJNklsZGxZaUlzSWxOdWMxUjVjR1VpT2lJd01ESWlMQ0pCY0hCVWVYQmxJam9pTURBeklpd2laWGh3SWpveE5qUTJPVGd5TURFekxDSnBjM01pT2lKb2RIUndjem92TDIxNWQyVmlZWEJwTG1OdmJTSXNJbUYxWkNJNkltaDBkSEJ6T2k4dmJYbDNaV0poY0drdVkyOXRJbjAuRlA4dk15aFBxeWM5dHpHV2dEOXF6cW8xOXNhMzhVbVRPN0o1aFEwMThKOA==";
-    // const user = "212";
-
-    // if (!token || !user) {
-    //   alert("권한이 없습니다. 두플러스 홈페이지로 이동합니다.");
-    //   location.href = "https://dev-dplus-front.azurewebsites.net/";
-    // }
-    // else {
-    //   if (user != _memberNo) {
-    //     alert("잘못 된 접근입니다.");
-    //     location.href = "https://dev-dplus-front.azurewebsites.net/";
-    //   }
-    // }
-
-    // if (token && user) {
-    //   loginCheck(token, user).then(function (result) {
-    //     if (result.tokenChkYN != "Y") {
-    //       alert("권한이 없습니다. 두플러스 홈페이지로 이동합니다.");
-    //       location.href = "https://dev-dplus-front.azurewebsites.net/";
-    //     }
-    //   })
-    // }
+  
 
     //로그인 정보 체크 끝 =======================================
 
@@ -1511,7 +1486,7 @@
             alert("1000자 이상 복사가 불가능합니다. 1000자까지 복사되었습니다.");
             text = text.substr(0, 1000);
           }
-          e.clipboardData.setData("text/plain", text + '\n[출처 : 두플러스] 《' + document.getElementById("h1-title").innerHTML + '》의 콘텐츠는 저작권의 보호를 받고 있습니다. 무단 전재와 무단 복재를 금하며 공유시 출처를 반드시 명시하여 콘텐츠를 소중히 지켜주시기 바랍니다.');
+          e.clipboardData.setData("text/plain", text + '\n[출처 : ] 《' + document.getElementById("h1-title").innerHTML + '》의 콘텐츠는 저작권의 보호를 받고 있습니다. 무단 전재와 무단 복재를 금하며 공유시 출처를 반드시 명시하여 콘텐츠를 소중히 지켜주시기 바랍니다.');
           e.preventDefault();
 
         });
@@ -5029,15 +5004,15 @@
     }
     function copyTextToClipboard(text) {
       if (!navigator.clipboard) {
-        fallbackCopyTextToClipboard(text + '\n[출처 : 두플러스] 《' + document.getElementById("h1-title").innerHTML + '》의 콘텐츠는 저작권의 보호를 받고 있습니다. 무단 전재와 무단 복재를 금하며 공유시 출처를 반드시 명시하여 콘텐츠를 소중히 지켜주시기 바랍니다.');
+        fallbackCopyTextToClipboard(text + '\n[출처 : ] 《' + document.getElementById("h1-title").innerHTML + '》의 콘텐츠는 저작권의 보호를 받고 있습니다. 무단 전재와 무단 복재를 금하며 공유시 출처를 반드시 명시하여 콘텐츠를 소중히 지켜주시기 바랍니다.');
         return;
       }
-      navigator.clipboard.writeText(text + '\n[출처 : 두플러스] 《' + document.getElementById("h1-title").innerHTML + '》의 콘텐츠는 저작권의 보호를 받고 있습니다. 무단 전재와 무단 복재를 금하며 공유시 출처를 반드시 명시하여 콘텐츠를 소중히 지켜주시기 바랍니다.').then(() => {
+      navigator.clipboard.writeText(text + '\n[출처 : ] 《' + document.getElementById("h1-title").innerHTML + '》의 콘텐츠는 저작권의 보호를 받고 있습니다. 무단 전재와 무단 복재를 금하며 공유시 출처를 반드시 명시하여 콘텐츠를 소중히 지켜주시기 바랍니다.').then(() => {
         if (text.length > 1000) {
           alert("1000자 이상 복사가 불가능합니다. 1000자까지 복사되었습니다.");
         }
       }, function (err) {
-        fallbackCopyTextToClipboard(text + '\n[출처 : 두플러스] 《' + document.getElementById("h1-title").innerHTML + '》의 콘텐츠는 저작권의 보호를 받고 있습니다. 무단 전재와 무단 복재를 금하며 공유시 출처를 반드시 명시하여 콘텐츠를 소중히 지켜주시기 바랍니다.');
+        fallbackCopyTextToClipboard(text + '\n[출처 : ] 《' + document.getElementById("h1-title").innerHTML + '》의 콘텐츠는 저작권의 보호를 받고 있습니다. 무단 전재와 무단 복재를 금하며 공유시 출처를 반드시 명시하여 콘텐츠를 소중히 지켜주시기 바랍니다.');
       });
     }
     //#endregion 
