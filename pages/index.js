@@ -84,7 +84,7 @@ export default function IndexPage() {
                   <div className="col-lg-6 align-self-center mb-3 mb-lg-0">
                     <div className="met-profile-main">
                       <div className="met-profile-main-pic">
-                        <img src="/images/profile.png" alt="" height="110" className="rounded-circle"></img>
+                        <img src="/images/profile2.jpg" alt="" height="110" className="rounded-circle"></img>
                         {/* <span className="met-profile_main-pic-change">
                                 <i className="fas fa-camera"></i>
                               </span> */}
@@ -98,16 +98,8 @@ export default function IndexPage() {
 
                   <div className="col-lg-6 ms-auto align-self-center">
                     <ul className="list-unstyled personal-detail mb-0">
-                      <li className=""><i className="las la-phone mr-2 text-secondary font-22 align-middle"></i> <b> phone </b> : 010 2835 3822</li>
+                      <li className=""><i className="las la-phone mr-2 text-secondary font-22 align-middle"></i> <b> phone </b> : 010-2835-3822</li>
                       <li className="mt-2"><i className="las la-envelope text-secondary font-22 align-middle mr-2"></i> <b> Email </b> : qudgus3822@gmail.com</li>
-                      <li className="mt-2"><i className="las la-globe text-secondary font-22 align-middle mr-2"></i> <b> Website </b> :
-                        <Link href="https://qudgus3822.github.io/">https://qudgus3822.github.io/</Link>
-                      </li>
-                      <li className="mt-2"><i className="las la-globe text-secondary font-22 align-middle mr-2"></i> <b> BLOG </b> :
-                        <Link href="/blog">
-                          이동
-                        </Link>
-                      </li>
                     </ul>
                   </div>
                 </div>
