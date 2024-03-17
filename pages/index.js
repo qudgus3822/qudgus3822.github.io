@@ -85,9 +85,6 @@ export default function IndexPage() {
                     <div className="met-profile-main">
                       <div className="met-profile-main-pic">
                         <img src="/images/profile2.jpg" alt="" height="110" className="rounded-circle"></img>
-                        {/* <span className="met-profile_main-pic-change">
-                                <i className="fas fa-camera"></i>
-                              </span> */}
                       </div>
                       <div className="met-profile_user-detail">
                         <h5 className="met-user-name">김 병 현</h5>
