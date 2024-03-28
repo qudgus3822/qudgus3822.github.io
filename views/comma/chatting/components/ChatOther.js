@@ -42,7 +42,7 @@ export const ChatOther = ({ data, loadingChat }) => {
                     (<div className="msg-bubble-wrap">
                         <div className="bubble-box">
                             <div className="bubble">
-                                <Loading rendered={false}>
+                                <Loading rendered={"false"}>
                                     <div className="dot-stage">
                                         <span className="dot-pulse" />
                                     </div>

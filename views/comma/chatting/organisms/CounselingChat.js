@@ -7,7 +7,6 @@ import AnswerButton from "../components/AnswerButton";
 import styled from "styled-components";
 import EndButton from "../components/EndButton";
 import React from "react"
-React.useLayoutEffect = React.useEffect 
 
 
 const ZoomLayout = styled.div`
@@ -16,6 +15,8 @@ const ZoomLayout = styled.div`
     }
 `
 export default function CounselingChat() {
+    React.useLayoutEffect = React.useEffect;
+
     const [messageData, setMessageData] = useState([]);
     const [buttonAnswer, setButtonAnswer] = useState([]);
     const [inputFormat, setInputFormat] = useState("");
@@ -25,7 +26,7 @@ export default function CounselingChat() {
     const [choiceQuestionData, setChoiceQuestionData] = useState({});
     const scrollDiv = useRef(null);
 
-    
+
     useEffect(async () => {
         const response = await fetch("/data/chatting.json");
         const json = await response.json();
@@ -167,8 +168,8 @@ export default function CounselingChat() {
                         {buttonAnswer && buttonAnswer.map((item, index) => {
                             return (<AnswerButton key={index} text={item.Text} link={item.Link} buttonClickHandler={answerButtonClickHandler}></AnswerButton>);
                         })}
-                        {!rendered && (
-                            <ChatOther key={rendered} loadingChat={true}></ChatOther>
+                        {!rendered &&(
+                            <ChatOther loadingChat={true}></ChatOther>
                         )}
 
                         {
