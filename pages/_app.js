@@ -9,6 +9,9 @@ import React from "react";
 import "../styles/global.css";
 import Head from "next/head";
 
+import '../styles/apti/apti_sub.css';
+import '../styles/apti/used_style.css';
+
 function App({ Component, pageProps }) {
   return (
     <>
