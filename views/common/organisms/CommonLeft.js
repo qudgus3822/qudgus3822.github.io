@@ -46,11 +46,11 @@ export default function CommonLeft({ }) {
                                         router.push({ pathname: "/trace", query: { currentMenu: "Trace" } });
                                     }}>Trace</a>
                                 </li>
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <a className={`nav-link ${active == "Game" ? "active" : ""}`} onClick={(e) => {
                                         router.push({ pathname: "/game", query: { currentMenu: "Game" } });
                                     }}>Game</a>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                     </div>

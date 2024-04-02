@@ -101,7 +101,7 @@ export default function IndexPage() {
                   </div>
                 </div>
               </div>
-              <button type="button" className="btn btn-de-primary float-end" onClick={() => { router.push("/games") }}>게임하러가기</button>
+              {/* <button type="button" className="btn btn-de-primary float-end" onClick={() => { router.push("/games") }}>게임하러가기</button> */}
             </div>
 
 
