@@ -144,12 +144,10 @@ export default function IndexPage() {
                                 <div className="accordion-body">
                                   <ul>
                                     <li>
-                                      epub : <Link href={hosturl + "/EbookViewer/epub/web/desktop-viewer.html?epub=" + epubUrl}> 클릭해서 이동</Link>
+                                      {/* epub : <Link href={hosturl + "/EbookViewer/epub/web/desktop-viewer.html?epub=" + epubUrl}> 클릭해서 이동</Link> */}
                                     </li>
                                     <li>
-                                      PDF : <Link href={hosturl + "/EbookViewer/pdf/web/pdf-viewer.html?file=" + pdfUrl}>
-                                        클릭해서 이동
-                                      </Link>
+                                      {/* PDF : <Link href={hosturl + "/EbookViewer/pdf/web/pdf-viewer.html?file=" + pdfUrl}> 클릭해서 이동</Link> */}
                                     </li>
                                   </ul>
                                 </div>
