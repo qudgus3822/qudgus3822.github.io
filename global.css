@@ -1,8 +1,0 @@
-.page-wrapper .page-content-tab {
-    /* width: 100%; */
-    /* margin-left: auto;
-    position: relative;
-    min-height: 100vh; */
-    margin-top: 0px !important;
-    width: calc(100% - 150px);
-}
