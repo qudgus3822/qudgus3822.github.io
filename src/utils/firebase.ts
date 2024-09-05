@@ -14,7 +14,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export function setFirebaseData(path: string, data: string) {
+export function setFirebaseData(path: string, data: any) {
   const nowDate = new Date();
 
   const database = getDatabase(app);
@@ -22,7 +22,7 @@ export function setFirebaseData(path: string, data: string) {
   return result;
 }
 
-export function pushFirebaseData(path: string, data: string) {
+export function pushFirebaseData(path: string, data: any) {
   // Create a new post reference with an auto-generated id
   const db = getDatabase(app);
   const postListRef = ref(db, path);

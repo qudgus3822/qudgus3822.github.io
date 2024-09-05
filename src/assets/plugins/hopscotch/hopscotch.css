@@ -283,8 +283,18 @@ div.hopscotch-bubble .hopscotch-nav-button.next {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
   background-color: #287bbc;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#287bbc', endColorstr='#23639a');
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #287bbc), color-stop(100%, #23639a));
-  background-image: -webkit-linear-gradient(to bottom, #287bbc 0%, #23639a 100%);
+  background-image: -webkit-gradient(
+    linear,
+    50% 0%,
+    50% 100%,
+    color-stop(0%, #287bbc),
+    color-stop(100%, #23639a)
+  );
+  background-image: -webkit-linear-gradient(
+    to bottom,
+    #287bbc 0%,
+    #23639a 100%
+  );
   background-image: -moz-linear-gradient(to bottom, #287bbc 0%, #23639a 100%);
   background-image: -o-linear-gradient(to bottom, #287bbc 0%, #23639a 100%);
   background-image: linear-gradient(to bottom, #287bbc 0%, #23639a 100%);
@@ -292,8 +302,18 @@ div.hopscotch-bubble .hopscotch-nav-button.next {
 div.hopscotch-bubble .hopscotch-nav-button.next:hover {
   background-color: #2672ae;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#2672ae', endColorstr='#1e4f7e');
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #2672ae), color-stop(100%, #1e4f7e));
-  background-image: -webkit-linear-gradient(to bottom, #2672ae 0%, #1e4f7e 100%);
+  background-image: -webkit-gradient(
+    linear,
+    50% 0%,
+    50% 100%,
+    color-stop(0%, #2672ae),
+    color-stop(100%, #1e4f7e)
+  );
+  background-image: -webkit-linear-gradient(
+    to bottom,
+    #2672ae 0%,
+    #1e4f7e 100%
+  );
   background-image: -moz-linear-gradient(to bottom, #2672ae 0%, #1e4f7e 100%);
   background-image: -o-linear-gradient(to bottom, #2672ae 0%, #1e4f7e 100%);
   background-image: linear-gradient(to bottom, #2672ae 0%, #1e4f7e 100%);
@@ -304,8 +324,18 @@ div.hopscotch-bubble .hopscotch-nav-button.prev {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   background-color: #f2f2f2;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#f2f2f2', endColorstr='#e9e9e9');
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f2f2f2), color-stop(100%, #e9e9e9));
-  background-image: -webkit-linear-gradient(to bottom, #f2f2f2 0%, #e9e9e9 100%);
+  background-image: -webkit-gradient(
+    linear,
+    50% 0%,
+    50% 100%,
+    color-stop(0%, #f2f2f2),
+    color-stop(100%, #e9e9e9)
+  );
+  background-image: -webkit-linear-gradient(
+    to bottom,
+    #f2f2f2 0%,
+    #e9e9e9 100%
+  );
   background-image: -moz-linear-gradient(to bottom, #f2f2f2 0%, #e9e9e9 100%);
   background-image: -o-linear-gradient(to bottom, #f2f2f2 0%, #e9e9e9 100%);
   background-image: linear-gradient(to bottom, #f2f2f2 0%, #e9e9e9 100%);
@@ -313,11 +343,48 @@ div.hopscotch-bubble .hopscotch-nav-button.prev {
 div.hopscotch-bubble .hopscotch-nav-button.prev:hover {
   background-color: #e8e8e8;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFE8E8E8', endColorstr='#FFA9A9A9');
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e8e8e8), color-stop(13%, #e3e3e3), color-stop(32%, #d7d7d7), color-stop(71%, #b9b9b9), color-stop(100%, #a9a9a9));
-  background-image: -webkit-linear-gradient(to bottom, #e8e8e8 0%, #e3e3e3 13%, #d7d7d7 32%, #b9b9b9 71%, #a9a9a9 100%);
-  background-image: -moz-linear-gradient(to bottom, #e8e8e8 0%, #e3e3e3 13%, #d7d7d7 32%, #b9b9b9 71%, #a9a9a9 100%);
-  background-image: -o-linear-gradient(to bottom, #e8e8e8 0%, #e3e3e3 13%, #d7d7d7 32%, #b9b9b9 71%, #a9a9a9 100%);
-  background-image: linear-gradient(to bottom, #e8e8e8 0%, #e3e3e3 13%, #d7d7d7 32%, #b9b9b9 71%, #a9a9a9 100%);
+  background-image: -webkit-gradient(
+    linear,
+    50% 0%,
+    50% 100%,
+    color-stop(0%, #e8e8e8),
+    color-stop(13%, #e3e3e3),
+    color-stop(32%, #d7d7d7),
+    color-stop(71%, #b9b9b9),
+    color-stop(100%, #a9a9a9)
+  );
+  background-image: -webkit-linear-gradient(
+    to bottom,
+    #e8e8e8 0%,
+    #e3e3e3 13%,
+    #d7d7d7 32%,
+    #b9b9b9 71%,
+    #a9a9a9 100%
+  );
+  background-image: -moz-linear-gradient(
+    to bottom,
+    #e8e8e8 0%,
+    #e3e3e3 13%,
+    #d7d7d7 32%,
+    #b9b9b9 71%,
+    #a9a9a9 100%
+  );
+  background-image: -o-linear-gradient(
+    to bottom,
+    #e8e8e8 0%,
+    #e3e3e3 13%,
+    #d7d7d7 32%,
+    #b9b9b9 71%,
+    #a9a9a9 100%
+  );
+  background-image: linear-gradient(
+    to bottom,
+    #e8e8e8 0%,
+    #e3e3e3 13%,
+    #d7d7d7 32%,
+    #b9b9b9 71%,
+    #a9a9a9 100%
+  );
 }
 div.hopscotch-bubble {
   background-color: #ffffff;
@@ -439,7 +506,9 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container {
   height: 34px;
 }
 div.hopscotch-bubble .hopscotch-bubble-arrow-container .hopscotch-bubble-arrow,
-div.hopscotch-bubble .hopscotch-bubble-arrow-container .hopscotch-bubble-arrow-border {
+div.hopscotch-bubble
+  .hopscotch-bubble-arrow-container
+  .hopscotch-bubble-arrow-border {
   width: 0;
   height: 0;
 }
@@ -447,14 +516,18 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.up {
   top: -10px;
   left: 10px;
 }
-div.hopscotch-bubble .hopscotch-bubble-arrow-container.up .hopscotch-bubble-arrow {
+div.hopscotch-bubble
+  .hopscotch-bubble-arrow-container.up
+  .hopscotch-bubble-arrow {
   border-bottom: 10px solid #ffffff;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   position: relative;
   top: -10px;
 }
-div.hopscotch-bubble .hopscotch-bubble-arrow-container.up .hopscotch-bubble-arrow-border {
+div.hopscotch-bubble
+  .hopscotch-bubble-arrow-container.up
+  .hopscotch-bubble-arrow-border {
   border-bottom: 10px solid #000000;
   border-bottom: 10px solid rgba(0, 0, 0, 0.5);
   border-left: 10px solid transparent;
@@ -464,14 +537,18 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down {
   bottom: -34px;
   left: 10px;
 }
-div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-arrow {
+div.hopscotch-bubble
+  .hopscotch-bubble-arrow-container.down
+  .hopscotch-bubble-arrow {
   border-top: 10px solid #ffffff;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   position: relative;
   top: -10px;
 }
-div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-arrow-border {
+div.hopscotch-bubble
+  .hopscotch-bubble-arrow-container.down
+  .hopscotch-bubble-arrow-border {
   border-top: 10px solid #000000;
   border-top: 10px solid rgba(0, 0, 0, 0.5);
   border-left: 10px solid transparent;
@@ -481,7 +558,9 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.left {
   top: 10px;
   left: -22px;
 }
-div.hopscotch-bubble .hopscotch-bubble-arrow-container.left .hopscotch-bubble-arrow {
+div.hopscotch-bubble
+  .hopscotch-bubble-arrow-container.left
+  .hopscotch-bubble-arrow {
   border-bottom: 10px solid transparent;
   border-right: 10px solid #ffffff;
   border-top: 10px solid transparent;
@@ -489,7 +568,9 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.left .hopscotch-bubble-ar
   left: 7px;
   top: -34px;
 }
-div.hopscotch-bubble .hopscotch-bubble-arrow-container.left .hopscotch-bubble-arrow-border {
+div.hopscotch-bubble
+  .hopscotch-bubble-arrow-container.left
+  .hopscotch-bubble-arrow-border {
   border-right: 10px solid #000000;
   border-right: 10px solid rgba(0, 0, 0, 0.5);
   border-bottom: 10px solid transparent;
@@ -499,7 +580,9 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.right {
   top: 10px;
   right: -39px;
 }
-div.hopscotch-bubble .hopscotch-bubble-arrow-container.right .hopscotch-bubble-arrow {
+div.hopscotch-bubble
+  .hopscotch-bubble-arrow-container.right
+  .hopscotch-bubble-arrow {
   border-bottom: 10px solid transparent;
   border-left: 10px solid #ffffff;
   border-top: 10px solid transparent;
@@ -507,7 +590,9 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.right .hopscotch-bubble-a
   left: -7px;
   top: -34px;
 }
-div.hopscotch-bubble .hopscotch-bubble-arrow-container.right .hopscotch-bubble-arrow-border {
+div.hopscotch-bubble
+  .hopscotch-bubble-arrow-container.right
+  .hopscotch-bubble-arrow-border {
   border-left: 10px solid #000000;
   border-left: 10px solid rgba(0, 0, 0, 0.5);
   border-bottom: 10px solid transparent;

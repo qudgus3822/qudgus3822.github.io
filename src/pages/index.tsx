@@ -1,51 +1,19 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import profile from "../images/profile2.jpg";
+import Web from "../components/main-web/Web";
+import Info from "../components/main-my-info/Info";
+import Introduce from "../components/main-introduce/Introduce";
+import Dekstop from "../components/main-desktop/Desktop";
+import TraceIndexPage from "../components/main-guestbook";
+import BlogIndexPage from "../components/main-blog";
+import BlogWritePage from "../components/main-blog/write";
+import TraceWritePage from "../components/main-guestbook/write";
+declare const naver: any;
 
 export default function IndexPage() {
-  let highSchoolMap;
-  let universityMap;
-
-  useEffect(() => {}, []);
-  useEffect(() => {
-    // let script = document.querySelector(`script[src="/assets/js/app.js"]`);
-    // if (!script) {
-    //   script = document.createElement("script");
-    //   script.src = "/assets/js/app.js";
-    //   script.async = true;
-    //   document.body.appendChild(script);
-    // }
-    // script = document.querySelector(
-    //   `script[src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=b15q7nzk9p"]`
-    // );
-    // if (!script) {
-    //   script = document.createElement("script");
-    //   script.src =
-    //     "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=b15q7nzk9p";
-    //   script.async = true;
-    //   document.body.appendChild(script);
-    //   script.addEventListener("load", () => {
-    //     highSchoolMap = new naver.maps.Map("mapHighSchool", {
-    //       center: new naver.maps.LatLng(36.7935697, 126.4587419),
-    //       zoom: 15,
-    //     });
-    //     universityMap = new naver.maps.Map("mapUniversity", {
-    //       center: new naver.maps.LatLng(36.8374266, 127.1687229),
-    //       zoom: 15,
-    //     });
-    //     let highSchoolMarker = new naver.maps.Marker({
-    //       position: new naver.maps.LatLng(36.7935697, 126.4587419),
-    //       map: highSchoolMap,
-    //     });
-    //     let universityMarker = new naver.maps.Marker({
-    //       position: new naver.maps.LatLng(36.8374266, 127.1687229),
-    //       map: universityMap,
-    //     });
-    //   });
-    // }
-  }, []);
-
   const [currentTab, setCurrentTab] = useState("web");
+
   return (
     <div className="">
       <div className="page-content-tab">
@@ -93,14 +61,38 @@ export default function IndexPage() {
                 </div>
 
                 <div className="card-body p-0">
+                  {currentTab === "blog" && (
+                    <button
+                      type="button"
+                      className="btn btn-de-dark float-end"
+                      onClick={() => {
+                        setCurrentTab("blog-write");
+                      }}
+                    >
+                      글쓰기
+                    </button>
+                  )}
+                  {currentTab === "guestbook" && (
+                    <button
+                      type="button"
+                      className="btn btn-de-dark float-end"
+                      onClick={() => {
+                        setCurrentTab("trace-write");
+                      }}
+                    >
+                      글쓰기
+                    </button>
+                  )}
+
                   <ul className="nav nav-tabs" role="tablist">
                     <li className="nav-item">
                       <a
-                        className="nav-link active"
-                        data-bs-toggle="tab"
-                        href="#front"
+                        className={`nav-link ${
+                          currentTab === "web" ? "active" : ""
+                        }`}
+                        onClick={() => setCurrentTab("web")}
                         role="tab"
-                        aria-selected="false"
+                        aria-selected={currentTab === "web"}
                       >
                         Web
                       </a>
@@ -108,11 +100,12 @@ export default function IndexPage() {
 
                     <li className="nav-item">
                       <a
-                        className="nav-link"
-                        data-bs-toggle="tab"
-                        href="#desktop"
+                        className={`nav-link ${
+                          currentTab === "desktop" ? "active" : ""
+                        }`}
+                        onClick={() => setCurrentTab("desktop")}
                         role="tab"
-                        aria-selected="false"
+                        aria-selected={currentTab === "desktop"}
                       >
                         desktop
                       </a>
@@ -120,11 +113,12 @@ export default function IndexPage() {
 
                     <li className="nav-item">
                       <a
-                        className="nav-link"
-                        data-bs-toggle="tab"
-                        href="#intro"
+                        className={`nav-link ${
+                          currentTab === "introduce" ? "active" : ""
+                        }`}
+                        onClick={() => setCurrentTab("introduce")}
                         role="tab"
-                        aria-selected="false"
+                        aria-selected={currentTab === "introduce"}
                       >
                         소개
                       </a>
@@ -132,11 +126,12 @@ export default function IndexPage() {
 
                     <li className="nav-item">
                       <a
-                        className="nav-link"
-                        data-bs-toggle="tab"
-                        href="#info"
+                        className={`nav-link ${
+                          currentTab === "info" ? "active" : ""
+                        }`}
+                        onClick={() => setCurrentTab("info")}
                         role="tab"
-                        aria-selected="false"
+                        aria-selected={currentTab === "info"}
                       >
                         내 정보
                       </a>
@@ -144,11 +139,12 @@ export default function IndexPage() {
 
                     <li className="nav-item">
                       <a
-                        className="nav-link"
-                        data-bs-toggle="tab"
-                        href="#blog"
+                        className={`nav-link ${
+                          currentTab === "blog" ? "active" : ""
+                        }`}
+                        onClick={() => setCurrentTab("blog")}
                         role="tab"
-                        aria-selected="false"
+                        aria-selected={currentTab === "blog"}
                       >
                         블로그
                       </a>
@@ -156,18 +152,27 @@ export default function IndexPage() {
 
                     <li className="nav-item">
                       <a
-                        className="nav-link"
-                        data-bs-toggle="tab"
-                        href="#trace"
+                        className={`nav-link ${
+                          currentTab === "guestbook" ? "active" : ""
+                        }`}
+                        onClick={() => setCurrentTab("guestbook")}
                         role="tab"
-                        aria-selected="false"
+                        aria-selected={currentTab === "guestbook"}
                       >
                         방명록
                       </a>
                     </li>
                   </ul>
                   <div className="tab-content">
-                    {/* {currentTab === "web" && <Web></Web>} */}
+                    {currentTab === "web" && <Web />}
+                    {currentTab === "info" && <Info />}
+                    {currentTab === "introduce" && <Introduce />}
+                    {currentTab === "desktop" && <Dekstop />}
+                    {currentTab === "blog" && <BlogIndexPage />}
+                    {currentTab === "guestbook" && <TraceIndexPage />}
+
+                    {currentTab === "blog-write" && <BlogWritePage />}
+                    {currentTab === "trace-write" && <TraceWritePage />}
                   </div>
                 </div>
               </div>

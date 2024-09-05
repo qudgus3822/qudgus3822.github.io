@@ -70,8 +70,9 @@
   position: relative;
 }
 
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:after {
-  content: '';
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:before,
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:after {
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -85,11 +86,15 @@
   height: 3px;
 }
 
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:after {
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:before,
+.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:hover:after {
   background: #111;
 }
 
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:before, .svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:after {
+.svgMap-map-wrapper
+  .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:before,
+.svgMap-map-wrapper
+  .svgMap-control-button.svgMap-zoom-button.svgMap-disabled:after {
   background: #ccc;
 }
 
@@ -112,10 +117,13 @@
   stroke-width: 1;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  transition: fill 0.2s, stroke 0.2s;
+  transition:
+    fill 0.2s,
+    stroke 0.2s;
 }
 
-.svgMap-map-wrapper .svgMap-country:hover, .svgMap-map-wrapper .svgMap-country.svgMap-active {
+.svgMap-map-wrapper .svgMap-country:hover,
+.svgMap-map-wrapper .svgMap-country.svgMap-active {
   stroke: #333;
 }
 
@@ -151,18 +159,25 @@
   padding: 10px 20px;
 }
 
-.svgMap-tooltip .svgMap-tooltip-content-container .svgMap-tooltip-flag-container {
+.svgMap-tooltip
+  .svgMap-tooltip-content-container
+  .svgMap-tooltip-flag-container {
   text-align: center;
   margin: 2px 0 5px;
 }
 
-.svgMap-tooltip .svgMap-tooltip-content-container .svgMap-tooltip-flag-container.svgMap-tooltip-flag-container-emoji {
+.svgMap-tooltip
+  .svgMap-tooltip-content-container
+  .svgMap-tooltip-flag-container.svgMap-tooltip-flag-container-emoji {
   font-size: 50px;
   line-height: 0;
   padding: 25px 0 15px;
 }
 
-.svgMap-tooltip .svgMap-tooltip-content-container .svgMap-tooltip-flag-container .svgMap-tooltip-flag {
+.svgMap-tooltip
+  .svgMap-tooltip-content-container
+  .svgMap-tooltip-flag-container
+  .svgMap-tooltip-flag {
   display: block;
   margin: auto;
   width: auto;
@@ -231,7 +246,7 @@
 }
 
 .svgMap-tooltip .svgMap-tooltip-pointer:after {
-  content: '';
+  content: "";
   width: 20px;
   height: 20px;
   background: #fff;

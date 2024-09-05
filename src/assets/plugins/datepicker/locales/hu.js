@@ -4,15 +4,49 @@
  */
 (function () {
   Datepicker.locales.hu = {
-    days: ["vasárnap", "hétfő", "kedd", "szerda", "csütörtök", "péntek", "szombat"],
+    days: [
+      "vasárnap",
+      "hétfő",
+      "kedd",
+      "szerda",
+      "csütörtök",
+      "péntek",
+      "szombat",
+    ],
     daysShort: ["vas", "hét", "ked", "sze", "csü", "pén", "szo"],
     daysMin: ["V", "H", "K", "Sze", "Cs", "P", "Szo"],
-    months: ["január", "február", "március", "április", "május", "június", "július", "augusztus", "szeptember", "október", "november", "december"],
-    monthsShort: ["jan", "feb", "már", "ápr", "máj", "jún", "júl", "aug", "sze", "okt", "nov", "dec"],
+    months: [
+      "január",
+      "február",
+      "március",
+      "április",
+      "május",
+      "június",
+      "július",
+      "augusztus",
+      "szeptember",
+      "október",
+      "november",
+      "december",
+    ],
+    monthsShort: [
+      "jan",
+      "feb",
+      "már",
+      "ápr",
+      "máj",
+      "jún",
+      "júl",
+      "aug",
+      "sze",
+      "okt",
+      "nov",
+      "dec",
+    ],
     today: "ma",
     weekStart: 1,
     clear: "töröl",
     titleFormat: "y. MM",
-    format: "yyyy.mm.dd"
+    format: "yyyy.mm.dd",
   };
-}());
+})();
