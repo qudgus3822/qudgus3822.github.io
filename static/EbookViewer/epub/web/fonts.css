@@ -1,0 +1,320 @@
+@font-face {
+  font-family: "CustomGungsuh";
+  src: url("../fonts/ChosunCentennial_ttf.ttf");
+}
+
+@font-face {
+  font-family: "CustomBatang";
+  src: url("../fonts/KoPub Batang Light.ttf");
+}
+
+@font-face {
+  font-family: "CustomBatangMedium";
+  src: url("../fonts/KoPub Batang Medium.ttf");
+}
+
+@font-face {
+  font-family: "MalgunGothic";
+  src: url("../fonts/MalgunGothic.ttf");
+}
+
+@font-face {
+  font-family: "BonGothic";
+  src: url("../fonts/BonGothic.otf");
+}
+
+@font-face {
+  font-family: "NanumMyeongjo";
+  src: url("../fonts/NanumMyeongjo.ttf");
+}
+
+@font-face {
+  font-family: "Dotum";
+  src: url("../fonts/KoPub Dotum Light.ttf");
+}
+
+body {
+  margin: 0;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+}
+
+.Background-1 {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.Background-2 {
+  background-color: #fdf7e0;
+  color: #000000;
+}
+
+.Background-3 {
+  background-color: #d0e8f2;
+  color: #000000;
+}
+
+.Background-4,
+.Background-4 *:not(svg) {
+  background-color: #50586d;
+  color: #ffffff;
+}
+
+.Background-5,
+.Background-5 *:not(svg) {
+  background-color: #555555;
+  color: #ffffff;
+}
+
+.Background-6,
+.Background-6 *:not(svg) {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.Background-1 a,
+.Background-2 a,
+.Background-3 a {
+  color: #8d7554 !important;
+}
+
+.Background-4 a,
+.Background-5 a,
+.Background-6 a {
+  color: #3685c1 !important;
+}
+
+.Background-7,
+.Background-7 *:not(svg) {
+  background-color: #d0e8f1;
+  color: #2f170e;
+}
+
+.NarrowLine * {
+  line-height: 20px;
+}
+
+.WideLine * {
+  line-height: 80px;
+}
+
+.AlignCenter * {
+  text-align: center;
+}
+
+.AlignLeft * {
+  text-align: left;
+}
+
+.AlignRight * {
+  text-align: right;
+}
+
+.AlignJustify * {
+  text-align: justify;
+}
+
+.LineHeight-1 * {
+  line-height: 1.2em !important;
+}
+
+.LineHeight-2 * {
+  line-height: 1.3em !important;
+}
+
+.LineHeight-3 * {
+  line-height: 1.4em !important;
+}
+
+.LineHeight-4 * {
+  line-height: 1.6em !important;
+}
+
+.LineHeight-5 * {
+  line-height: 1.8em !important;
+}
+
+.LineHeight-6 * {
+  line-height: 2em !important;
+}
+
+.ParagraphHeight-1 p {
+  /* padding-top: 10px; */
+  /* padding-bottom : 10px; */
+  padding-top: 1.2em;
+}
+
+.ParagraphHeight-2 p {
+  padding-top: 1.3em;
+  /* padding-bottom : 15px; */
+}
+
+.ParagraphHeight-3 p {
+  padding-top: 1.4em;
+  /* padding-bottom : 20px; */
+}
+
+.ParagraphHeight-4 p {
+  padding-top: 1.6em;
+  /* padding-bottom : 25px; */
+}
+
+.ParagraphHeight-5 p {
+  padding-top: 1.8em;
+  /* padding-bottom : 30px; */
+}
+
+.ParagraphHeight-6 p {
+  padding-top: 2em;
+  /* padding-bottom : 35px; */
+}
+
+.ParagraphWidth-1 {
+  padding-top: 6vh !important;
+  padding-bottom: 6vh !important;
+}
+
+.ParagraphWidth-2 {
+  padding-top: 5vh !important;
+  padding-bottom: 5vh !important;
+}
+
+.ParagraphWidth-3 {
+  padding-top: 4vh !important;
+  padding-bottom: 4vh !important;
+}
+
+.ParagraphWidth-4 {
+  padding-top: 3vh !important;
+  padding-bottom: 3vh !important;
+}
+
+.ParagraphWidth-5 {
+  padding-top: 2vh !important;
+  padding-bottom: 1vh !important;
+}
+
+.ParagraphWidth-6 {
+  padding-top: 0vh !important;
+  padding-bottom: 0vh !important;
+}
+
+.ParagraphWidth-1 p {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  /* padding-bottom : 35px; */
+}
+
+.ParagraphWidth-2 p {
+  margin-left: auto;
+  margin-right: auto;
+  width: 84%;
+  /* padding-bottom : 35px; */
+}
+
+.ParagraphWidth-3 p {
+  margin-left: auto;
+  margin-right: auto;
+  width: 88%;
+  /* padding-bottom : 35px; */
+}
+
+.ParagraphWidth-4 p {
+  margin-left: auto;
+  margin-right: auto;
+  width: 92%;
+  /* padding-bottom : 35px; */
+}
+
+.ParagraphWidth-5 p {
+  margin-left: auto;
+  margin-right: auto;
+  width: 96%;
+  /* padding-bottom : 35px; */
+}
+
+.ParagraphWidth-6 p {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  /* padding-bottom : 35px; */
+}
+
+span::selection,
+p::selection {
+  color: rgb(255, 255, 255);
+  background-color: rgb(246, 207, 70);
+}
+
+span::-moz-selection,
+p::-moz-selection {
+  color: rgb(255, 255, 255);
+  background-color: rgb(246, 207, 70);
+}
+
+html {
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+
+  -webkit-touch-callout: none !important;
+}
+
+a {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  -webkit-touch-callout: none !important;
+}
+
+/* modal - 형광펜 */
+
+.modal-highlight {
+  /*김병현 추가 크기 맞추기  */
+  width: 150px;
+  /* height: 175px; */
+  padding: 20px;
+  box-shadow: 4px 6px 12px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #e1e1e1;
+  background-color: #fff;
+}
+
+.highlight__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.highlight__button {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  vertical-align: top;
+}
+
+.highlight__text-button {
+  display: block;
+  width: 100%;
+  padding: 5px 0;
+  font-size: 20px;
+  text-align: left;
+}
+
+.highlight__text-button:hover {
+  color: var(--color-primary);
+}
+
+ul {
+  list-style: none;
+}

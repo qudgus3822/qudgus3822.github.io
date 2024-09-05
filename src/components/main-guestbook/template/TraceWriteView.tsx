@@ -13,12 +13,6 @@ export default function TraceWriteView() {
   const [name, setName] = useState("");
   const [contents, setContents] = useState("");
 
-  const handleChange = (e: any) => {
-    let file = e.target.files[0];
-    let reader = getBase64(file);
-    reader.then((result: string) => {});
-  };
-
   const writeComplete = () => {
     const today = new Date();
     pushFirebaseData("traces/", {
@@ -88,14 +82,6 @@ export default function TraceWriteView() {
                   rows={3}
                 ></textarea>
               </div>
-
-              {/* <img style={{ maxWidth: "400px" }} src={imgSrc}></img>
-
-                            <div className="d-grid">
-                                <div className="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1"></div>
-                                <input type="file" id="input-file" name="input-file" accept="image/*" onChange={handleChange}></input>
-                                <label className="btn-upload btn btn-primary mt-4" htmlFor="input-file">Upload Image</label>
-                            </div> */}
             </form>
           </div>
         </div>
