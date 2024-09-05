@@ -1503,7 +1503,7 @@
       });
 
       httpGet("note", { MemberNo: _memberNo, BookNo: _bookNo }).then((data) => {
-        debugger
+        
         for (let i = 0; i < data.length; i++) {
           if (rendition.epubcfi.checkType(data[i].NotePositionValue)) {
             if (data[i].NoteHighlightColorKindcode.length > 0) {
