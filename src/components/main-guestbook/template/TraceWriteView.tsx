@@ -8,18 +8,15 @@ import {
   pushFirebaseData,
 } from "../../../utils/firebase";
 import { getBase64 } from "../../../utils/common";
+import { toast } from "react-toastify";
 export default function TraceWriteView() {
   const [name, setName] = useState("");
   const [contents, setContents] = useState("");
-  const [imgSrc, setImgSrc] = useState("");
-  const router = useRouter();
 
   const handleChange = (e: any) => {
     let file = e.target.files[0];
     let reader = getBase64(file);
-    reader.then((result: string) => {
-      setImgSrc(result);
-    });
+    reader.then((result: string) => {});
   };
 
   const writeComplete = () => {
@@ -29,7 +26,14 @@ export default function TraceWriteView() {
       contents: contents,
       date: today.toLocaleString(),
     }).then((res: any) => {
+      resetData();
+      toast.success("글쓰기 완료");
     });
+  };
+
+  const resetData = () => {
+    setName("");
+    setContents("");
   };
   return (
     <>
@@ -68,6 +72,7 @@ export default function TraceWriteView() {
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
+                  value={name}
                 ></input>
               </div>
 
@@ -77,6 +82,7 @@ export default function TraceWriteView() {
                   onChange={(e) => {
                     setContents(e.target.value);
                   }}
+                  value={contents}
                   className="form-control"
                   id="exampleFormControlTextarea1"
                   rows={3}

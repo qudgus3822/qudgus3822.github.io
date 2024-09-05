@@ -7,12 +7,11 @@ import {
   getFirebaseData,
   pushFirebaseData,
 } from "../../../utils/firebase";
+import { toast } from "react-toastify";
 export default function BlogWriteView() {
   const [imgSrc, setImgSrc] = useState("");
   const [subject, setSubject] = useState("");
   const [description, setDescription] = useState("");
-
-  const router = useRouter();
 
   const handleChange = (e: any) => {
     let file = e.target.files[0];
@@ -28,7 +27,15 @@ export default function BlogWriteView() {
       description: description,
       image: imgSrc,
     }).then((res) => {
+      resetAll();
+      toast.success("글쓰기 완료");
     });
+  };
+
+  const resetAll = () => {
+    setSubject("");
+    setDescription("");
+    setImgSrc("");
   };
   return (
     <div className="row">
@@ -66,6 +73,7 @@ export default function BlogWriteView() {
                 onChange={(e) => {
                   setSubject(e.target.value);
                 }}
+                value={subject}
               ></input>
             </div>
             {/* <div className="mb-3">
@@ -94,6 +102,7 @@ export default function BlogWriteView() {
                 onChange={(e) => {
                   setDescription(e.target.value);
                 }}
+                value={description}
                 className="form-control"
                 id="exampleFormControlTextarea1"
                 rows={3}
@@ -110,6 +119,7 @@ export default function BlogWriteView() {
                 name="input-file"
                 accept="image/*"
                 onChange={handleChange}
+                value={imgSrc}
               ></input>
               <label
                 className="btn-upload btn btn-primary mt-4"

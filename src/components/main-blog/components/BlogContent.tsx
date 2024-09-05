@@ -19,21 +19,24 @@ export default function BlogContent({ data }: any) {
   return (
     <>
       <div className="col-lg-4">
-        <div className="card">
+        <div className="card" style={{ height: 300 }}>
           <div className="card-body">
-            <div className="blog-card">
-              <img
-                src={data.image ? data.image : "/images/profile.png"}
-                alt=""
-                className="img-fluid rounded"
-                style={{ height: "250px", margin: "0 auto" }}
-              ></img>
-              <h4 className="my-3">
-                <a href="" className="">
-                  {data.subject}
-                </a>
+            <div className="blog-card" style={{ overflowX: "auto" }}>
+              {data.image && (
+                <img
+                  src={data.image ? data.image : "/images/profile.png"}
+                  alt=""
+                  className="img-fluid rounded"
+                  style={{ height: "150px", margin: "0 auto" }}
+                ></img>
+              )}
+
+              <h4 className="my-3" style={{ height: 20 }}>
+                {data.subject}
               </h4>
-              <p className="text-muted">{data.description}</p>
+              <p style={{ height: 130 }} className="text-muted">
+                {data.description}
+              </p>
               {/* <hr className="hr-dashed"></hr>
                         <div className="d-flex justify-content-between">
                             <div className="meta-box">

@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import profile from "../images/profile2.jpg";
 import Web from "../components/main-web/Web";
 import Info from "../components/main-my-info/Info";
@@ -9,7 +9,7 @@ import TraceIndexPage from "../components/main-guestbook";
 import BlogIndexPage from "../components/main-blog";
 import BlogWritePage from "../components/main-blog/write";
 import TraceWritePage from "../components/main-guestbook/write";
-declare const naver: any;
+import { ToastContainer, toast } from "react-toastify";
 
 export default function IndexPage() {
   const [currentTab, setCurrentTab] = useState("web");
@@ -180,6 +180,7 @@ export default function IndexPage() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

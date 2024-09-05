@@ -92,7 +92,7 @@ const Info = () => {
                           style={{
                             position: "relative",
                             overflow: "hidden",
-                            width: "30vw",
+                            width: "100%",
                           }}
                         ></div>
                       </div>
@@ -128,7 +128,7 @@ const Info = () => {
                           style={{
                             position: "relative",
                             overflow: "hidden",
-                            width: "30vw",
+                            width: "100%",
                           }}
                         ></div>
                       </div>
