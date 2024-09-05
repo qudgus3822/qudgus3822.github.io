@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="ic_pin" width="28" height="28" viewBox="0 0 28 28">
+    <defs>
+        <style>
+            .cls-2{fill:none;stroke:#555;stroke-miterlimit:10;stroke-width:1.3px}
+        </style>
+    </defs>
+    <path id="사각형_900" fill="none" d="M0 0H28V28H0z" transform="translate(28) rotate(90)"/>
+    <path id="선_361" d="M5.376 0L0 5.644" class="cls-2" transform="translate(4.058 18.105)"/>
+    <path id="패스_24768" d="M452.351 525.173l2.524-2.872a2.446 2.446 0 0 0 2.722 0c.981-.91.484-3.041-1.111-4.76s-3.682-2.375-4.663-1.466a2.456 2.456 0 0 0-.2 2.733l-2.568 2.922c-1.566-.925-3.139-1.092-4.019-.276-1.26 1.169-.621 3.907 1.427 6.116s4.731 3.052 5.991 1.883c.922-.862.822-2.563-.103-4.28z" class="cls-2" transform="translate(-437.101 -509.662)"/>
+</svg>

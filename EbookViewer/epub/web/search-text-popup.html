@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EPUB.js setting</title>
+    <link rel="stylesheet" type="text/css" href="examples.css">
+    <link rel="stylesheet" type="text/css" href="readium-all.css">
+    <link rel="stylesheet" type="text/css" href="tab.css">
+</head>
+
+<body>
+    <!-- 레디움====================================== -->
+    <!-- div class="modal-header">
+         <h4 class="modal-title" id="settings-label">Settings</h4>
+        </div -->
+
+    <div class="modal-body">
+        <button type="button" class="close" id="closeSettingsCross" data-dismiss="modal" title="Close Settings"
+            aria-label="Close Settings"><span aria-hidden="true">×</span></button>
+        <!-- button  type="button" title="TESTING" aria-label="TESTING">TESTING DANIEL</button -->
+
+        <div>
+            <h3>검색</h5>
+                <textarea id="target-text"></textarea>
+                <button id="search-button">검색</button>
+        </div>
+        <dl>
+            <dt class="search">본문</dt>
+            <dd>
+                <div>
+                    <ul id="ul-this-book">
+                        <!-- <li>
+                                
+                            </li> -->
+                    </ul>
+
+                </div>
+            </dd>
+
+
+            <dt class="search">국어사전</dt>
+            <dd class="hidden">
+
+            </dd>
+
+            <dt class="search">영어사전</dt>
+            <dd class="hidden">
+
+            </dd>
+
+            <dt class="search">백과사전</dt>
+            <dd class="hidden">
+
+            </dd>
+
+        </dl>
+
+    </div>
+
+
+    <!-- <div class="modal-footer">
+        <button id="buttClose" type="button" class="btn btn-default" data-dismiss="modal" title="Close [c]"
+            aria-label="Close [c]" accesskey="c">Close</button>
+        <button id="buttSave" type="button" class="btn btn-primary" data-dismiss="modal" title="Save changes [s]"
+            aria-label="Save changes [s]" accesskey="s">Save changes</button>
+    </div> -->
+    <!-- ========================================================================== -->
+
+    <input type="hidden" id="epub-cfi" />
+    <!-- <input type="hidden" id="epub-cfi" /> -->
+</body>
+
+<script>
+    //#region 디비 연동
+    // fetch("https://localhost:44357/Epub/Test")
+    //     .then((response) => { return response.json() })
+    //     .then((data) => {
+
+    //         BindHighlights(data);
+    //     });
+
+
+    // function BindHighlights(data) {
+    //     for (var i = 0; i < data.length; i++) {
+    //         var li = document.createElement("li");
+    //         var a = document.createElement("a");
+    //         a.innerHTML = data[i].contents;
+    //         a.tag = i;
+    //         a.addEventListener("click", function () {
+
+    //             var hiddenEpubCfi = document.getElementById("epub-cfi");
+    //             hiddenEpubCfi.value = data[this.tag].epubCfi;
+    //             window.close();
+    //         })
+    //         li.appendChild(a);
+    //     }
+
+    //     document.getElementById("ul-highlight").appendChild(li);
+
+    // }
+    //#endregion
+
+    //#region 탭메뉴
+    var menuEle = document.querySelectorAll("dt");
+
+    menuEle.forEach(function (dt) {
+        dt.addEventListener("click", function () {
+            document.querySelectorAll("dd").forEach(function (dd) {
+
+                dd.classList.add("hidden");
+            })
+            this.nextElementSibling.classList.remove("hidden");
+        })
+
+    })
+    //#endregion
+
+
+    //#region 검색 버튼 클릭 이벤트
+    const searchButton = document.getElementById("search-button")
+    searchButton.addEventListener("click", function () {
+
+        const result = opener.findText(document.getElementById("target-text").value);
+        // const result = opener.find();
+
+        result.then((arr) => {
+
+            const ul = document.getElementById("ul-this-book");
+            for (var i = 0; i < arr.length; i++) {
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                a.innerText = arr[i].text;
+                a.tag = arr[i].cfi;
+                a.addEventListener("click", function () {
+                    document.getElementById("epub-cfi").value = this.tag;
+                    window.close();
+                })
+
+                li.appendChild(a);
+                document.getElementById("ul-this-book").appendChild(li);
+            }
+        })
+    })
+
+//#endregion
+</script>
+
+</html>
